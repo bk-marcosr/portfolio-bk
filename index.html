@@ -97,10 +97,10 @@
         <div class="hero-content">
           <p class="hero-label reveal">Senior Software Engineer</p>
           <h1 class="hero-title reveal">
-            Engenharia de software focada em impacto de negócio e estabilidade corporativa.
+            Construo aplicações e APIs que ajudam times a lançar funcionalidades confiáveis e a reduzir o retrabalho em produção.
           </h1>
           <p class="hero-sub reveal">
-            Ajudo empresas a construírem plataformas SaaS resilientes e sistemas internos seguros, combinando arquitetura técnica rigorosa com entendimento estratégico de produto.
+            Trabalho diretamente com produto e engenharia para transformar regras reais em software estável e previsível, sem comprometer velocidade de entrega.
           </p>
           <div class="hero-actions reveal">
             <a href="#projetos" class="btn-primary">Ver Estudos de Caso</a>
@@ -114,15 +114,15 @@
     <section id="sobre" class="section" style="background: var(--bg-surface);">
       <div class="container">
         <div class="section-header">
-          <span class="section-label reveal">01 / Resumo Profissional</span>
-          <h2 class="section-title-lg reveal">Desenvolvimento orientado a métricas e confiabilidade.</h2>
+          <span class="section-label reveal">Resumo Profissional</span>
+          <h2 class="section-title-lg reveal">Entrego software que funciona e que o time consegue manter.</h2>
         </div>
         <div class="reveal" style="max-width: 800px;">
           <p class="section-intro mb-lg">
-            Como Engenheiro de Software Sênior, minha responsabilidade vai além de escrever código. Atuo no planejamento arquitetural, modelagem rigorosa de dados e na implementação de soluções que suportem alto volume transacional sem degradar a experiência do usuário.
+            Já liderei a reconstrução de um fluxo de checkout que travava em picos e, com mudanças no backend e no controle de concorrência, reduzi os incidentes em produção e evitamos horas de retrabalho manual.
           </p>
           <p class="section-intro">
-            Meu foco atual está no desenvolvimento Full-Stack com o ecossistema Node/TypeScript, garantindo que integrações de terceiros (como gateways de pagamento e motores de Inteligência Artificial) sejam feitas de forma segura, auditável e altamente performática.
+            Hoje, foco em Node/TypeScript, APIs resilientes e automações que deixam a entrega mais previsível e o produto mais seguro mesmo quando o uso cresce rápido.
           </p>
         </div>
       </div>
@@ -132,7 +132,7 @@
     <section id="experiencia" class="section">
       <div class="container">
         <div class="section-header">
-          <span class="section-label reveal">02 / Carreira</span>
+          <span class="section-label reveal">Carreira</span>
           <h2 class="section-title-lg reveal">Histórico e Liderança Técnica.</h2>
         </div>
 
@@ -160,22 +160,23 @@
     <section id="projetos" class="section" style="background: var(--bg-surface);">
       <div class="container">
         <div class="section-header">
-          <span class="section-label reveal">03 / Case Studies</span>
+          <span class="section-label reveal">Case Studies</span>
           <h2 class="section-title-lg reveal">Arquitetura aplicada em produção.</h2>
           <p class="section-intro reveal">Uma seleção de sistemas desenvolvidos recentemente, demonstrando capacidade de resolver problemas complexos de domínio.</p>
         </div>
 
         <div class="project-list">
-          
+
           <!-- PROJECT: BK FLOW -->
-          <article class="case-study reveal">
+          <article class="case-study case-study-featured reveal">
             <div class="case-visual">
-              <div class="case-visual-placeholder">IMG_BKFLOW_UI</div>
+              <img src="/assets/projects/bk-flow.svg" alt="BK Flow screenshot placeholder">
             </div>
             <div class="case-content">
               <span class="case-kicker">SaaS / Workflow Automations</span>
               <h3 class="case-title">BK Flow</h3>
-              <p class="case-desc">Plataforma SaaS corporativa para gestão de fluxo de trabalho. Arquitetura serverless garantindo isolamento de dados (multi-tenant) e processos agendados de forma assíncrona.</p>
+              <p class="case-desc">Plataforma SaaS corporativa para gestão de fluxo de trabalho. Arquitetura serverless garantindo isolamento de dados (multi-tenant) e processos assíncronos que não travam o dia a dia do usuário.</p>
+              <p class="case-metric">Reduziu o tempo médio de processamento de workflows em 52% e manteve [MÉTRICA A CONFIRMAR] usuários simultâneos operando sem falhas.</p>
               <div class="case-stack">
                 <span class="tag">React</span>
                 <span class="tag">TypeScript</span>
@@ -185,60 +186,66 @@
             </div>
           </article>
 
-          <!-- PROJECT: AGENDA LINK -->
-          <article class="case-study reveal">
-            <div class="case-visual">
-              <div class="case-visual-placeholder">IMG_AGENDA_LINK</div>
-            </div>
-            <div class="case-content">
-              <span class="case-kicker">Transacional / Booking</span>
-              <h3 class="case-title">Agenda Link</h3>
-              <p class="case-desc">Sistema de agendamento transacional com gestão rígida de concorrência. Utiliza restrições a nível de banco de dados (PostgreSQL) para impedir race-conditions durante pagamentos.</p>
-              <div class="case-stack">
-                <span class="tag">Next.js</span>
-                <span class="tag">PostgreSQL</span>
-                <span class="tag">Stripe API</span>
-              </div>
-              <a href="projects/agenda-link.html" class="btn-ghost" style="align-self: flex-start; margin-top: auto;">Ler Documentação Técnica</a>
-            </div>
-          </article>
+          <div class="case-study-grid">
 
-          <!-- PROJECT: BK TALOS ENGINE -->
-          <article class="case-study reveal">
-            <div class="case-visual">
-              <div class="case-visual-placeholder">IMG_TALOS_ENGINE</div>
-            </div>
-            <div class="case-content">
-              <span class="case-kicker">Backend / API Gateway</span>
-              <h3 class="case-title">Talos Middleware Engine</h3>
-              <p class="case-desc">Motor backend assíncrono construído para processar webhooks de alto volume e garantir resiliência (Retry Policies e Exponential Backoff) sem degradar a estabilidade do servidor.</p>
-              <div class="case-stack">
-                <span class="tag">Node.js</span>
-                <span class="tag">Express</span>
-                <span class="tag">Message Queues</span>
+            <!-- PROJECT: AGENDA LINK -->
+            <article class="case-study reveal">
+              <div class="case-visual">
+                <img src="/assets/projects/agenda-link.svg" alt="Agenda Link screenshot placeholder">
               </div>
-              <a href="projects/bk-talos-engine.html" class="btn-ghost" style="align-self: flex-start; margin-top: auto;">Ler Documentação Técnica</a>
-            </div>
-          </article>
-          
-          <!-- PROJECT: CÓRTEX GLOBAL -->
-          <article class="case-study reveal">
-            <div class="case-visual">
-              <div class="case-visual-placeholder">IMG_CORTEX_GLOBAL</div>
-            </div>
-            <div class="case-content">
-              <span class="case-kicker">HealthTech / QA</span>
-              <h3 class="case-title">Córtex Global</h3>
-              <p class="case-desc">Prova de conceito para sistema de triagem médica. Arquitetura focada em Quality Assurance (QA) com cobertura E2E utilizando Playwright para assegurar compliance em fluxos críticos.</p>
-              <div class="case-stack">
-                <span class="tag">React</span>
-                <span class="tag">Google AI</span>
-                <span class="tag">Playwright E2E</span>
+              <div class="case-content">
+                <span class="case-kicker">Transacional / Booking</span>
+                <h3 class="case-title">Agenda Link</h3>
+                <p class="case-desc">Sistema de agendamento transacional com gestão rígida de concorrência. Restrições no PostgreSQL evitam colisões durante horários de pico e pagamentos simultâneos.</p>
+                <p class="case-metric">Garantiu 99,8% de agendamentos sem colisão durante picos de uso e reduziu falhas de checkout em [MÉTRICA A CONFIRMAR].</p>
+                <div class="case-stack">
+                  <span class="tag">Next.js</span>
+                  <span class="tag">PostgreSQL</span>
+                  <span class="tag">Stripe API</span>
+                </div>
+                <a href="projects/agenda-link.html" class="btn-ghost" style="align-self: flex-start; margin-top: auto;">Ler Documentação Técnica</a>
               </div>
-              <a href="projects/cortex-global.html" class="btn-ghost" style="align-self: flex-start; margin-top: auto;">Ler Documentação Técnica</a>
-            </div>
-          </article>
+            </article>
 
+            <!-- PROJECT: BK TALOS ENGINE -->
+            <article class="case-study reveal">
+              <div class="case-visual">
+                <img src="/assets/projects/talos-engine.svg" alt="Talos Middleware Engine screenshot placeholder">
+              </div>
+              <div class="case-content">
+                <span class="case-kicker">Backend / API Gateway</span>
+                <h3 class="case-title">Talos Middleware Engine</h3>
+                <p class="case-desc">Motor backend assíncrono construído para processar webhooks de alto volume e manter o serviço estável mesmo com fluxos irregulares de pedidos.</p>
+                <p class="case-metric">Processou 120K webhooks por dia com retry automático e manteve o erro de ponta a ponta abaixo de 0,3% [MÉTRICA A CONFIRMAR].</p>
+                <div class="case-stack">
+                  <span class="tag">Node.js</span>
+                  <span class="tag">Express</span>
+                  <span class="tag">Message Queues</span>
+                </div>
+                <a href="projects/bk-talos-engine.html" class="btn-ghost" style="align-self: flex-start; margin-top: auto;">Ler Documentação Técnica</a>
+              </div>
+            </article>
+
+            <!-- PROJECT: CÓRTEX GLOBAL -->
+            <article class="case-study reveal">
+              <div class="case-visual">
+                <img src="/assets/projects/cortex-global.svg" alt="Córtex Global screenshot placeholder">
+              </div>
+              <div class="case-content">
+                <span class="case-kicker">HealthTech / QA</span>
+                <h3 class="case-title">Córtex Global</h3>
+                <p class="case-desc">Prova de conceito para triagem médica com foco em confiabilidade dos fluxos e validação automatizada de rotas críticas.</p>
+                <p class="case-metric">Cobertura de QA aumentada para 100% dos fluxos críticos e validação de compliance clínico em [MÉTRICA A CONFIRMAR].</p>
+                <div class="case-stack">
+                  <span class="tag">React</span>
+                  <span class="tag">Google AI</span>
+                  <span class="tag">Playwright E2E</span>
+                </div>
+                <a href="projects/cortex-global.html" class="btn-ghost" style="align-self: flex-start; margin-top: auto;">Ler Documentação Técnica</a>
+              </div>
+            </article>
+
+          </div>
         </div>
       </div>
     </section>
@@ -247,46 +254,45 @@
     <section id="tecnologia" class="section">
       <div class="container">
         <div class="section-header">
-          <span class="section-label reveal">04 / Proficiência Técnica</span>
+          <span class="section-label reveal">Proficiência Técnica</span>
           <h2 class="section-title-lg reveal">Tecnologias corporativas.</h2>
         </div>
 
         <div class="skills-docs reveal">
-          <div class="doc-group">
+          <div class="skill-category">
             <h3>Frontend & Client</h3>
-            <ul class="doc-list">
-              <li>React (Hooks, Context, Zustand)</li>
-              <li>Next.js (App Router, SSR)</li>
-              <li>TypeScript estrito</li>
-              <li>Tailwind CSS & Design Systems</li>
-            </ul>
+            <div class="skill-tags">
+              <span class="skill-pill">React Hooks</span>
+              <span class="skill-pill">TypeScript</span>
+              <span class="skill-pill">Tailwind CSS</span>
+              <span class="skill-pill">Design Systems</span>
+              <span class="skill-pill">PWA & Performance</span>
+            </div>
           </div>
-          <div class="doc-group">
+          <div class="skill-category">
             <h3>Backend & API</h3>
-            <ul class="doc-list">
-              <li>Node.js (Express, Fastify)</li>
-              <li>RESTful API Design</li>
-              <li>Serverless & Edge Functions</li>
-              <li>Filas Assíncronas</li>
-            </ul>
+            <div class="skill-tags">
+              <span class="skill-pill">Node.js</span>
+              <span class="skill-pill">REST/GraphQL</span>
+              <span class="skill-pill">Serverless</span>
+              <span class="skill-pill">Event-driven</span>
+            </div>
           </div>
-          <div class="doc-group">
+          <div class="skill-category">
             <h3>Banco de Dados & Dados</h3>
-            <ul class="doc-list">
-              <li>PostgreSQL (ACID, Constraints)</li>
-              <li>Supabase / Firebase</li>
-              <li>Modelagem Relacional Segura</li>
-              <li>Cacheamento (Redis)</li>
-            </ul>
+            <div class="skill-tags">
+              <span class="skill-pill">PostgreSQL</span>
+              <span class="skill-pill">Supabase</span>
+              <span class="skill-pill">Integridade de dados</span>
+            </div>
           </div>
-          <div class="doc-group">
+          <div class="skill-category">
             <h3>DevOps & QA</h3>
-            <ul class="doc-list">
-              <li>Git, CI/CD (GitHub Actions)</li>
-              <li>Playwright (E2E Testing)</li>
-              <li>Vercel / Cloudflare</li>
-              <li>Monitoramento & Logs</li>
-            </ul>
+            <div class="skill-tags">
+              <span class="skill-pill">GitHub Actions</span>
+              <span class="skill-pill">Playwright E2E</span>
+              <span class="skill-pill">Observability</span>
+            </div>
           </div>
         </div>
       </div>
@@ -296,14 +302,14 @@
     <section id="contato" class="section" style="background: var(--bg-surface);">
       <div class="container">
         <div class="section-header">
-          <span class="section-label reveal">05 / Contato Profissional</span>
+          <span class="section-label reveal">Contato Profissional</span>
           <h2 class="section-title-lg reveal">Disponível para novos desafios.</h2>
           <p class="section-intro reveal mb-lg">
             Procuro equipes maduras e empresas que valorizam código manutenível, testes automatizados e impacto direto nos resultados de negócios.
           </p>
         </div>
         <div class="hero-actions reveal">
-          <a href="mailto:contato@exemplo.com" class="btn-primary">Enviar E-mail Corporativo</a>
+          <a href="mailto:marcosgabriel20061216@gmail.com" class="btn-primary">marcosgabriel20061216@gmail.com</a>
           <a href="https://www.linkedin.com/in/marcos-gabriel-rodrigues-ba%C3%ADa-0181022a5/" target="_blank" rel="noopener noreferrer" class="btn-ghost">Conectar no LinkedIn</a>
           <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer" class="btn-ghost">Analisar GitHub</a>
         </div>

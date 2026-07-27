@@ -50,8 +50,14 @@
 
 /* EDITORIAL CASE STUDY (PROJECTS) */
 .project-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.case-study-grid {
+  display: grid;
+  grid-template-columns: 1fr;
   gap: var(--space-xl);
 }
 
@@ -73,7 +79,12 @@
   .case-study {
     grid-template-columns: 1fr 1fr;
   }
+
+  .case-study-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
+
 
 .case-visual {
   width: 100%;
@@ -194,6 +205,35 @@
   content: '→';
   color: var(--accent);
   font-family: var(--font-mono);
+}
+
+.skill-category {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: #FEF3C7;
+  border: 1px solid #FBBF24;
+  border-radius: var(--radius-md);
+}
+
+@media (min-width: 768px) {
+  .skills-docs {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* TIMELINE */

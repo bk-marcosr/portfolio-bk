@@ -19,13 +19,25 @@
 .section-header {
   margin-bottom: var(--space-xxl);
   max-width: 800px;
+  position: relative;
+}
+
+.section-header::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 3px;
+  background: var(--accent-alt);
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-md);
+  opacity: 0.55;
 }
 
 .section-label {
   display: block;
   font-family: var(--font-mono);
   font-size: 0.875rem;
-  color: var(--accent);
+  color: var(--accent-alt);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-sm);
