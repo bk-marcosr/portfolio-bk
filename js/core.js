@@ -1,103 +1,78 @@
 /* ============================================================
    CORE
-   Navigation, scroll spy and mobile menu
+   Navigation, Scroll Spy, and Mobile Menu
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // 1. FLOATING NAV SCROLL STATE
   const floatingNav = document.getElementById('floatingNav');
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-  const mobileOverlay = document.getElementById('mobileOverlay');
-  const mobileLinks = document.querySelectorAll('.mobile-link');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const sections = document.querySelectorAll('section[id]');
+  let ticking = false;
 
-  let navTicking = false;
-  let spyTicking = false;
-
-  function setScrolledNav() {
-    if (!floatingNav) return;
-    floatingNav.classList.toggle('scrolled', window.scrollY > 60);
-    navTicking = false;
-  }
-
-  function updateActiveNav() {
-    const offsetY = window.scrollY + 180;
-    let activeId = sections[0]?.getAttribute('id') || '';
-
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      const sectionBottom = sectionTop + section.offsetHeight;
-
-      if (offsetY >= sectionTop && offsetY < sectionBottom) {
-        activeId = section.getAttribute('id') || activeId;
-      }
-    });
-
-    navLinks.forEach((link) => {
-      link.classList.toggle('active', link.getAttribute('href') === `#${activeId}`);
-    });
-
-    spyTicking = false;
-  }
-
-  function closeMobileMenu() {
-    if (!mobileMenuBtn || !mobileOverlay) return;
-    mobileMenuBtn.classList.remove('active');
-    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-    mobileMenuBtn.setAttribute('aria-label', 'Abrir menu');
-    mobileOverlay.classList.remove('active');
-    mobileOverlay.setAttribute('aria-hidden', 'true');
-    mobileOverlay.hidden = true;
-    document.body.style.overflow = '';
-  }
-
-  function openMobileMenu() {
-    if (!mobileMenuBtn || !mobileOverlay) return;
-    mobileOverlay.hidden = false;
-    mobileMenuBtn.classList.add('active');
-    mobileMenuBtn.setAttribute('aria-expanded', 'true');
-    mobileMenuBtn.setAttribute('aria-label', 'Fechar menu');
-    mobileOverlay.classList.add('active');
-    mobileOverlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function toggleMobileMenu() {
-    if (!mobileOverlay?.classList.contains('active')) {
-      openMobileMenu();
+  function onNavScroll() {
+    if (window.scrollY > 10) {
+      floatingNav.classList.add('scrolled');
     } else {
-      closeMobileMenu();
+      floatingNav.classList.remove('scrolled');
     }
+    ticking = false;
   }
 
   window.addEventListener('scroll', () => {
-    if (!navTicking) {
-      requestAnimationFrame(setScrolledNav);
-      navTicking = true;
+    if (!ticking) {
+      requestAnimationFrame(onNavScroll);
+      ticking = true;
     }
+  });
 
+  // 2. SCROLL SPY
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  let spyTicking = false;
+
+  function updateActiveNav() {
+    const scrollY = window.scrollY + 100;
+
+    sections.forEach(section => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      const id = section.getAttribute('id');
+
+      if (scrollY >= top && scrollY < top + height) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + id || link.getAttribute('href') === '../index.html#' + id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+    spyTicking = false;
+  }
+
+  window.addEventListener('scroll', () => {
     if (!spyTicking) {
       requestAnimationFrame(updateActiveNav);
       spyTicking = true;
     }
-  }, { passive: true });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 860) closeMobileMenu();
   });
+  updateActiveNav();
 
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') closeMobileMenu();
-  });
+  // 3. MOBILE MENU
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
 
   if (mobileMenuBtn && mobileOverlay) {
-    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileOverlay.classList.toggle('active');
+      document.body.style.overflow = mobileOverlay.classList.contains('active') ? 'hidden' : '';
+    });
 
-    mobileLinks.forEach((link) => {
-      link.addEventListener('click', closeMobileMenu);
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
     });
   }
-
-  setScrolledNav();
-  updateActiveNav();
 });

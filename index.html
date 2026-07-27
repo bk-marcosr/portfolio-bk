@@ -1,35 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marcos Gabriel | Desenvolvedor Full Stack, IA e SaaS</title>
-  <meta name="description" content="Portf&oacute;lio de Marcos Gabriel, desenvolvedor Full Stack focado em engenharia de software, IA, SaaS, automa&ccedil;&atilde;o e produtos digitais.">
-  <meta name="theme-color" content="#050505">
-
-  <meta property="og:title" content="Marcos Gabriel | Desenvolvedor Full Stack">
-  <meta property="og:description" content="Projetos profissionais em React, Next.js, TypeScript, Node.js, Supabase, IA e automa&ccedil;&atilde;o.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="perfil.png">
+  <title>Marcos Gabriel | Engenharia de Software</title>
+  <meta name="description" content="Engenheiro de Software focado em arquiteturas escaláveis, SaaS e produtos baseados em IA.">
+  <meta name="theme-color" content="#000000">
 
   <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <link rel="stylesheet" href="css/tokens.css?v=20260727-2">
-  <link rel="stylesheet" href="css/base.css?v=20260727-2">
-  <link rel="stylesheet" href="css/layout.css?v=20260727-2">
-  <link rel="stylesheet" href="css/components.css?v=20260727-2">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <style>
+    /* Hero Specific */
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      padding-top: 100px;
+    }
+    .hero-content {
+      max-width: 700px;
+    }
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: var(--space-lg);
+    }
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      line-height: 1.1;
+      margin-bottom: var(--space-lg);
+    }
+    .hero-sub {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xl);
+      line-height: 1.5;
+    }
+    .hero-actions {
+      display: flex;
+      gap: var(--space-md);
+    }
+    
+    /* Typography Utilities for Clean Layout */
+    .mt-lg { margin-top: var(--space-lg); }
+    .mb-lg { margin-bottom: var(--space-lg); }
+    .text-mono { font-family: var(--font-mono); font-size: 0.875rem; }
+  </style>
 </head>
 
 <body>
-  <a class="skip-link" href="#conteudo">Pular para o conte&uacute;do</a>
-
-  <nav class="floating-nav" id="floatingNav" aria-label="Navegacao principal">
+  <nav class="floating-nav" id="floatingNav">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo" aria-label="Ir para o inicio">BK.</a>
+      <a href="#hero" class="nav-logo">Marcos Gabriel</a>
       <div class="nav-links" id="navLinks">
         <a href="#sobre" class="nav-link">Sobre</a>
         <a href="#projetos" class="nav-link">Projetos</a>
@@ -37,16 +69,14 @@
         <a href="#timeline" class="nav-link">Timeline</a>
         <a href="#contato" class="nav-link">Contato</a>
       </div>
-      <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Abrir menu" aria-controls="mobileOverlay" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true" hidden>
-    <a href="#hero" class="mobile-link">In&iacute;cio</a>
+  <div class="mobile-overlay" id="mobileOverlay">
+    <a href="#hero" class="mobile-link">Início</a>
     <a href="#sobre" class="mobile-link">Sobre</a>
     <a href="#projetos" class="mobile-link">Projetos</a>
     <a href="#skills" class="mobile-link">Skills</a>
@@ -55,532 +85,284 @@
   </div>
 
   <main id="conteudo">
-    <section id="hero" class="hero">
-      <canvas id="neuralCanvas" aria-hidden="true"></canvas>
-
-      <div class="hero-shell">
-        <div class="hero-copy">
-          <div class="hero-status reveal">
-            <span class="pulse-dot"></span>
-            <span>Dispon&iacute;vel para oportunidades Full Stack</span>
-          </div>
-          <p class="hero-label reveal">Marcos Gabriel | Desenvolvedor Full Stack</p>
+    <!-- HERO -->
+    <section id="hero" class="section hero">
+      <div class="container">
+        <div class="hero-content">
+          <p class="hero-label reveal">Marcos Gabriel — Engenheiro de Software</p>
           <h1 class="hero-title reveal">
-            Engenharia, IA e SaaS para produtos que precisam sair do prot&oacute;tipo.
+            Construo produtos digitais escaláveis, arquiteturas modernas e aplicações orientadas por IA.
           </h1>
           <p class="hero-sub reveal">
-            Construo interfaces, backends, automa&ccedil;&otilde;es e arquiteturas orientadas a dados para transformar ideias em sistemas reais, escal&aacute;veis e prontos para uso profissional.
+            Focado em resolver problemas complexos de engenharia de software e construir soluções SaaS profissionais, escaláveis e focadas na experiência do usuário.
           </p>
-          <div class="hero-actions reveal" aria-label="Acoes principais">
-            <a href="#projetos" class="btn-primary">
-              <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
-              Ver projetos
-            </a>
-            <a href="#contato" class="btn-ghost">
-              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-              Falar comigo
-            </a>
-          </div>
-
-          <dl class="hero-metrics reveal" aria-label="Indicadores profissionais">
-            <div class="metric-card">
-              <dt>8+</dt>
-              <dd>Projetos curados</dd>
-            </div>
-            <div class="metric-card">
-              <dt>30+</dt>
-              <dd>Tecnologias</dd>
-            </div>
-            <div class="metric-card">
-              <dt>6</dt>
-              <dd>&Aacute;reas de atua&ccedil;&atilde;o</dd>
-            </div>
-          </dl>
-        </div>
-
-        <div class="hero-visual reveal" aria-label="Retrato profissional e stack principal">
-          <div class="profile-stage">
-            <div class="profile-glow"></div>
-            <img src="perfil.png" alt="Marcos Gabriel" class="hero-photo">
-            <div class="floating-chip chip-react">React</div>
-            <div class="floating-chip chip-ai">IA</div>
-            <div class="floating-chip chip-node">Node.js</div>
-          </div>
-          <div class="hero-console" aria-hidden="true">
-            <div class="console-header">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <p><span>stack.main</span> = React + TypeScript + Node + Supabase</p>
-            <p><span>focus.now</span> = SaaS, IA, automa&ccedil;&atilde;o</p>
+          <div class="hero-actions reveal">
+            <a href="#projetos" class="btn-primary">Estudos de caso</a>
+            <a href="#contato" class="btn-ghost">Contato</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="sobre" class="section section-tight">
+    <!-- SOBRE -->
+    <section id="sobre" class="section">
       <div class="container">
-        <div class="split-layout">
-          <div class="section-header">
-            <span class="section-label reveal">// sobre_mim</span>
-            <h2 class="section-title-lg reveal">Full Stack com cabe&ccedil;a de produto e engenharia.</h2>
-          </div>
-
-          <div class="about-panel reveal">
-            <p>
-              Sou desenvolvedor Full Stack com foco em engenharia de software, arquitetura, intelig&ecirc;ncia artificial, SaaS, automa&ccedil;&atilde;o e produtos digitais. Meu trabalho combina vis&atilde;o de interface, backend, dados e integra&ccedil;&otilde;es para criar sistemas que resolvem opera&ccedil;&otilde;es reais.
-            </p>
-            <p>
-              Gosto de transformar fluxos manuais em produtos confi&aacute;veis: dashboards, automa&ccedil;&otilde;es, APIs, pipelines, aplica&ccedil;&otilde;es com IA e experi&ecirc;ncias digitais que parecem simples por fora, mas s&atilde;o bem pensadas por dentro.
-            </p>
-          </div>
+        <div class="section-header">
+          <span class="section-label reveal">01. Sobre</span>
+          <h2 class="section-title-lg reveal">Engenharia orientada a produto.</h2>
         </div>
-
-        <div class="focus-grid">
-          <article class="focus-card reveal">
-            <i class="fa-solid fa-code" aria-hidden="true"></i>
-            <h3>Engenharia de Software</h3>
-            <p>Componentiza&ccedil;&atilde;o, arquitetura, integra&ccedil;&otilde;es, manutenibilidade e entrega com padr&atilde;o profissional.</p>
-          </article>
-          <article class="focus-card reveal">
-            <i class="fa-solid fa-brain" aria-hidden="true"></i>
-            <h3>IA Aplicada</h3>
-            <p>Produtos com OpenAI, Gemini, RAG, prompts estruturados, automa&ccedil;&otilde;es e agentes para casos de uso concretos.</p>
-          </article>
-          <article class="focus-card reveal">
-            <i class="fa-solid fa-chart-simple" aria-hidden="true"></i>
-            <h3>SaaS e Dashboards</h3>
-            <p>Interfaces para opera&ccedil;&atilde;o, gest&atilde;o, an&aacute;lise, aprova&ccedil;&atilde;o, assinatura, relat&oacute;rios e acompanhamento de indicadores.</p>
-          </article>
+        <div class="reveal" style="max-width: 700px;">
+          <p class="section-intro mb-lg">
+            Sou um engenheiro de software com sólida experiência em arquitetura de sistemas e desenvolvimento Full Stack. Minha abordagem técnica prioriza código limpo, componentização rigorosa e escolhas arquiteturais pragmáticas.
+          </p>
+          <p class="section-intro">
+            Do backend estruturado em Node e bancos relacionais até interfaces frontend reativas e integração contínua de modelos de Inteligência Artificial, meu trabalho visa criar produtos que suportem alto fluxo de dados e casos de uso corporativos sem comprometer a estabilidade.
+          </p>
         </div>
       </div>
     </section>
 
+    <!-- PROJETOS -->
     <section id="projetos" class="section">
       <div class="container">
-        <div class="section-header section-header-wide">
-          <div>
-            <span class="section-label reveal">// portfolio_curado</span>
-            <h2 class="section-title-lg reveal">Projetos que representam meu n&iacute;vel atual.</h2>
-          </div>
-          <p class="section-intro reveal">
-            Sele&ccedil;&atilde;o focada em produtos full stack, IA, SaaS, automa&ccedil;&atilde;o, dados e arquitetura. Projetos acad&ecirc;micos, experimentais e internos foram removidos da vitrine.
-          </p>
+        <div class="section-header">
+          <span class="section-label reveal">02. Estudos de Caso</span>
+          <h2 class="section-title-lg reveal">Arquitetura em produção.</h2>
+          <p class="section-intro reveal">Uma seleção de sistemas desenvolvidos recentemente focando em SaaS, ferramentas corporativas e integração de LLMs.</p>
         </div>
 
-        <article class="project-card project-card-hero reveal">
-          <div class="project-content">
-            <div class="project-kicker">
-              <span>Projeto Principal</span>
-              <strong>Hero Project</strong>
+        <div class="project-list">
+          
+          <!-- PROJECT: BK FLOW -->
+          <article class="case-study reveal">
+            <div class="case-visual">
+              <div class="case-visual-placeholder">IMG_BKFLOW_UI</div>
             </div>
-            <h3>BK Flow</h3>
-            <p class="project-description">
-              Plataforma SaaS para gest&atilde;o de m&iacute;dias sociais com IA, calend&aacute;rio inteligente, aprova&ccedil;&atilde;o de conte&uacute;do, dashboard operacional, automa&ccedil;&otilde;es e colabora&ccedil;&atilde;o multiusu&aacute;rio.
-            </p>
-
-            <div class="stack-tags project-stack" aria-label="Tecnologias do BK Flow">
-              <span class="tag">React</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">Vite</span>
-              <span class="tag">Supabase</span>
-              <span class="tag">Edge Functions</span>
-              <span class="tag">React Query</span>
-              <span class="tag">Zustand</span>
-              <span class="tag">Shadcn/UI</span>
-              <span class="tag">Recharts</span>
-              <span class="tag">Framer Motion</span>
-            </div>
-
-            <div class="project-details">
-              <div>
-                <span>Funcionalidades</span>
-                <p>Calend&aacute;rio editorial, aprova&ccedil;&atilde;o de conte&uacute;do, IA, dashboard, automa&ccedil;&otilde;es, gest&atilde;o de redes sociais e times.</p>
+            <div class="case-content">
+              <span class="case-kicker">SaaS / Automação</span>
+              <h3 class="case-title">BK Flow</h3>
+              <p class="case-desc">Plataforma SaaS para gestão de mídias sociais integrando inteligência artificial para aprovação de conteúdo, calendário dinâmico e automações de publicação em escala.</p>
+              <div class="case-stack">
+                <span class="tag">React</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Supabase</span>
+                <span class="tag">React Query</span>
               </div>
-              <div>
-                <span>Desafios t&eacute;cnicos</span>
-                <p>Sincroniza&ccedil;&atilde;o de estados complexos, permiss&otilde;es multiusu&aacute;rio, experi&ecirc;ncia responsiva e integra&ccedil;&atilde;o entre IA e dados operacionais.</p>
+              <a href="projects/bk-flow.html" class="btn-ghost" style="align-self: flex-start; margin-top: auto;">Ver estudo de caso</a>
+            </div>
+          </article>
+
+          <!-- PROJECT: BK TALOS DASHBOARD -->
+          <article class="case-study reveal">
+            <div class="case-visual">
+              <div class="case-visual-placeholder">IMG_TALOS_DASHBOARD</div>
+            </div>
+            <div class="case-content">
+              <span class="case-kicker">Corporativo / Workflows</span>
+              <h3 class="case-title">BK Talos Dashboard</h3>
+              <p class="case-desc">Dashboard corporativo voltado para processamento de workflows visuais (grafos) e orquestração de rotinas complexas com motor interno e inteligência artificial.</p>
+              <div class="case-stack">
+                <span class="tag">Next.js</span>
+                <span class="tag">React Flow</span>
+                <span class="tag">Supabase</span>
               </div>
-              <div>
-                <span>Arquitetura</span>
-                <p>Frontend SPA em React, estado ass&iacute;ncrono com React Query, Supabase como backend e Edge Functions para automa&ccedil;&otilde;es.</p>
+              <a href="projects/bk-talos-dashboard.html" class="btn-ghost" style="align-self: flex-start; margin-top: auto;">Ver estudo de caso</a>
+            </div>
+          </article>
+
+          <!-- PROJECT: BK TALOS ENGINE -->
+          <article class="case-study reveal">
+            <div class="case-visual">
+              <div class="case-visual-placeholder">IMG_TALOS_ENGINE</div>
+            </div>
+            <div class="case-content">
+              <span class="case-kicker">Backend / Orquestração</span>
+              <h3 class="case-title">BK Talos Engine</h3>
+              <p class="case-desc">Motor assíncrono construído em Node.js para sustentar automações de WhatsApp e APIs RESTful, garantindo resiliência em requisições de alto volume.</p>
+              <div class="case-stack">
+                <span class="tag">Node.js</span>
+                <span class="tag">Express</span>
+                <span class="tag">TypeScript</span>
               </div>
+              <a href="projects/bk-talos-engine.html" class="btn-ghost" style="align-self: flex-start; margin-top: auto;">Ver estudo de caso</a>
             </div>
+          </article>
 
-            <div class="project-links" aria-label="Links do projeto BK Flow">
-              <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-github" aria-hidden="true"></i>
-                GitHub
-              </a>
-              <span class="project-link-muted">
-                <i class="fa-solid fa-lock" aria-hidden="true"></i>
-                Demo sob solicita&ccedil;&atilde;o
-              </span>
+          <!-- PROJECT: AGENDA LINK -->
+          <article class="case-study reveal">
+            <div class="case-visual">
+              <div class="case-visual-placeholder">IMG_AGENDA_LINK</div>
             </div>
-          </div>
-
-          <div class="project-preview project-preview-flow" role="img" aria-label="Preview visual do BK Flow">
-            <div class="preview-window">
-              <div class="preview-topbar">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="case-content">
+              <span class="case-kicker">SaaS / Transacional</span>
+              <h3 class="case-title">Agenda Link</h3>
+              <p class="case-desc">Sistema de agendamento focado em autônomos, utilizando PostgreSQL para gerenciamento rígido de conflitos e integrações severas com gateways de pagamento.</p>
+              <div class="case-stack">
+                <span class="tag">React</span>
+                <span class="tag">Stripe</span>
+                <span class="tag">Edge Functions</span>
               </div>
-              <div class="preview-dashboard">
-                <div class="preview-sidebar"></div>
-                <div class="preview-main">
-                  <div class="preview-chart"></div>
-                  <div class="preview-grid">
-                    <span></span><span></span><span></span><span></span><span></span><span></span>
-                  </div>
-                  <div class="preview-row"></div>
-                </div>
+              <a href="projects/agenda-link.html" class="btn-ghost" style="align-self: flex-start; margin-top: auto;">Ver estudo de caso</a>
+            </div>
+          </article>
+
+          <!-- PROJECT: BK ECHO -->
+          <article class="case-study reveal">
+            <div class="case-visual">
+              <div class="case-visual-placeholder">IMG_BK_ECHO</div>
+            </div>
+            <div class="case-content">
+              <span class="case-kicker">IA Generativa / Mídia</span>
+              <h3 class="case-title">BK Echo</h3>
+              <p class="case-desc">Aplicação focada em processamento de arquivos de áudio via inteligência artificial, atuando no parse de estruturas de dados e devoluções contextuais precisas.</p>
+              <div class="case-stack">
+                <span class="tag">Next.js</span>
+                <span class="tag">OpenAI API</span>
+                <span class="tag">Server Components</span>
               </div>
-            </div>
-          </div>
-        </article>
-
-        <div class="project-grid">
-          <article class="project-card reveal">
-            <div class="project-mini-preview preview-talos-dashboard" aria-hidden="true"></div>
-            <div class="project-kicker">
-              <span>Projeto Destaque</span>
-              <strong>Dashboard corporativo</strong>
-            </div>
-            <h3>BK Talos Dashboard</h3>
-            <p class="project-description">Dashboard corporativo com IA para workflows, PDFs, grafos, analytics e visualiza&ccedil;&atilde;o de processos.</p>
-            <div class="stack-tags project-stack">
-              <span class="tag">Next.js</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">Gemini</span>
-              <span class="tag">React Flow</span>
-              <span class="tag">Stripe</span>
-              <span class="tag">Supabase</span>
-            </div>
-            <div class="project-details compact">
-              <div><span>Funcionalidades</span><p>IA, workflows, PDFs, grafos, dashboard e analytics.</p></div>
-              <div><span>Desafios t&eacute;cnicos</span><p>Organizar fluxos visuais e dados corporativos em uma experi&ecirc;ncia clara.</p></div>
-              <div><span>Arquitetura</span><p>Next.js com integra&ccedil;&otilde;es de IA, pagamentos, Supabase e camada visual com React Flow.</p></div>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+              <a href="projects/bk-echo.html" class="btn-ghost" style="align-self: flex-start; margin-top: auto;">Ver estudo de caso</a>
             </div>
           </article>
 
-          <article class="project-card reveal">
-            <div class="project-mini-preview preview-talos-engine" aria-hidden="true"></div>
-            <div class="project-kicker">
-              <span>Projeto Destaque</span>
-              <strong>Backend e orquestra&ccedil;&atilde;o</strong>
+          <!-- PROJECT: CÓRTEX GLOBAL -->
+          <article class="case-study reveal">
+            <div class="case-visual">
+              <div class="case-visual-placeholder">IMG_CORTEX_GLOBAL</div>
             </div>
-            <h3>BK Talos Engine</h3>
-            <p class="project-description">Backend respons&aacute;vel pela orquestra&ccedil;&atilde;o de IA, WhatsApp, vetores, webhooks e APIs REST.</p>
-            <div class="stack-tags project-stack">
-              <span class="tag">Node.js</span>
-              <span class="tag">Express</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">Baileys</span>
-              <span class="tag">Gemini</span>
-              <span class="tag">Supabase</span>
-            </div>
-            <div class="project-details compact">
-              <div><span>Funcionalidades</span><p>API REST, WhatsApp, IA, vetores, webhooks e backend de automa&ccedil;&atilde;o.</p></div>
-              <div><span>Desafios t&eacute;cnicos</span><p>Manter integra&ccedil;&otilde;es ass&iacute;ncronas confi&aacute;veis entre mensagens, IA e banco.</p></div>
-              <div><span>Arquitetura</span><p>Servidor Express em TypeScript com integra&ccedil;&atilde;o Baileys, Gemini e persist&ecirc;ncia no Supabase.</p></div>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+            <div class="case-content">
+              <span class="case-kicker">Saúde / Validação</span>
+              <h3 class="case-title">Córtex Global</h3>
+              <p class="case-desc">Sistema de apoio a decisão médica focado em triagem. Combina inteligência artificial para estruturação semântica e E2E testing rigoroso com Playwright.</p>
+              <div class="case-stack">
+                <span class="tag">React</span>
+                <span class="tag">Google AI</span>
+                <span class="tag">Playwright</span>
+              </div>
+              <a href="projects/cortex-global.html" class="btn-ghost" style="align-self: flex-start; margin-top: auto;">Ver estudo de caso</a>
             </div>
           </article>
 
-          <article class="project-card reveal">
-            <div class="project-mini-preview preview-echo" aria-hidden="true"></div>
-            <div class="project-kicker">
-              <span>Projeto Destaque</span>
-              <strong>IA e conte&uacute;do</strong>
+          <!-- PROJECT: ORÇAPRO -->
+          <article class="case-study reveal">
+            <div class="case-visual">
+              <div class="case-visual-placeholder">IMG_ORCAPRO</div>
             </div>
-            <h3>BK Echo</h3>
-            <p class="project-description">Plataforma Full Stack de IA para processamento de &aacute;udio e gera&ccedil;&atilde;o de conte&uacute;do.</p>
-            <div class="stack-tags project-stack">
-              <span class="tag">Next.js</span>
-              <span class="tag">OpenAI</span>
-              <span class="tag">Supabase</span>
-              <span class="tag">Server Components</span>
-            </div>
-            <div class="project-details compact">
-              <div><span>Funcionalidades</span><p>Upload, processamento de &aacute;udio, IA e gera&ccedil;&atilde;o estruturada de conte&uacute;do.</p></div>
-              <div><span>Desafios t&eacute;cnicos</span><p>Lidar com arquivos, estados de processamento e retorno inteligente de informa&ccedil;&otilde;es.</p></div>
-              <div><span>Arquitetura</span><p>Next.js com Server Components, OpenAI para IA e Supabase para dados e autentica&ccedil;&atilde;o.</p></div>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+            <div class="case-content">
+              <span class="case-kicker">Ferramenta / Produtividade</span>
+              <h3 class="case-title">OrçaPro</h3>
+              <p class="case-desc">Micro-SaaS para padronização e automação na geração de PDFs corporativos e propostas comerciais complexas, poupando overhead manual.</p>
+              <div class="case-stack">
+                <span class="tag">React</span>
+                <span class="tag">React PDF</span>
+                <span class="tag">Supabase</span>
+              </div>
+              <a href="projects/orcapro.html" class="btn-ghost" style="align-self: flex-start; margin-top: auto;">Ver estudo de caso</a>
             </div>
           </article>
 
-          <article class="project-card reveal">
-            <div class="project-mini-preview preview-agenda" aria-hidden="true"></div>
-            <div class="project-kicker">
-              <span>Projeto Destaque</span>
-              <strong>SaaS de agendamento</strong>
-            </div>
-            <h3>Agenda Link</h3>
-            <p class="project-description">SaaS de agendamento para profissionais aut&ocirc;nomos com pagamentos, banco relacional e automa&ccedil;&otilde;es.</p>
-            <div class="stack-tags project-stack">
-              <span class="tag">React</span>
-              <span class="tag">Stripe</span>
-              <span class="tag">Supabase</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">Edge Functions</span>
-            </div>
-            <div class="project-details compact">
-              <div><span>Funcionalidades</span><p>Agenda, reservas, pagamentos, confirma&ccedil;&otilde;es e gest&atilde;o de disponibilidade.</p></div>
-              <div><span>Desafios t&eacute;cnicos</span><p>Prevenir conflitos de hor&aacute;rio e manter fluxos de pagamento e agenda consistentes.</p></div>
-              <div><span>Arquitetura</span><p>React no frontend, Supabase/PostgreSQL no backend e Edge Functions para regras de neg&oacute;cio.</p></div>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-mini-preview preview-cortex" aria-hidden="true"></div>
-            <div class="project-kicker">
-              <span>Projeto Destaque</span>
-              <strong>Sa&uacute;de e IA</strong>
-            </div>
-            <h3>C&oacute;rtex Global</h3>
-            <p class="project-description">Sistema de triagem m&eacute;dica com IA para apoiar classifica&ccedil;&atilde;o, prioriza&ccedil;&atilde;o e fluxo de atendimento.</p>
-            <div class="stack-tags project-stack">
-              <span class="tag">React</span>
-              <span class="tag">Google AI</span>
-              <span class="tag">Playwright</span>
-            </div>
-            <div class="project-details compact">
-              <div><span>Funcionalidades</span><p>Triagem, suporte de IA, formul&aacute;rios inteligentes e valida&ccedil;&atilde;o de jornadas.</p></div>
-              <div><span>Desafios t&eacute;cnicos</span><p>Criar uma interface objetiva para um dom&iacute;nio sens&iacute;vel, com testes de fluxo e clareza operacional.</p></div>
-              <div><span>Arquitetura</span><p>React no frontend, Google AI para apoio inteligente e Playwright para valida&ccedil;&atilde;o ponta a ponta.</p></div>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
-            </div>
-          </article>
-
-          <article class="project-card reveal project-card-compact">
-            <div class="project-mini-preview preview-orcapro" aria-hidden="true"></div>
-            <div class="project-kicker">
-              <span>Projeto Complementar</span>
-              <strong>PDF e produtividade</strong>
-            </div>
-            <h3>Or&ccedil;aPro</h3>
-            <p class="project-description">Sistema para gera&ccedil;&atilde;o de or&ccedil;amentos em PDF para freelancers.</p>
-            <div class="stack-tags project-stack">
-              <span class="tag">React</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">Supabase</span>
-              <span class="tag">React PDF</span>
-            </div>
-            <div class="project-details compact">
-              <div><span>Funcionalidades</span><p>Cadastro, c&aacute;lculo, templates e gera&ccedil;&atilde;o de PDF.</p></div>
-              <div><span>Desafios t&eacute;cnicos</span><p>Padronizar documentos e evitar retrabalho em propostas comerciais.</p></div>
-              <div><span>Arquitetura</span><p>React com tipagem, Supabase para dados e React PDF para sa&iacute;das profissionais.</p></div>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
-            </div>
-          </article>
-
-          <article class="project-card reveal project-card-compact">
-            <div class="project-mini-preview preview-cvm" aria-hidden="true"></div>
-            <div class="project-kicker">
-              <span>Projeto Complementar</span>
-              <strong>Dados e pipeline</strong>
-            </div>
-            <h3>CVM Extract</h3>
-            <p class="project-description">Pipeline Python para processamento de dados da CVM com extra&ccedil;&atilde;o, tratamento e organiza&ccedil;&atilde;o.</p>
-            <div class="stack-tags project-stack">
-              <span class="tag">Python</span>
-              <span class="tag">Pandas</span>
-              <span class="tag">Requests</span>
-            </div>
-            <div class="project-details compact">
-              <div><span>Funcionalidades</span><p>Coleta de dados, limpeza, normaliza&ccedil;&atilde;o e prepara&ccedil;&atilde;o para an&aacute;lise.</p></div>
-              <div><span>Desafios t&eacute;cnicos</span><p>Tratar dados financeiros com consist&ecirc;ncia e reduzir processamento manual.</p></div>
-              <div><span>Arquitetura</span><p>Pipeline Python com Requests para coleta e Pandas para transforma&ccedil;&atilde;o.</p></div>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
-            </div>
-          </article>
         </div>
       </div>
     </section>
 
-    <section id="skills" class="section section-muted">
+    <!-- SKILLS -->
+    <section id="skills" class="section">
       <div class="container">
-        <div class="section-header section-header-wide">
-          <div>
-            <span class="section-label reveal">// stack_atual</span>
-            <h2 class="section-title-lg reveal">Skills organizadas por contexto de entrega.</h2>
-          </div>
-          <p class="section-intro reveal">
-            Stack voltada para construir produtos completos: interface, backend, banco, cloud, IA, dados e ferramentas de desenvolvimento.
-          </p>
+        <div class="section-header">
+          <span class="section-label reveal">03. Stack Técnica</span>
+          <h2 class="section-title-lg reveal">Tecnologias & Ferramentas.</h2>
         </div>
 
-        <div class="skills-grid">
-          <article class="skill-card reveal">
-            <div class="skill-icon"><i class="fa-solid fa-display" aria-hidden="true"></i></div>
+        <div class="skills-docs reveal">
+          <div class="doc-group">
             <h3>Frontend</h3>
-            <div class="stack-tags">
-              <span class="tag">React</span>
-              <span class="tag">Next.js</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-              <span class="tag">Tailwind</span>
-              <span class="tag">Shadcn</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <div class="skill-icon"><i class="fa-solid fa-server" aria-hidden="true"></i></div>
+            <ul class="doc-list text-mono">
+              <li>React</li>
+              <li>Next.js</li>
+              <li>TypeScript</li>
+              <li>Tailwind CSS</li>
+              <li>Shadcn/UI</li>
+            </ul>
+          </div>
+          <div class="doc-group">
             <h3>Backend</h3>
-            <div class="stack-tags">
-              <span class="tag">Node.js</span>
-              <span class="tag">Express</span>
-              <span class="tag">APIs REST</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <div class="skill-icon"><i class="fa-solid fa-database" aria-hidden="true"></i></div>
-            <h3>Banco</h3>
-            <div class="stack-tags">
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">Supabase</span>
-              <span class="tag">SQL</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <div class="skill-icon"><i class="fa-solid fa-cloud" aria-hidden="true"></i></div>
-            <h3>Cloud</h3>
-            <div class="stack-tags">
-              <span class="tag">Vercel</span>
-              <span class="tag">Edge Functions</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <div class="skill-icon"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></div>
-            <h3>IA</h3>
-            <div class="stack-tags">
-              <span class="tag">OpenAI</span>
-              <span class="tag">Gemini</span>
-              <span class="tag">RAG</span>
-              <span class="tag">Prompt Engineering</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <div class="skill-icon"><i class="fa-solid fa-table" aria-hidden="true"></i></div>
-            <h3>Dados</h3>
-            <div class="stack-tags">
-              <span class="tag">Python</span>
-              <span class="tag">Pandas</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <div class="skill-icon"><i class="fa-solid fa-toolbox" aria-hidden="true"></i></div>
-            <h3>Ferramentas</h3>
-            <div class="stack-tags">
-              <span class="tag">Git</span>
-              <span class="tag">GitHub</span>
-              <span class="tag">VS Code</span>
-              <span class="tag">Figma</span>
-            </div>
-          </article>
+            <ul class="doc-list text-mono">
+              <li>Node.js</li>
+              <li>Express</li>
+              <li>Arquitetura REST</li>
+              <li>Serverless</li>
+            </ul>
+          </div>
+          <div class="doc-group">
+            <h3>Bancos de Dados</h3>
+            <ul class="doc-list text-mono">
+              <li>PostgreSQL</li>
+              <li>Supabase</li>
+              <li>SQL Avançado</li>
+              <li>Redis</li>
+            </ul>
+          </div>
+          <div class="doc-group">
+            <h3>Cloud & Infra</h3>
+            <ul class="doc-list text-mono">
+              <li>Vercel</li>
+              <li>Edge Functions</li>
+              <li>Docker</li>
+              <li>Git / CI/CD</li>
+            </ul>
+          </div>
+          <div class="doc-group">
+            <h3>Inteligência Artificial</h3>
+            <ul class="doc-list text-mono">
+              <li>OpenAI API</li>
+              <li>Gemini API</li>
+              <li>Prompt Engineering</li>
+              <li>RAG Pipelines</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- TIMELINE -->
     <section id="timeline" class="section">
       <div class="container">
         <div class="section-header">
-          <span class="section-label reveal">// evolucao_profissional</span>
-          <h2 class="section-title-lg reveal">Uma trajet&oacute;ria cada vez mais orientada a produto.</h2>
+          <span class="section-label reveal">04. Experiência</span>
+          <h2 class="section-title-lg reveal">Histórico Técnico.</h2>
         </div>
 
-        <div class="timeline">
-          <article class="timeline-item reveal">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <span>Base full stack</span>
-              <h3>Interfaces, APIs e banco trabalhando juntos</h3>
-              <p>Consolida&ccedil;&atilde;o de fundamentos de frontend, backend, modelagem de dados e integra&ccedil;&otilde;es para entregar aplica&ccedil;&otilde;es completas.</p>
-            </div>
-          </article>
-
-          <article class="timeline-item reveal">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <span>SaaS e automa&ccedil;&atilde;o</span>
-              <h3>Produtos com fluxo, assinatura e opera&ccedil;&atilde;o real</h3>
-              <p>Constru&ccedil;&atilde;o de agendas, dashboards, gest&atilde;o de conte&uacute;do, aprova&ccedil;&otilde;es, pagamentos e regras de neg&oacute;cio em produtos digitais.</p>
-            </div>
-          </article>
-
-          <article class="timeline-item reveal">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <span>IA aplicada</span>
-              <h3>LLMs dentro de sistemas, n&atilde;o apenas em demos</h3>
-              <p>Uso de OpenAI, Gemini, RAG, prompts estruturados e orquestra&ccedil;&atilde;o para resolver processamento de &aacute;udio, triagem, atendimento e analytics.</p>
-            </div>
-          </article>
-
-          <article class="timeline-item reveal">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <span>Arquitetura e engenharia</span>
-              <h3>Foco em sistemas sustent&aacute;veis</h3>
-              <p>Evolu&ccedil;&atilde;o para pensar em qualidade de c&oacute;digo, manutenibilidade, estados complexos, permiss&otilde;es, integra&ccedil;&otilde;es e experi&ecirc;ncia de uso.</p>
-            </div>
-          </article>
+        <div class="timeline-premium">
+          <div class="timeline-event reveal">
+            <div class="timeline-date">Atual</div>
+            <h3 class="timeline-title">Arquitetura de Sistemas Híbridos & IA</h3>
+            <p class="timeline-desc">Foco na integração de Modelos de Linguagem Grande (LLMs) em processos operacionais, construindo motores de backend capazes de sustentar inteligência autônoma. Aplicação profunda de Edge Computing e Next.js.</p>
+          </div>
+          <div class="timeline-event reveal">
+            <div class="timeline-date">2023</div>
+            <h3 class="timeline-title">Evolução SaaS & Ferramentas Operacionais</h3>
+            <p class="timeline-desc">Transição para desenvolvimento orientado a produto. Implementação de pipelines complexos, como gateways de pagamento, controle estrito de RBAC (Role-based access control) e manipulação de estado otimista.</p>
+          </div>
+          <div class="timeline-event reveal">
+            <div class="timeline-date">2021 — 2022</div>
+            <h3 class="timeline-title">Fundamentos em APIs & Client-side</h3>
+            <p class="timeline-desc">Forte base no ecossistema Node/React. Modelagem intensiva de bancos de dados relacionais para evitar anomalias, garantindo consistência em microsserviços precoces.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="contato" class="section contact-section">
-      <div class="container">
-        <div class="contact-card reveal">
-          <span class="section-label">// contato</span>
-          <h2>Vamos construir algo com n&iacute;vel de produto.</h2>
-          <p>
-            Estou aberto a oportunidades como Desenvolvedor Full Stack, Front-end, Back-end e Engenharia de Software, especialmente em times que valorizam produto, arquitetura, IA e automa&ccedil;&atilde;o.
-          </p>
-
-          <div class="contact-actions">
-            <a href="https://wa.me/5591992531885" target="_blank" rel="noopener noreferrer" class="btn-primary">
-              <i class="fab fa-whatsapp" aria-hidden="true"></i>
-              WhatsApp
-            </a>
-            <a href="https://www.linkedin.com/in/marcos-gabriel-rodrigues-ba%C3%ADa-0181022a5/" target="_blank" rel="noopener noreferrer" class="btn-ghost">
-              <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-              LinkedIn
-            </a>
-            <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer" class="btn-ghost">
-              <i class="fab fa-github" aria-hidden="true"></i>
-              GitHub
-            </a>
-            <a href="https://www.instagram.com/bk.marcosr/" target="_blank" rel="noopener noreferrer" class="btn-ghost">
-              <i class="fab fa-instagram" aria-hidden="true"></i>
-              Instagram
-            </a>
-          </div>
+    <!-- CONTATO -->
+    <section id="contato" class="section">
+      <div class="container" style="border-top: 1px solid var(--border-subtle); padding-top: var(--space-xl);">
+        <span class="section-label reveal">05. Contato</span>
+        <h2 class="section-title-lg reveal">Vamos construir.</h2>
+        <p class="section-intro reveal mb-lg" style="max-width: 500px;">
+          Disponível para desafios sérios envolvendo engenharia de software e produtos digitais.
+        </p>
+        <div class="hero-actions reveal">
+          <a href="mailto:contato@exemplo.com" class="btn-primary">Email</a>
+          <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer" class="btn-ghost">GitHub</a>
+          <a href="https://www.linkedin.com/in/marcos-gabriel-rodrigues-ba%C3%ADa-0181022a5/" target="_blank" rel="noopener noreferrer" class="btn-ghost">LinkedIn</a>
         </div>
       </div>
     </section>
@@ -589,29 +371,13 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <span class="footer-logo">BK.</span>
-        <span>&copy; 2026 Marcos Gabriel. Desenvolvido com HTML, CSS e JavaScript.</span>
+        <span class="footer-logo">Marcos Gabriel</span>
+        <span>© 2026 Engenharia de Software.</span>
       </div>
     </div>
   </footer>
 
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Marcos Gabriel",
-      "jobTitle": "Desenvolvedor Full Stack",
-      "url": "https://github.com/bk-marcosr",
-      "sameAs": [
-        "https://github.com/bk-marcosr",
-        "https://www.linkedin.com/in/marcos-gabriel-rodrigues-ba%C3%ADa-0181022a5/"
-      ],
-      "knowsAbout": ["React", "Next.js", "TypeScript", "Node.js", "Supabase", "OpenAI", "Gemini", "SaaS", "Automacao"]
-    }
-  </script>
-  <script src="js/core.js?v=20260727-2"></script>
-  <script src="js/animations.js?v=20260727-2"></script>
-  <script src="js/canvas-network.js?v=20260727-2"></script>
+  <script src="js/core.js"></script>
+  <script src="js/animations.js"></script>
 </body>
-
 </html>

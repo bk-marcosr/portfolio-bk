@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estudo de Caso: BK Talos Dashboard | Marcos Gabriel</title>
+  <meta name="theme-color" content="#000000">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+
+  <style>
+    .case-header { padding-top: 120px; padding-bottom: var(--space-xl); border-bottom: 1px solid var(--border-subtle); margin-bottom: var(--space-xl); }
+    .case-meta { display: flex; flex-wrap: wrap; gap: var(--space-lg); margin-bottom: var(--space-lg); font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-muted); }
+    .case-meta div { display: flex; flex-direction: column; gap: 4px; }
+    .case-meta strong { color: var(--text-primary); font-weight: 500; }
+    .content-block { margin-bottom: var(--space-xxl); max-width: 800px; }
+    .content-block h2 { font-size: 1.5rem; margin-bottom: var(--space-md); }
+    .content-block p { margin-bottom: var(--space-md); }
+    .content-block ul { list-style: disc; padding-left: var(--space-lg); margin-bottom: var(--space-md); color: var(--text-secondary); }
+    .content-block ul li { margin-bottom: var(--space-sm); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.875rem; text-decoration: none; transition: color 0.2s; margin-bottom: var(--space-lg); }
+    .back-link:hover { color: var(--text-primary); }
+  </style>
+</head>
+<body>
+
+  <nav class="floating-nav" id="floatingNav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Marcos Gabriel</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="case-header reveal">
+      <a href="../index.html" class="back-link">← Voltar para o portfólio</a>
+      <h1 class="section-title-lg">BK Talos Dashboard</h1>
+      <p class="section-intro mb-lg">Dashboard corporativo voltado para processamento de workflows visuais (grafos) e orquestração de rotinas complexas.</p>
+      
+      <div class="case-meta">
+        <div><span>Papel</span><strong>Front-End / UI Engineer</strong></div>
+        <div><span>Ano</span><strong>2024</strong></div>
+        <div><span>Categoria</span><strong>Dashboard / Corporativo</strong></div>
+        <div><span>Status</span><strong>Em Produção</strong></div>
+      </div>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Contexto & Problema</h2>
+      <p>Em ambientes corporativos com processos densos, a visualização de automações é frequentemente feita através de interfaces em lista, difíceis de interpretar quando existem milhares de etapas lógicas. A falta de uma visualização baseada em grafos (nodes e edges) dificultava a auditoria das automações gerenciadas pelo motor de IA.</p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Objetivo</h2>
+      <p>Construir a camada visual (Dashboard) do Protocolo Talos, permitindo que usuários criem, editem e visualizem workflows em formato de diagrama interativo, além de fornecer métricas gerenciais em tempo real sobre a utilização dos modelos de Inteligência Artificial.</p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Arquitetura & Tecnologias</h2>
+      <ul>
+        <li><strong>Framework Principal:</strong> Next.js com foco pesado na renderização do lado do cliente para as ferramentas visuais.</li>
+        <li><strong>Visualização de Grafos:</strong> React Flow para construir o editor de nodes drag-and-drop.</li>
+        <li><strong>Conectividade:</strong> Integração com Supabase (Realtime) para atualizações instantâneas no dashboard sem necessidade de polling.</li>
+        <li><strong>Pagamentos:</strong> Integração server-side com Stripe para processar o billing das métricas de IA consumidas no painel.</li>
+      </ul>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Decisões Técnicas & Desafios</h2>
+      <p>O React Flow introduziu um nível severo de complexidade de estado, pois o gerenciamento das posições X/Y de centenas de nodes precisa estar em sincronia com o estado lógico no banco de dados. Foi implementado um debounce customizado no salvamento, mitigando o sobrecarregamento das chamadas de API.</p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Galeria & Mockups</h2>
+      <div class="case-visual" style="margin-bottom: var(--space-md);">
+        <div class="case-visual-placeholder">IMG_TALOS_FLOW_EDITOR</div>
+      </div>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Conclusão</h2>
+      <p>A separação estrita entre o Talos Dashboard (Camada Visual Client-heavy) e o Talos Engine (Camada Servidor) permitiu que a equipe escalasse as interfaces gráficas sem medo de degradar a performance das filas de processamento concorrentes da API.</p>
+      <div class="hero-actions" style="margin-top: var(--space-lg);">
+        <a href="https://github.com/bk-marcosr" target="_blank" class="btn-ghost">Ver no GitHub</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">Marcos Gabriel</span>
+        <span>© 2026 Engenharia de Software.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/animations.js"></script>
+</body>
+</html>

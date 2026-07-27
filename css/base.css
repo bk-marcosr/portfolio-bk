@@ -1,85 +1,44 @@
 /* ============================================================
    BASE
-   Reset, global typography and accessibility
+   Resets and global typography
    ============================================================ */
 
 *, *::before, *::after {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 110px;
   font-size: 16px;
+  background: var(--bg-deep);
 }
 
 body {
-  min-height: 100vh;
   font-family: var(--font-main);
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
-    linear-gradient(180deg, #050505 0%, #07090c 42%, #050505 100%);
-  background-size: 96px 96px, 96px 96px, auto;
+  background: var(--bg-deep);
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    linear-gradient(120deg, rgba(125, 211, 252, 0.065), transparent 34%),
-    linear-gradient(260deg, rgba(52, 211, 153, 0.05), transparent 42%),
-    linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.026) 48%, transparent 100%);
+a { 
+  text-decoration: none; 
+  color: inherit; 
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+ul { 
+  list-style: none; 
 }
 
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-button {
-  color: inherit;
-}
-
-img,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-ul,
-ol {
-  list-style: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-display);
-  line-height: 1.08;
-  letter-spacing: 0;
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  line-height: 1.2;
 }
 
 p {
@@ -87,58 +46,21 @@ p {
 }
 
 ::selection {
-  background: rgba(var(--accent), 0.3);
+  background: rgba(255, 255, 255, 0.15);
   color: var(--text-primary);
 }
 
-:focus-visible {
-  outline: 2px solid var(--accent-blue);
-  outline-offset: 4px;
-}
-
-.skip-link {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  z-index: 2000;
-  transform: translateY(-140%);
-  background: var(--text-primary);
-  color: var(--bg-deep);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  font-weight: 700;
-  transition: transform 0.2s var(--ease-smooth);
-}
-
-.skip-link:focus {
-  transform: translateY(0);
-}
-
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
-
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: var(--bg-deep);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.16);
-  border: 2px solid #050505;
-  border-radius: var(--radius-pill);
+  background: var(--border-subtle);
+  border-radius: var(--radius-sm);
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.26);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.001ms !important;
-  }
+  background: var(--border-strong);
 }

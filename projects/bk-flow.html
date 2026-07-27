@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estudo de Caso: BK Flow | Marcos Gabriel</title>
+  <meta name="theme-color" content="#000000">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+
+  <style>
+    .case-header {
+      padding-top: 120px;
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: var(--space-xl);
+    }
+    .case-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-lg);
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    .case-meta div {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .case-meta strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    .content-block {
+      margin-bottom: var(--space-xxl);
+      max-width: 800px;
+    }
+    .content-block h2 {
+      font-size: 1.5rem;
+      margin-bottom: var(--space-md);
+    }
+    .content-block p {
+      margin-bottom: var(--space-md);
+    }
+    .content-block ul {
+      list-style: disc;
+      padding-left: var(--space-lg);
+      margin-bottom: var(--space-md);
+      color: var(--text-secondary);
+    }
+    .content-block ul li {
+      margin-bottom: var(--space-sm);
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: color 0.2s;
+      margin-bottom: var(--space-lg);
+    }
+    .back-link:hover {
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="floating-nav" id="floatingNav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Marcos Gabriel</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="case-header reveal">
+      <a href="../index.html" class="back-link">← Voltar para o portfólio</a>
+      <h1 class="section-title-lg">BK Flow</h1>
+      <p class="section-intro mb-lg">Plataforma SaaS para gestão de mídias sociais integrando IA para aprovação de conteúdo, calendário dinâmico e automações.</p>
+      
+      <div class="case-meta">
+        <div><span>Papel</span><strong>Engenheiro Full Stack</strong></div>
+        <div><span>Ano</span><strong>2024</strong></div>
+        <div><span>Categoria</span><strong>SaaS / Automação</strong></div>
+        <div><span>Status</span><strong>Em Produção</strong></div>
+      </div>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Contexto & Problema</h2>
+      <p>Equipes de marketing digital frequentemente lidam com ferramentas fragmentadas para criação, aprovação e agendamento de conteúdo. O processo manual de redigir legendas, enviá-las para revisão em planilhas ou comunicadores e, após aprovação, agendá-las em outra plataforma resulta em perda de produtividade e quebra de fluxo.</p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Objetivo</h2>
+      <p>Desenvolver uma plataforma SaaS centralizada (BK Flow) que unifica o calendário editorial, fluxos de aprovação com papéis distintos (RBAC) e publicação automatizada, potencializada por IA para suporte na geração de copy e ideias estruturadas.</p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Arquitetura & Tecnologias</h2>
+      <p>O sistema foi desenhado para ser serverless-first, priorizando velocidade de entrega e escalabilidade.</p>
+      <ul>
+        <li><strong>Frontend:</strong> React, TypeScript, Vite. Estado global com Zustand, e estado assíncrono rigorosamente gerido via React Query.</li>
+        <li><strong>Componentização:</strong> Tailwind CSS e Shadcn/UI para um design system focado em consistência visual.</li>
+        <li><strong>Backend & Dados:</strong> Supabase servindo como API e banco relacional (PostgreSQL). Utilização extensiva de RLS (Row Level Security) para isolamento de dados (multi-tenant).</li>
+        <li><strong>Automação:</strong> Edge Functions (Deno) para orquestrar publicações agendadas e chamadas externas.</li>
+      </ul>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Decisões Técnicas & Desafios</h2>
+      <p>Um dos maiores desafios técnicos foi o estado do calendário editorial. Mudanças de data via drag-and-drop exigiam mutações otimistas (Optimistic Updates) para garantir que a UI fosse instantânea, mesmo antes da persistência no Supabase. A escolha do React Query solucionou conflitos de estado e cache de forma elegante.</p>
+      <p>Outro ponto crítico foi a modelagem multi-tenant. O esquema de banco foi desenhado para separar os dados de cada agência/cliente nativamente através do PostgreSQL RLS, garantindo que usuários comuns nunca acessem relatórios de times aos quais não pertencem, eliminando vulnerabilidades na camada de aplicação.</p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Galeria & Mockups</h2>
+      <div class="case-visual" style="margin-bottom: var(--space-md);">
+        <div class="case-visual-placeholder">IMG_DASHBOARD_MAIN</div>
+      </div>
+      <div class="case-visual">
+        <div class="case-visual-placeholder">IMG_CALENDAR_VIEW</div>
+      </div>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Conclusão</h2>
+      <p>O BK Flow se consolidou como uma infraestrutura robusta, demonstrando como a união de uma modelagem de banco relacional sólida com as práticas mais modernas do ecossistema React (estado imutável e assíncrono) pode gerar uma experiência de classe mundial para o usuário final.</p>
+      <div class="hero-actions" style="margin-top: var(--space-lg);">
+        <a href="https://github.com/bk-marcosr" target="_blank" class="btn-ghost">Ver no GitHub</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">Marcos Gabriel</span>
+        <span>© 2026 Engenharia de Software.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/animations.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estudo de Caso: Agenda Link | Marcos Gabriel</title>
+  <meta name="theme-color" content="#000000">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+
+  <style>
+    .case-header { padding-top: 120px; padding-bottom: var(--space-xl); border-bottom: 1px solid var(--border-subtle); margin-bottom: var(--space-xl); }
+    .case-meta { display: flex; flex-wrap: wrap; gap: var(--space-lg); margin-bottom: var(--space-lg); font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-muted); }
+    .case-meta div { display: flex; flex-direction: column; gap: 4px; }
+    .case-meta strong { color: var(--text-primary); font-weight: 500; }
+    .content-block { margin-bottom: var(--space-xxl); max-width: 800px; }
+    .content-block h2 { font-size: 1.5rem; margin-bottom: var(--space-md); }
+    .content-block p { margin-bottom: var(--space-md); }
+    .content-block ul { list-style: disc; padding-left: var(--space-lg); margin-bottom: var(--space-md); color: var(--text-secondary); }
+    .content-block ul li { margin-bottom: var(--space-sm); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.875rem; text-decoration: none; transition: color 0.2s; margin-bottom: var(--space-lg); }
+    .back-link:hover { color: var(--text-primary); }
+  </style>
+</head>
+<body>
+
+  <nav class="floating-nav" id="floatingNav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Marcos Gabriel</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="case-header reveal">
+      <a href="../index.html" class="back-link">← Voltar para o portfólio</a>
+      <h1 class="section-title-lg">Agenda Link</h1>
+      <p class="section-intro mb-lg">Sistema de agendamento focado em autônomos, utilizando gerenciamento rígido de conflitos e integrações com gateways de pagamento.</p>
+      
+      <div class="case-meta">
+        <div><span>Papel</span><strong>Engenheiro Full Stack</strong></div>
+        <div><span>Ano</span><strong>2023</strong></div>
+        <div><span>Categoria</span><strong>SaaS / Transacional</strong></div>
+        <div><span>Status</span><strong>Em Produção</strong></div>
+      </div>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Contexto & Problema</h2>
+      <p>Profissionais autônomos gastam horas semanais organizando horários, lidando com no-shows e realizando cobranças manuais. Plataformas genéricas muitas vezes falham na flexibilidade de pagamentos locais ou carecem de regras de negócio personalizadas para o prestador de serviço brasileiro.</p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Objetivo</h2>
+      <p>Criar uma plataforma de reservas sem fricção (Booking System) onde o cliente final consegue ver disponibilidades reais, reservar o horário mediante pagamento (Stripe) e receber notificações automatizadas (WhatsApp/Email), liberando totalmente a agenda do profissional.</p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Arquitetura & Tecnologias</h2>
+      <ul>
+        <li><strong>Frontend:</strong> React (Vite), priorizando velocidade e componentes visuais de calendário de alta performance.</li>
+        <li><strong>Banco de Dados:</strong> PostgreSQL através do Supabase. A escolha do Postgres é vital pela transacionalidade ACID e constraints rigorosas (evitar double-booking).</li>
+        <li><strong>Serverless:</strong> Supabase Edge Functions invocadas durante o checkout para comunicar com a API da Stripe de maneira segura.</li>
+      </ul>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Decisões Técnicas & Desafios</h2>
+      <p>O maior risco arquitetural em um sistema de reservas é o fenômeno da Concorrência (race conditions). Se dois clientes tentarem reservar o mesmo horário simultaneamente, o sistema não pode permitir ambas as gravações. Implementei travas a nível de banco (Table Constraints no PostgreSQL) e validações no servidor antes de instanciar a Intent de Pagamento, garantindo integridade 100%.</p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Galeria & Mockups</h2>
+      <div class="case-visual" style="margin-bottom: var(--space-md);">
+        <div class="case-visual-placeholder">IMG_AGENDA_BOOKING_UI</div>
+      </div>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Conclusão</h2>
+      <p>Agenda Link prova que SaaS focado no transacional não tolera estado global instável. O projeto consolida princípios sólidos de engenharia de software transacional misturado à comodidade visual das tecnologias modernas de frontend.</p>
+      <div class="hero-actions" style="margin-top: var(--space-lg);">
+        <a href="https://github.com/bk-marcosr" target="_blank" class="btn-ghost">Ver no GitHub</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">Marcos Gabriel</span>
+        <span>© 2026 Engenharia de Software.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/animations.js"></script>
+</body>
+</html>
