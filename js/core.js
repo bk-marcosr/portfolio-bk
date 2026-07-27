@@ -47,11 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileMenuBtn.setAttribute('aria-label', 'Abrir menu');
     mobileOverlay.classList.remove('active');
     mobileOverlay.setAttribute('aria-hidden', 'true');
+    mobileOverlay.hidden = true;
     document.body.style.overflow = '';
   }
 
   function openMobileMenu() {
     if (!mobileMenuBtn || !mobileOverlay) return;
+    mobileOverlay.hidden = false;
     mobileMenuBtn.classList.add('active');
     mobileMenuBtn.setAttribute('aria-expanded', 'true');
     mobileMenuBtn.setAttribute('aria-label', 'Fechar menu');
