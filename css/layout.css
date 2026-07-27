@@ -27,17 +27,17 @@
   display: block;
   width: 56px;
   height: 3px;
-  background: var(--accent-alt);
+  background: linear-gradient(90deg, var(--accent), var(--accent-alt));
   border-radius: var(--radius-sm);
   margin-top: var(--space-md);
-  opacity: 0.55;
+  opacity: 0.75;
 }
 
 .section-label {
   display: block;
   font-family: var(--font-mono);
   font-size: 0.875rem;
-  color: var(--accent-alt);
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-sm);
