@@ -7,23 +7,26 @@
 
 :root {
   /* Core Colors - Light Corporate Theme */
-  --bg-deep: #F8FAFC; /* Slate 50 - Very light gray/blue background */
+  --bg-deep: #EAF2FA; /* Soft blue background */
   --bg-surface: #FFFFFF; /* Pure white for cards/surfaces */
-  --bg-surface-hover: #F1F5F9; /* Slate 100 */
+  --bg-surface-hover: #F3F7FB; /* Gentle surface hover */
+  --bg-surface-soft: #F8FAFC; /* Light surface tint */
   
   /* Borders */
-  --border-subtle: #E2E8F0; /* Slate 200 */
-  --border-strong: #CBD5E1; /* Slate 300 */
+  --border-subtle: #D9E2EF; /* Soft blue gray */
+  --border-strong: #B8C6DD; /* Moderate contrast border */
   
   /* Text */
-  --text-primary: #0F172A; /* Slate 900 - Almost black for high readability */
-  --text-secondary: #475569; /* Slate 600 - For descriptions */
-  --text-muted: #64748B; /* Slate 500 - For meta data */
+  --text-primary: #0F172A; /* Dark slate for strong readability */
+  --text-secondary: #334155; /* Soft charcoal for body text */
+  --text-muted: #475569; /* Muted indigo for meta text */
   
-  /* Brand/Accent - Deep Professional Blue (Trust, Corporate, Security) */
-  --accent: #1E3A8A; /* Blue 900 */
-  --accent-hover: #1E40AF; /* Blue 800 */
-  --accent-alt: #D97706; /* Orange accent for subtle highlights */
+  /* Brand/Accent */
+  --accent: #0F5FA5; /* Trustworthy deep blue */
+  --accent-hover: #155E99; /* Hover state blue */
+  --accent-soft: #D0E8FF; /* Soft blue highlight */
+  --accent-alt: #F59E0B; /* Warm accent for confidence */
+  --accent-alt-hover: #D97706;
   
   /* Typography */
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
