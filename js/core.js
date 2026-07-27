@@ -1,78 +1,101 @@
 /* ============================================================
    CORE
-   Navigation, Scroll Spy, and Mobile Menu
+   Navigation, scroll spy and mobile menu
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. FLOATING NAV SCROLL STATE
   const floatingNav = document.getElementById('floatingNav');
-  let ticking = false;
-
-  function onNavScroll() {
-    if (window.scrollY > 60) {
-      floatingNav.classList.add('scrolled');
-    } else {
-      floatingNav.classList.remove('scrolled');
-    }
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(onNavScroll);
-      ticking = true;
-    }
-  });
-
-  // 2. SCROLL SPY
-  const sections = document.querySelectorAll('section[id]');
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
   const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section[id]');
+
+  let navTicking = false;
   let spyTicking = false;
 
+  function setScrolledNav() {
+    if (!floatingNav) return;
+    floatingNav.classList.toggle('scrolled', window.scrollY > 60);
+    navTicking = false;
+  }
+
   function updateActiveNav() {
-    const scrollY = window.scrollY + 200;
+    const offsetY = window.scrollY + 180;
+    let activeId = sections[0]?.getAttribute('id') || '';
 
-    sections.forEach(section => {
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-      const id = section.getAttribute('id');
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
 
-      if (scrollY >= top && scrollY < top + height) {
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === '#' + id) {
-            link.classList.add('active');
-          }
-        });
+      if (offsetY >= sectionTop && offsetY < sectionBottom) {
+        activeId = section.getAttribute('id') || activeId;
       }
     });
+
+    navLinks.forEach((link) => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${activeId}`);
+    });
+
     spyTicking = false;
   }
 
+  function closeMobileMenu() {
+    if (!mobileMenuBtn || !mobileOverlay) return;
+    mobileMenuBtn.classList.remove('active');
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    mobileMenuBtn.setAttribute('aria-label', 'Abrir menu');
+    mobileOverlay.classList.remove('active');
+    mobileOverlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function openMobileMenu() {
+    if (!mobileMenuBtn || !mobileOverlay) return;
+    mobileMenuBtn.classList.add('active');
+    mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    mobileMenuBtn.setAttribute('aria-label', 'Fechar menu');
+    mobileOverlay.classList.add('active');
+    mobileOverlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function toggleMobileMenu() {
+    if (!mobileOverlay?.classList.contains('active')) {
+      openMobileMenu();
+    } else {
+      closeMobileMenu();
+    }
+  }
+
   window.addEventListener('scroll', () => {
+    if (!navTicking) {
+      requestAnimationFrame(setScrolledNav);
+      navTicking = true;
+    }
+
     if (!spyTicking) {
       requestAnimationFrame(updateActiveNav);
       spyTicking = true;
     }
-  });
-  updateActiveNav();
+  }, { passive: true });
 
-  // 3. MOBILE MENU
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-  const mobileOverlay = document.getElementById('mobileOverlay');
-  const mobileLinks = document.querySelectorAll('.mobile-link');
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 860) closeMobileMenu();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMobileMenu();
+  });
 
   if (mobileMenuBtn && mobileOverlay) {
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileOverlay.classList.toggle('active');
-      document.body.style.overflow = mobileOverlay.classList.contains('active') ? 'hidden' : '';
-    });
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-      });
+    mobileLinks.forEach((link) => {
+      link.addEventListener('click', closeMobileMenu);
     });
   }
+
+  setScrolledNav();
+  updateActiveNav();
 });

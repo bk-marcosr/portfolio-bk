@@ -1,68 +1,69 @@
 /* ============================================================
    ANIMATIONS
-   Scroll reveals and mouse-following glow
+   Scroll reveals and subtle pointer spotlight
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. SCROLL REVEAL (STAGGERED)
   const revealElements = document.querySelectorAll('.reveal');
-  const heroReveals = document.querySelectorAll('.hero-content .reveal');
-  
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const parent = entry.target.parentElement;
-        const siblings = parent ? parent.querySelectorAll(':scope > .reveal') : [];
-        const index = Array.from(siblings).indexOf(entry.target);
-        const delay = index >= 0 ? index * 0.15 : 0;
+  const heroReveals = document.querySelectorAll('.hero-shell .reveal');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        entry.target.style.transitionDelay = `${delay}s`;
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
+  if (prefersReducedMotion) {
+    revealElements.forEach((element) => element.classList.add('visible'));
+    return;
+  }
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+
+      const parent = entry.target.parentElement;
+      const siblings = parent ? parent.querySelectorAll(':scope > .reveal') : [];
+      const index = Array.from(siblings).indexOf(entry.target);
+      const delay = index >= 0 ? index * 0.08 : 0;
+
+      entry.target.style.transitionDelay = `${delay}s`;
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
     });
   }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.12,
+    rootMargin: '0px 0px -56px 0px'
   });
 
-  // Observe only non-hero elements
-  revealElements.forEach(el => {
-    let isHero = false;
-    heroReveals.forEach(heroEl => {
-      if (heroEl === el) isHero = true;
-    });
-    if (!isHero) revealObserver.observe(el);
+  revealElements.forEach((element) => {
+    if (!Array.from(heroReveals).includes(element)) {
+      revealObserver.observe(element);
+    }
   });
 
-  // Hero custom entrance
   setTimeout(() => {
-    heroReveals.forEach((el, i) => {
-      el.style.transitionDelay = `${0.3 + i * 0.2}s`;
-      el.classList.add('visible');
+    heroReveals.forEach((element, index) => {
+      element.style.transitionDelay = `${0.14 + index * 0.1}s`;
+      element.classList.add('visible');
     });
-  }, 100);
+  }, 80);
 
-  // 2. BENTO CARD MOUSE GLOW
-  const cards = document.querySelectorAll('.bento-card');
-  cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
+  const spotlightCards = document.querySelectorAll('.project-card, .skill-card, .focus-card, .metric-card, .timeline-content, .contact-card, .about-panel');
+
+  spotlightCards.forEach((card) => {
+    card.addEventListener('mousemove', (event) => {
       const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
       card.style.background = `
         radial-gradient(
-          800px circle at ${x}px ${y}px, 
-          rgba(255,255,255,0.06),
-          transparent 40%
+          620px circle at ${x}px ${y}px,
+          rgba(125, 211, 252, 0.075),
+          transparent 42%
         ),
         var(--bg-card)
       `;
     });
-    
+
     card.addEventListener('mouseleave', () => {
-      card.style.background = 'var(--bg-card)';
+      card.style.background = '';
     });
   });
 });

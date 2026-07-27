@@ -1,46 +1,56 @@
 /* ============================================================
    DESIGN TOKENS
-   Premium Neutral Interface with Bento Grid Aesthetics
+   Dark professional portfolio system
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
 
 :root {
-  /* Colors */
   --bg-deep: #050505;
-  --bg-glass: rgba(10, 10, 10, 0.6);
-  --bg-surface: rgba(255, 255, 255, 0.02);
-  --bg-surface-hover: rgba(255, 255, 255, 0.04);
-  --bg-card: rgba(20, 20, 20, 0.4);
-  
-  --border-subtle: rgba(255, 255, 255, 0.04);
-  --border-hover: rgba(255, 255, 255, 0.12);
-  
-  --text-primary: #FFFFFF;
-  --text-secondary: #A1A1AA;
-  --text-muted: #52525B;
-  
-  --accent: 59, 130, 246;
-  --accent-glow: rgba(59, 130, 246, 0.4);
+  --bg-elevated: #0b0d10;
+  --bg-glass: rgba(10, 13, 17, 0.74);
+  --bg-surface: rgba(255, 255, 255, 0.035);
+  --bg-surface-strong: rgba(255, 255, 255, 0.065);
+  --bg-card: rgba(12, 15, 19, 0.78);
+  --bg-card-solid: #0f1318;
 
-  /* Gradients */
-  --gradient-text: linear-gradient(120deg, #ffffff 20%, #a5b4fc 50%, #ffffff 80%);
-  --gradient-card: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-accent: rgba(125, 211, 252, 0.32);
 
-  /* Typography */
+  --text-primary: #f8fafc;
+  --text-secondary: #bac4d0;
+  --text-muted: #7b8794;
+  --text-soft: #d8dee7;
+
+  --accent: 125, 211, 252;
+  --accent-blue: #7dd3fc;
+  --accent-green: #34d399;
+  --accent-amber: #fbbf24;
+  --accent-rose: #fb7185;
+  --accent-violet: #a78bfa;
+
+  --gradient-text: linear-gradient(120deg, #ffffff 0%, #7dd3fc 34%, #34d399 68%, #ffffff 100%);
+  --gradient-card: linear-gradient(135deg, rgba(125, 211, 252, 0.11), rgba(52, 211, 153, 0.045), rgba(251, 191, 36, 0.035));
+  --gradient-border: linear-gradient(135deg, rgba(125, 211, 252, 0.44), rgba(52, 211, 153, 0.22), rgba(251, 191, 36, 0.2));
+
+  --shadow-soft: 0 18px 48px rgba(0, 0, 0, 0.34);
+  --shadow-card: 0 24px 70px rgba(0, 0, 0, 0.42);
+
   --font-display: 'Outfit', sans-serif;
-  --font-main: 'Inter', -apple-system, sans-serif;
-  --font-code: 'Fira Code', monospace;
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-code: 'Fira Code', Consolas, monospace;
 
-  /* Spacing & Radii */
-  --radius-sm: 12px;
-  --radius-md: 24px;
-  --radius-lg: 40px;
-  --radius-pill: 100px;
-  
-  --space-section: 160px;
-  
-  /* Easing */
-  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+
+  --container: 1180px;
+  --space-section: 128px;
+  --space-section-mobile: 88px;
+
+  --ease-spring: cubic-bezier(0.2, 0.85, 0.22, 1.12);
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
