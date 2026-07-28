@@ -1,14 +1,14 @@
 /* ============================================================
    ANIMATIONS — Lenis smooth scroll + GSAP ScrollTrigger
-   Immersive, physics-based, silky-smooth.
+   Immersive, physics-based, silky-smooth navigation.
    ============================================================ */
 
 (function () {
   'use strict';
 
   // ——— LENIS SMOOTH SCROLL ———
-  const lenis = new Lenis({
-    duration: 1.2,
+  var lenis = new Lenis({
+    duration: 1.4,
     easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
     orientation: 'vertical',
     gestureOrientation: 'vertical',
@@ -16,6 +16,9 @@
     smoothTouch: false,
     touchMultiplier: 2,
   });
+
+  // Expose globally so core.js can access it
+  window.__lenis = lenis;
 
   // Sync Lenis RAF with GSAP ticker
   lenis.on('scroll', ScrollTrigger.update);
@@ -26,7 +29,38 @@
 
   gsap.ticker.lagSmoothing(0);
 
-  // ——— GSAP ScrollTrigger Defaults ———
+  // ——— SMOOTH ANCHOR NAVIGATION via Lenis ———
+  // All links with [data-scroll-to] will use Lenis scrollTo instead of native jump
+  var anchorLinks = document.querySelectorAll('[data-scroll-to]');
+  anchorLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var href = this.getAttribute('href');
+      if (!href || href.charAt(0) !== '#') return;
+
+      e.preventDefault();
+
+      // Close mobile menu if open
+      var overlay = document.getElementById('mobileOverlay');
+      var btn = document.getElementById('mobileMenuBtn');
+      if (overlay && overlay.classList.contains('active')) {
+        overlay.classList.remove('active');
+        if (btn) btn.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      if (href === '#') {
+        // Scroll to top
+        lenis.scrollTo(0, { duration: 1.8 });
+      } else {
+        var target = document.querySelector(href);
+        if (target) {
+          lenis.scrollTo(target, { offset: -80, duration: 1.8 });
+        }
+      }
+    });
+  });
+
+  // ——— GSAP ScrollTrigger ———
   gsap.registerPlugin(ScrollTrigger);
 
   // ——— HERO — Staggered reveal from bottom ———
@@ -39,7 +73,7 @@
       opacity: 1,
       y: 0,
       duration: 1.2,
-      stagger: 0.15,
+      stagger: 0.18,
       ease: 'expo.out',
       delay: 0.3,
     });
@@ -85,56 +119,19 @@
     });
   });
 
-  var gsRight = document.querySelectorAll('.gs-hidden-right');
-  gsRight.forEach(function (el) {
-    gsap.fromTo(el, {
-      opacity: 0,
-      x: 60,
-    }, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-      opacity: 1,
-      x: 0,
-      duration: 1.1,
-      ease: 'expo.out',
-    });
-  });
-
-  // ——— SCALE reveals ———
-  var gsScale = document.querySelectorAll('.gs-hidden-scale');
-  gsScale.forEach(function (el) {
-    gsap.fromTo(el, {
-      opacity: 0,
-      scale: 0.92,
-    }, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-      opacity: 1,
-      scale: 1,
-      duration: 1,
-      ease: 'expo.out',
-    });
-  });
-
   // ——— PROJECT IMAGES — Parallax subtle shift ———
   var projectVisuals = document.querySelectorAll('.project-visual img');
   projectVisuals.forEach(function (img) {
     gsap.fromTo(img, {
-      yPercent: -5,
+      yPercent: -8,
     }, {
       scrollTrigger: {
         trigger: img.closest('.project-item'),
         start: 'top bottom',
         end: 'bottom top',
-        scrub: 0.8,
+        scrub: 0.6,
       },
-      yPercent: 5,
+      yPercent: 8,
       ease: 'none',
     });
   });
@@ -200,13 +197,12 @@
   // ——— NAV SCROLL STATE ———
   ScrollTrigger.create({
     start: 'top -60',
-    onUpdate: function (self) {
+    onUpdate: function () {
       var nav = document.getElementById('siteNav');
       if (!nav) return;
-      if (self.direction === 1 && window.scrollY > 60) {
+      if (window.scrollY > 60) {
         nav.classList.add('scrolled');
-      }
-      if (window.scrollY <= 10) {
+      } else {
         nav.classList.remove('scrolled');
       }
     },

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Marcos Gabriel — Software Engineer</title>
-  <meta name="description" content="Engenheiro de Software. Construo aplicações escaláveis, APIs resilientes e interfaces focadas em produto.">
+  <meta name="description" content="Engenheiro de Software. Aplicações escaláveis, APIs resilientes e interfaces focadas em produto.">
   <meta name="theme-color" content="#050505">
 
   <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
@@ -30,14 +30,14 @@
   <!-- NAV -->
   <nav class="nav" id="siteNav">
     <div class="nav-inner">
-      <a href="#" class="nav-wordmark">marcos<em>.dev</em></a>
+      <a href="#" class="nav-wordmark" data-scroll-to>marcos<em>.dev</em></a>
 
       <div class="nav-links">
-        <a href="#sobre" class="nav-link">Sobre</a>
-        <a href="#carreira" class="nav-link">Carreira</a>
-        <a href="#projetos" class="nav-link">Projetos</a>
-        <a href="#stack" class="nav-link">Stack</a>
-        <a href="#contato" class="nav-link">Contato</a>
+        <a href="#sobre" class="nav-link" data-scroll-to>Sobre</a>
+        <a href="#carreira" class="nav-link" data-scroll-to>Carreira</a>
+        <a href="#projetos" class="nav-link" data-scroll-to>Projetos</a>
+        <a href="#stack" class="nav-link" data-scroll-to>Stack</a>
+        <a href="#contato" class="nav-link" data-scroll-to>Contato</a>
         <button class="theme-btn" id="themeToggle" type="button" aria-label="Alternar tema">
           <span id="themeIcon">☀</span>
         </button>
@@ -51,12 +51,12 @@
 
   <!-- MOBILE OVERLAY -->
   <div class="mobile-overlay" id="mobileOverlay">
-    <a href="#" class="mobile-link">Início</a>
-    <a href="#sobre" class="mobile-link">Sobre</a>
-    <a href="#carreira" class="mobile-link">Carreira</a>
-    <a href="#projetos" class="mobile-link">Projetos</a>
-    <a href="#stack" class="mobile-link">Stack</a>
-    <a href="#contato" class="mobile-link">Contato</a>
+    <a href="#" class="mobile-link" data-scroll-to>Início</a>
+    <a href="#sobre" class="mobile-link" data-scroll-to>Sobre</a>
+    <a href="#carreira" class="mobile-link" data-scroll-to>Carreira</a>
+    <a href="#projetos" class="mobile-link" data-scroll-to>Projetos</a>
+    <a href="#stack" class="mobile-link" data-scroll-to>Stack</a>
+    <a href="#contato" class="mobile-link" data-scroll-to>Contato</a>
   </div>
 
   <main>
@@ -64,13 +64,6 @@
     <section id="hero" class="hero">
       <div class="container">
         <div class="hero-inner">
-          <div class="hero-intro gs-hidden">
-            <span class="hero-intro-line">
-              <span class="dot"></span>
-              Disponível para novos desafios
-            </span>
-          </div>
-
           <h1 class="gs-hidden">
             Construo software<br>
             <span class="thin">que resolve problemas reais.</span>
@@ -83,8 +76,8 @@
           </p>
 
           <div class="hero-ctas gs-hidden">
-            <a href="#projetos" class="btn-fill">Ver projetos</a>
-            <a href="#contato" class="btn-outline">Fale comigo</a>
+            <a href="#projetos" class="btn-fill" data-scroll-to>Ver projetos</a>
+            <a href="#contato" class="btn-outline" data-scroll-to>Fale comigo</a>
           </div>
         </div>
       </div>
@@ -93,7 +86,6 @@
     <!-- ═══════════ SOBRE ═══════════ -->
     <section id="sobre" class="section">
       <div class="container">
-        <p class="section-eyebrow gs-hidden">01 — Sobre</p>
         <h2 class="section-heading gs-hidden">Engenharia orientada<br>a impacto de produto.</h2>
 
         <div class="about-layout">
@@ -123,7 +115,6 @@
     <!-- ═══════════ CARREIRA ═══════════ -->
     <section id="carreira" class="section">
       <div class="container">
-        <p class="section-eyebrow gs-hidden">02 — Carreira</p>
         <h2 class="section-heading gs-hidden">Histórico técnico.</h2>
 
         <div class="timeline-grid">
@@ -159,7 +150,6 @@
     <!-- ═══════════ PROJETOS ═══════════ -->
     <section id="projetos" class="section">
       <div class="container">
-        <p class="section-eyebrow gs-hidden">03 — Projetos</p>
         <h2 class="section-heading gs-hidden">Arquitetura em produção.</h2>
         <p class="section-lead gs-hidden">Sistemas reais resolvendo problemas complexos de domínio.</p>
 
@@ -168,77 +158,88 @@
           <!-- BK FLOW -->
           <article class="project-item gs-hidden">
             <div class="project-visual">
-              <img src="assets/projects/bk-flow.svg" alt="BK Flow">
+              <img src="assets/projects/bk-flow.png" alt="BK Flow — SaaS de Gestão de Redes Sociais" loading="lazy">
             </div>
             <div class="project-details">
-              <span class="project-category">SaaS / Workflow</span>
+              <span class="project-category">SaaS B2B / Automação</span>
               <h3 class="project-title">BK Flow</h3>
-              <p class="project-desc">Plataforma SaaS para gestão de fluxo de trabalho. Arquitetura serverless com isolamento multi-tenant e processos agendados de forma assíncrona.</p>
-              <div class="project-impact">Reduziu o tempo médio de processamento em 52%</div>
+              <p class="project-desc">SaaS colossal focado em agências de marketing. Gestão de métricas, orquestração de publicações e calendário editorial com autopublicação no Instagram via Meta Graph API. Visão Multi-Tenant com níveis de permissão e controle de acesso.</p>
+              <div class="project-impact">A "Santíssima Trindade" do Frontend: React Query + Zustand + Shadcn</div>
               <div class="project-tags">
-                <span class="project-tag">React</span>
-                <span class="project-tag">TypeScript</span>
-                <span class="project-tag">Supabase RLS</span>
-                <span class="project-tag">Serverless</span>
+                <span class="project-tag">React 18</span>
+                <span class="project-tag">Vite</span>
+                <span class="project-tag">Supabase</span>
+                <span class="project-tag">Zustand</span>
+                <span class="project-tag">React Query</span>
+                <span class="project-tag">Edge Functions</span>
+                <span class="project-tag">Meta Graph API</span>
               </div>
-              <a href="projects/bk-flow.html" class="btn-text">Documentação técnica <span class="arrow">→</span></a>
+              <a href="projects/bk-flow.html" class="btn-text">Ler estudo de caso <span class="arrow">→</span></a>
+            </div>
+          </article>
+
+          <!-- ECOSSISTEMA TALOS -->
+          <article class="project-item gs-hidden">
+            <div class="project-visual">
+              <img src="assets/projects/talos-ecosystem.png" alt="Ecossistema Talos — Motor de IA + Dashboard Visual" loading="lazy">
+            </div>
+            <div class="project-details">
+              <span class="project-category">IA / Automação / Full Stack</span>
+              <h3 class="project-title">Ecossistema Talos</h3>
+              <p class="project-desc">Projeto de maior impacto técnico. Motor pesado (bk-talos-engine) orquestrando sockets persistentes do WhatsApp e IA em Node.js, aliado a um painel complexo (bk-talos-dashboard) que processa PDFs, faz web scraping e desenha fluxos interativos através de nós.</p>
+              <div class="project-impact">O ápice da engenharia Full Stack: Motor backend + Grafos interativos + IA</div>
+              <div class="project-tags">
+                <span class="project-tag">Next.js 16</span>
+                <span class="project-tag">Express</span>
+                <span class="project-tag">Gemini AI</span>
+                <span class="project-tag">xyflow/react</span>
+                <span class="project-tag">Baileys</span>
+                <span class="project-tag">Webhooks</span>
+              </div>
+              <a href="projects/bk-talos-dashboard.html" class="btn-text">Ler estudo de caso <span class="arrow">→</span></a>
             </div>
           </article>
 
           <!-- AGENDA LINK -->
           <article class="project-item gs-hidden">
             <div class="project-visual">
-              <img src="assets/projects/agenda-link.svg" alt="Agenda Link">
+              <img src="assets/projects/agenda-link.png" alt="AgendaLink — Plataforma B2B2C com Pagamentos" loading="lazy">
             </div>
             <div class="project-details">
-              <span class="project-category">Transacional / Booking</span>
-              <h3 class="project-title">Agenda Link</h3>
-              <p class="project-desc">Sistema de agendamento transacional com gestão rígida de concorrência. Restrições a nível de banco (PostgreSQL) para impedir race-conditions durante pagamentos.</p>
-              <div class="project-impact">99,8% agendamentos sem colisão</div>
+              <span class="project-category">B2B2C / Transacional</span>
+              <h3 class="project-title">AgendaLink</h3>
+              <p class="project-desc">Aplicação cirúrgica que cobre o ciclo completo do usuário, do cadastro ao pagamento. Algoritmos de fuso horário, gestão de conflitos em calendários dinâmicos e pagamentos externos usando Edge Functions Serverless acopladas a Webhooks do Stripe com Row Level Security no banco.</p>
+              <div class="project-impact">Integrações com dinheiro real: Stripe Checkout + Edge Functions + RLS</div>
               <div class="project-tags">
-                <span class="project-tag">Next.js</span>
-                <span class="project-tag">PostgreSQL</span>
-                <span class="project-tag">Stripe API</span>
+                <span class="project-tag">React 19</span>
+                <span class="project-tag">Vite</span>
+                <span class="project-tag">Supabase</span>
+                <span class="project-tag">Tailwind v4</span>
+                <span class="project-tag">Stripe</span>
+                <span class="project-tag">RLS</span>
               </div>
-              <a href="projects/agenda-link.html" class="btn-text">Documentação técnica <span class="arrow">→</span></a>
+              <a href="projects/agenda-link.html" class="btn-text">Ler estudo de caso <span class="arrow">→</span></a>
             </div>
           </article>
 
-          <!-- TALOS ENGINE -->
+          <!-- BK ECHO -->
           <article class="project-item gs-hidden">
             <div class="project-visual">
-              <img src="assets/projects/talos-engine.svg" alt="Talos Middleware Engine">
+              <img src="assets/projects/bk-echo.png" alt="BK Echo — Geração e Scoring de Conteúdo com IA" loading="lazy">
             </div>
             <div class="project-details">
-              <span class="project-category">Backend / API Gateway</span>
-              <h3 class="project-title">Talos Middleware Engine</h3>
-              <p class="project-desc">Motor backend assíncrono para webhooks de alto volume com retry policies e exponential backoff sem degradar o servidor.</p>
-              <div class="project-impact">120K webhooks/dia com &lt;0.3% erro</div>
+              <span class="project-category">IA / RAG / Content Scoring</span>
+              <h3 class="project-title">BK Echo</h3>
+              <p class="project-desc">Ecossistema rigoroso de transcrição, recuperação e geração (RAG) com sistema de avaliação (Scoring) de conteúdo. Utiliza roteamento híbrido do Next.js (Middlewares + Server Components) para abstrair lógicas pesadas e proteger dados através de Sessões SSR.</p>
+              <div class="project-impact">Não é "chamar uma API": é RAG + Scoring + Aprovação + SSR</div>
               <div class="project-tags">
-                <span class="project-tag">Node.js</span>
-                <span class="project-tag">Express</span>
-                <span class="project-tag">Message Queues</span>
+                <span class="project-tag">Next.js 14</span>
+                <span class="project-tag">React 18</span>
+                <span class="project-tag">Supabase SSR</span>
+                <span class="project-tag">OpenAI</span>
+                <span class="project-tag">Middlewares</span>
               </div>
-              <a href="projects/bk-talos-engine.html" class="btn-text">Documentação técnica <span class="arrow">→</span></a>
-            </div>
-          </article>
-
-          <!-- CÓRTEX GLOBAL -->
-          <article class="project-item gs-hidden">
-            <div class="project-visual">
-              <img src="assets/projects/cortex-global.svg" alt="Córtex Global">
-            </div>
-            <div class="project-details">
-              <span class="project-category">HealthTech / QA</span>
-              <h3 class="project-title">Córtex Global</h3>
-              <p class="project-desc">Prova de conceito para triagem médica. Foco em Quality Assurance com cobertura E2E usando Playwright para compliance em fluxos críticos.</p>
-              <div class="project-impact">100% cobertura em fluxos críticos</div>
-              <div class="project-tags">
-                <span class="project-tag">React</span>
-                <span class="project-tag">Google AI</span>
-                <span class="project-tag">Playwright E2E</span>
-              </div>
-              <a href="projects/cortex-global.html" class="btn-text">Documentação técnica <span class="arrow">→</span></a>
+              <a href="projects/bk-echo.html" class="btn-text">Ler estudo de caso <span class="arrow">→</span></a>
             </div>
           </article>
 
@@ -251,18 +252,19 @@
     <!-- ═══════════ STACK ═══════════ -->
     <section id="stack" class="section">
       <div class="container">
-        <p class="section-eyebrow gs-hidden">04 — Stack</p>
         <h2 class="section-heading gs-hidden">Tecnologias que uso em produção.</h2>
 
         <div class="skills-table gs-hidden" style="margin-top: var(--space-2xl);">
           <div class="skill-row">
             <span class="skill-label">Frontend</span>
             <div class="skill-items">
-              <span class="skill-chip">React</span>
+              <span class="skill-chip">React 18/19</span>
               <span class="skill-chip">Next.js</span>
               <span class="skill-chip">TypeScript</span>
               <span class="skill-chip">Tailwind CSS</span>
               <span class="skill-chip">Zustand</span>
+              <span class="skill-chip">React Query</span>
+              <span class="skill-chip">Shadcn/UI</span>
             </div>
           </div>
           <div class="skill-row">
@@ -271,7 +273,8 @@
               <span class="skill-chip">Node.js</span>
               <span class="skill-chip">Express</span>
               <span class="skill-chip">REST / GraphQL</span>
-              <span class="skill-chip">Serverless</span>
+              <span class="skill-chip">Edge Functions</span>
+              <span class="skill-chip">Webhooks</span>
               <span class="skill-chip">Event-driven</span>
             </div>
           </div>
@@ -281,7 +284,17 @@
               <span class="skill-chip">PostgreSQL</span>
               <span class="skill-chip">Supabase</span>
               <span class="skill-chip">Redis</span>
+              <span class="skill-chip">RLS</span>
               <span class="skill-chip">Data Modeling</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">IA</span>
+            <div class="skill-items">
+              <span class="skill-chip">OpenAI</span>
+              <span class="skill-chip">Gemini</span>
+              <span class="skill-chip">RAG Pipelines</span>
+              <span class="skill-chip">Prompt Engineering</span>
             </div>
           </div>
           <div class="skill-row">
@@ -303,7 +316,6 @@
     <section id="contato" class="section">
       <div class="container">
         <div class="contact-block gs-hidden">
-          <p class="section-eyebrow">05 — Contato</p>
           <h2 class="section-heading">Disponível para<br>novos desafios.</h2>
           <p class="section-lead">
             Procuro equipes maduras que valorizam código manutenível, testes automatizados e impacto nos resultados de negócio.
@@ -334,15 +346,15 @@
       <div class="footer-inner">
         <span style="font-family: var(--font-display); font-weight: 700; color: var(--text-heading);">marcos<em style="font-style: normal; color: var(--text-dim); font-weight: 500;">.dev</em></span>
         <div class="footer-links">
-          <a href="#projetos">Projetos</a>
-          <a href="#contato">Contato</a>
+          <a href="#projetos" data-scroll-to>Projetos</a>
+          <a href="#contato" data-scroll-to>Contato</a>
           <a href="https://github.com/bk-marcosr" target="_blank">GitHub</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- LIBS: Lenis (Smooth Scroll) + GSAP (Animations) via CDN -->
+  <!-- LIBS -->
   <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>

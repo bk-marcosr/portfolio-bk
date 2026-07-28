@@ -134,14 +134,6 @@
 
 
 /* ——— SECTION HEADERS ——— */
-.section-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: var(--space-md);
-}
 
 .section-heading {
   font-size: clamp(1.8rem, 3.5vw, 2.8rem);
@@ -167,18 +159,19 @@
 
 @media (min-width: 900px) {
   .about-layout {
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 320px 1fr;
     gap: var(--space-3xl);
   }
 }
 
 .about-photo {
-  width: 180px;
-  height: 180px;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1;
   object-fit: cover;
   border-radius: var(--radius-xl);
   filter: grayscale(100%);
-  transition: filter 0.5s ease;
+  transition: filter 0.6s ease;
 }
 
 .about-photo:hover {
