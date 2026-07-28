@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +14,16 @@
   <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/components.css">
 
+  <script>
+    (function() {
+      var theme = localStorage.getItem('theme');
+      if (!theme) {
+        theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
   <style>
     .case-header { padding-top: 120px; padding-bottom: var(--space-xl); border-bottom: 1px solid var(--border-subtle); margin-bottom: var(--space-xl); }
     .case-meta { display: flex; flex-wrap: wrap; gap: var(--space-lg); margin-bottom: var(--space-lg); font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-muted); }
@@ -24,15 +34,18 @@
     .content-block p { margin-bottom: var(--space-md); }
     .content-block ul { list-style: disc; padding-left: var(--space-lg); margin-bottom: var(--space-md); color: var(--text-secondary); }
     .content-block ul li { margin-bottom: var(--space-sm); }
-    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.875rem; text-decoration: none; transition: color 0.2s; margin-bottom: var(--space-lg); }
-    .back-link:hover { color: var(--text-primary); }
   </style>
 </head>
 <body>
 
   <nav class="floating-nav" id="floatingNav">
     <div class="nav-inner">
-      <a href="../index.html" class="nav-logo">Marcos Gabriel</a>
+      <a href="../index.html" class="nav-logo">Marcos<span>.</span></a>
+      <div class="nav-links">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema">
+          <span id="themeIcon">☀️</span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -94,12 +107,20 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <span class="footer-logo">Marcos Gabriel</span>
-        <span>© 2026 Engenharia de Software.</span>
+        <div>
+          <span class="footer-logo">Marcos<span style="color: var(--accent);">.</span></span>
+          <span style="margin-left: var(--space-md);">Engenharia de Software © 2026</span>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Início</a>
+          <a href="../index.html#projetos">Projetos</a>
+          <a href="../index.html#contato">Contato</a>
+        </div>
       </div>
     </div>
   </footer>
 
   <script src="../js/animations.js"></script>
+  <script src="../js/core.js"></script>
 </body>
 </html>

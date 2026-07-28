@@ -1,24 +1,25 @@
-/* ============================================================
-   ANIMATIONS
-   Minimalist Intersection Observer (Fade only)
-   ============================================================ */
-
 document.addEventListener('DOMContentLoaded', () => {
-  const revealElements = document.querySelectorAll('.reveal');
-  
-  const revealObserver = new IntersectionObserver((entries) => {
+  const revealMap = {
+    'reveal': { opacity: 0, transform: 'translateY(24px)' },
+    'reveal-left': { opacity: 0, transform: 'translateX(-24px)' },
+    'reveal-right': { opacity: 0, transform: 'translateX(24px)' },
+    'reveal-scale': { opacity: 0, transform: 'scale(0.95)' },
+  };
+
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
+        observer.unobserve(entry.target);
       }
     });
   }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
   });
 
-  revealElements.forEach(el => {
-    revealObserver.observe(el);
+  document.querySelectorAll('[class*="reveal"]').forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
   });
 });
