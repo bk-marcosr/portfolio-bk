@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.querySelectorAll('[class*="reveal"]').forEach(el => {
-    el.style.opacity = '0';
     observer.observe(el);
   });
 });
