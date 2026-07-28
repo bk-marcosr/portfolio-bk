@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR" data-theme="dark" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marcos Gabriel | Senior Software Engineer</title>
-  <meta name="description" content="Engenheiro de Software Sênior especializado em arquiteturas corporativas, desenvolvimento full-stack e escalabilidade.">
-  <meta name="theme-color" content="#000000">
+  <title>Marcos Gabriel — Software Engineer</title>
+  <meta name="description" content="Engenheiro de Software. Construo aplicações escaláveis, APIs resilientes e interfaces focadas em produto.">
+  <meta name="theme-color" content="#050505">
 
   <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,426 +18,334 @@
 
   <script>
     (function() {
-      var theme = localStorage.getItem('theme');
-      if (!theme) {
-        theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-      }
-      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.classList.remove('no-js');
+      var t = localStorage.getItem('theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
 </head>
-<body>
 
-  <nav class="floating-nav" id="floatingNav">
+<body>
+  <!-- NAV -->
+  <nav class="nav" id="siteNav">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo">Marcos<span>.</span></a>
-      <div class="nav-links" id="navLinks">
+      <a href="#" class="nav-wordmark">marcos<em>.dev</em></a>
+
+      <div class="nav-links">
         <a href="#sobre" class="nav-link">Sobre</a>
-        <a href="#experiencia" class="nav-link">Experiência</a>
+        <a href="#carreira" class="nav-link">Carreira</a>
         <a href="#projetos" class="nav-link">Projetos</a>
-        <a href="#tecnologia" class="nav-link">Skills</a>
+        <a href="#stack" class="nav-link">Stack</a>
         <a href="#contato" class="nav-link">Contato</a>
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema">
-          <span id="themeIcon">🌙</span>
+        <button class="theme-btn" id="themeToggle" type="button" aria-label="Alternar tema">
+          <span id="themeIcon">☀</span>
         </button>
       </div>
-      <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Abrir menu">
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
+  <!-- MOBILE OVERLAY -->
   <div class="mobile-overlay" id="mobileOverlay">
-    <a href="#hero" class="mobile-link">Início</a>
+    <a href="#" class="mobile-link">Início</a>
     <a href="#sobre" class="mobile-link">Sobre</a>
-    <a href="#experiencia" class="mobile-link">Experiência</a>
+    <a href="#carreira" class="mobile-link">Carreira</a>
     <a href="#projetos" class="mobile-link">Projetos</a>
-    <a href="#tecnologia" class="mobile-link">Skills</a>
+    <a href="#stack" class="mobile-link">Stack</a>
     <a href="#contato" class="mobile-link">Contato</a>
   </div>
 
   <main>
-    <!-- HERO -->
+    <!-- ═══════════ HERO ═══════════ -->
     <section id="hero" class="hero">
       <div class="container">
-        <div class="hero-grid">
-          <div class="reveal">
-            <p class="hero-tag">Disponível para novos desafios</p>
-            <h1 class="hero-title">
-              Construo <span class="highlight">aplicações e APIs</span> que ajudam times a entregar com confiança.
-            </h1>
-            <p class="hero-sub">
-              Trabalho diretamente com produto e engenharia para transformar regras reais em software estável e previsível, sem comprometer velocidade de entrega.
-            </p>
-            <div class="hero-actions">
-              <a href="#projetos" class="btn-primary">Ver Projetos</a>
-              <a href="#contato" class="btn-ghost">Fale Comigo</a>
-            </div>
+        <div class="hero-inner">
+          <div class="hero-intro gs-hidden">
+            <span class="hero-intro-line">
+              <span class="dot"></span>
+              Disponível para novos desafios
+            </span>
           </div>
 
-          <div class="reveal-right">
-            <div class="terminal-window">
-              <div class="terminal-header">
-                <span class="terminal-dot"></span>
-                <span class="terminal-dot"></span>
-                <span class="terminal-dot"></span>
-                <span class="terminal-title">~/portfolio</span>
-              </div>
-              <div class="terminal-body" id="terminalBody">
-                <span class="terminal-line">
-                  <span class="terminal-prompt">$</span>
-                  <span class="terminal-command">whoami</span>
-                </span>
-                <span class="terminal-line">
-                  <span class="terminal-output">Marcos Gabriel — Senior Software Engineer</span>
-                </span>
-                <span class="terminal-line">
-                  <span class="terminal-prompt">$</span>
-                  <span class="terminal-command">cat stack.txt</span>
-                </span>
-                <span class="terminal-line">
-                  <span class="terminal-output">{</span>
-                </span>
-                <span class="terminal-line">
-                  <span class="terminal-output">  "backend":  ["Node.js", "TypeScript", "Express", "Serverless"],</span>
-                </span>
-                <span class="terminal-line">
-                  <span class="terminal-output">  "frontend": ["React", "Next.js", "Tailwind"],</span>
-                </span>
-                <span class="terminal-line">
-                  <span class="terminal-output">  "database": ["PostgreSQL", "Supabase", "Redis"],</span>
-                </span>
-                <span class="terminal-line">
-                  <span class="terminal-output">  "devops":   ["Docker", "GitHub Actions", "AWS"]</span>
-                </span>
-                <span class="terminal-line">
-                  <span class="terminal-output">}</span>
-                </span>
-                <span class="terminal-line">
-                  <span class="terminal-prompt">$</span>
-                  <span class="terminal-command" id="typingLine"></span>
-                  <span class="terminal-cursor"></span>
-                </span>
-              </div>
-            </div>
+          <h1 class="gs-hidden">
+            Construo software<br>
+            <span class="thin">que resolve problemas reais.</span>
+          </h1>
+
+          <hr class="hero-rule gs-hidden">
+
+          <p class="hero-body gs-hidden">
+            Engenheiro Full Stack focado em aplicações SaaS, APIs resilientes e integrações de IA. Trabalho com produto e engenharia para transformar necessidades complexas em sistemas que escalam.
+          </p>
+
+          <div class="hero-ctas gs-hidden">
+            <a href="#projetos" class="btn-fill">Ver projetos</a>
+            <a href="#contato" class="btn-outline">Fale comigo</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- STATS -->
-    <section class="section" style="padding: 0;">
-      <div class="container">
-        <div class="stats-bar reveal">
-          <div class="stat-item">
-            <span class="stat-number"><span class="stat-counter" data-target="5">0</span><span class="stat-suffix">+</span></span>
-            <span class="stat-label">Anos de Experiência</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number"><span class="stat-counter" data-target="15">0</span><span class="stat-suffix">+</span></span>
-            <span class="stat-label">Projetos Entregues</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number"><span class="stat-counter" data-target="99">0</span><span class="stat-suffix">.9%</span></span>
-            <span class="stat-label">Uptime em Produção</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOBRE -->
+    <!-- ═══════════ SOBRE ═══════════ -->
     <section id="sobre" class="section">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-label">Sobre</span>
-          <h2 class="section-title">Entrego software que funciona e que o time consegue manter.</h2>
-        </div>
+        <p class="section-eyebrow gs-hidden">01 — Sobre</p>
+        <h2 class="section-heading gs-hidden">Engenharia orientada<br>a impacto de produto.</h2>
 
-        <div class="about-grid">
-          <img src="perfil.png" alt="Marcos Gabriel" class="about-photo reveal">
-          <div class="about-text reveal">
+        <div class="about-layout">
+          <img src="perfil.png" alt="Marcos Gabriel" class="about-photo gs-hidden-left">
+
+          <div class="about-body gs-hidden">
             <p>
               Já liderei a reconstrução de um fluxo de checkout que travava em picos e, com mudanças no backend e no controle de concorrência, reduzi os incidentes em produção e evitamos horas de retrabalho manual.
             </p>
             <p>
               Hoje, foco em <strong>Node.js / TypeScript</strong>, APIs resilientes e automações que deixam a entrega mais previsível e o produto mais seguro — mesmo quando o uso cresce rápido.
             </p>
-            <div class="about-highlights">
-              <span class="about-highlight">Full Stack</span>
-              <span class="about-highlight">APIs Resilientes</span>
-              <span class="about-highlight">Arquitetura Multi-tenant</span>
-              <span class="about-highlight">Tech Lead</span>
+
+            <div class="about-tags">
+              <span class="about-tag">Full Stack</span>
+              <span class="about-tag">APIs Resilientes</span>
+              <span class="about-tag">Arquitetura Multi-tenant</span>
+              <span class="about-tag">Tech Lead</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- EXPERIÊNCIA -->
-    <section id="experiencia" class="section" style="background: var(--bg-secondary);">
+    <hr class="section-divider">
+
+    <!-- ═══════════ CARREIRA ═══════════ -->
+    <section id="carreira" class="section">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-label">Carreira</span>
-          <h2 class="section-title">Histórico e Liderança Técnica.</h2>
-          <p class="section-desc">Evolução profissional construindo sistemas que escalam.</p>
-        </div>
+        <p class="section-eyebrow gs-hidden">02 — Carreira</p>
+        <h2 class="section-heading gs-hidden">Histórico técnico.</h2>
 
-        <div class="timeline">
-          <div class="timeline-event reveal">
-            <div class="timeline-marker">
-              <div class="timeline-marker-inner"></div>
-            </div>
-            <div class="timeline-content">
-              <div class="timeline-date">2024 — Presente</div>
-              <h3 class="timeline-title">Engenharia de Plataforma & Arquiteturas Híbridas</h3>
-              <p class="timeline-desc">Foco no desenvolvimento de middlewares assíncronos e integração profunda de modelos LLM em workflows corporativos. Modelagem de bancos de dados para cenários multi-tenant e orquestração de microsserviços usando Edge Computing, garantindo alta disponibilidade (99.9% uptime).</p>
+        <div class="timeline-grid">
+          <div class="timeline-row gs-hidden">
+            <span class="timeline-year">2024 — Atual</span>
+            <div class="timeline-info">
+              <h3>Engenharia de Plataforma & IA</h3>
+              <p>Middlewares assíncronos, integração de LLMs em workflows corporativos. Modelagem multi-tenant e orquestração em Edge Computing com foco em alta disponibilidade.</p>
             </div>
           </div>
 
-          <div class="timeline-event reveal">
-            <div class="timeline-marker">
-              <div class="timeline-marker-inner"></div>
-            </div>
-            <div class="timeline-content">
-              <div class="timeline-date">2023</div>
-              <h3 class="timeline-title">Desenvolvimento SaaS & Ferramentas Transacionais</h3>
-              <p class="timeline-desc">Transição para um foco agressivo em estabilidade de produto. Implementação de pipelines críticos, como gateways de pagamento recorrentes, controle de permissões (RBAC) granular e manipulação de estado otimista para interfaces reativas B2B.</p>
+          <div class="timeline-row gs-hidden">
+            <span class="timeline-year">2023</span>
+            <div class="timeline-info">
+              <h3>Desenvolvimento SaaS & Transacional</h3>
+              <p>Pipelines críticos: gateways de pagamento recorrentes, RBAC granular e estado otimista para interfaces reativas B2B.</p>
             </div>
           </div>
 
-          <div class="timeline-event reveal">
-            <div class="timeline-marker">
-              <div class="timeline-marker-inner"></div>
-            </div>
-            <div class="timeline-content">
-              <div class="timeline-date">2021 — 2022</div>
-              <h3 class="timeline-title">Fundamentos Core: APIs & Client-Side</h3>
-              <p class="timeline-desc">Atuação forte no ecossistema Node/React. Modelagem intensiva de bancos de dados relacionais e construção de APIs RESTful que servem como base para sistemas internos de gestão.</p>
+          <div class="timeline-row gs-hidden">
+            <span class="timeline-year">2021 — 2022</span>
+            <div class="timeline-info">
+              <h3>Fundamentos: APIs & Client-Side</h3>
+              <p>Ecossistema Node/React. Modelagem intensiva de bancos relacionais e construção de APIs RESTful como base para sistemas de gestão internos.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PROJETOS -->
+    <hr class="section-divider">
+
+    <!-- ═══════════ PROJETOS ═══════════ -->
     <section id="projetos" class="section">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-label">Case Studies</span>
-          <h2 class="section-title">Arquitetura aplicada em produção.</h2>
-          <p class="section-desc">Sistemas reais resolvendo problemas complexos de domínio.</p>
-        </div>
+        <p class="section-eyebrow gs-hidden">03 — Projetos</p>
+        <h2 class="section-heading gs-hidden">Arquitetura em produção.</h2>
+        <p class="section-lead gs-hidden">Sistemas reais resolvendo problemas complexos de domínio.</p>
 
-        <div class="project-list">
+        <div class="project-feed" style="margin-top: var(--space-3xl);">
 
-          <!-- BK FLOW (Featured) -->
-          <article class="project-card reveal">
-            <div class="project-card-inner">
-              <div class="project-visual">
-                <img src="assets/projects/bk-flow.svg" alt="BK Flow">
+          <!-- BK FLOW -->
+          <article class="project-item gs-hidden">
+            <div class="project-visual">
+              <img src="assets/projects/bk-flow.svg" alt="BK Flow">
+            </div>
+            <div class="project-details">
+              <span class="project-category">SaaS / Workflow</span>
+              <h3 class="project-title">BK Flow</h3>
+              <p class="project-desc">Plataforma SaaS para gestão de fluxo de trabalho. Arquitetura serverless com isolamento multi-tenant e processos agendados de forma assíncrona.</p>
+              <div class="project-impact">Reduziu o tempo médio de processamento em 52%</div>
+              <div class="project-tags">
+                <span class="project-tag">React</span>
+                <span class="project-tag">TypeScript</span>
+                <span class="project-tag">Supabase RLS</span>
+                <span class="project-tag">Serverless</span>
               </div>
-              <div class="project-body">
-                <span class="project-kicker">SaaS / Workflow Automations</span>
-                <h3 class="project-title">BK Flow</h3>
-                <p class="project-desc">Plataforma SaaS corporativa para gestão de fluxo de trabalho. Arquitetura serverless garantindo isolamento de dados (multi-tenant) e processos assíncronos que não travam o dia a dia do usuário.</p>
-                <div class="project-metric">Reduziu o tempo médio de processamento em <strong>52%</strong></div>
-                <div class="project-stack">
-                  <span class="tag">React</span>
-                  <span class="tag">TypeScript</span>
-                  <span class="tag">Supabase RLS</span>
-                  <span class="tag">Serverless</span>
-                </div>
-                <div class="project-footer">
-                  <a href="projects/bk-flow.html" class="project-link">Documentação Técnica →</a>
-                </div>
-              </div>
+              <a href="projects/bk-flow.html" class="btn-text">Documentação técnica <span class="arrow">→</span></a>
             </div>
           </article>
 
-          <!-- Sub-grid for remaining projects -->
-          <div class="project-subgrid">
-
-            <!-- AGENDA LINK -->
-            <article class="project-card reveal">
-              <div class="project-card-inner">
-                <div class="project-visual">
-                  <img src="assets/projects/agenda-link.svg" alt="Agenda Link">
-                </div>
-                <div class="project-body">
-                  <span class="project-kicker">Transacional / Booking</span>
-                  <h3 class="project-title">Agenda Link</h3>
-                  <p class="project-desc">Sistema de agendamento transacional com gestão rígida de concorrência. Restrições no PostgreSQL evitam colisões durante horários de pico.</p>
-                  <div class="project-metric">99,8% agendamentos sem colisão</div>
-                  <div class="project-stack">
-                    <span class="tag">Next.js</span>
-                    <span class="tag">PostgreSQL</span>
-                    <span class="tag">Stripe API</span>
-                  </div>
-                  <div class="project-footer">
-                    <a href="projects/agenda-link.html" class="project-link">Documentação →</a>
-                  </div>
-                </div>
+          <!-- AGENDA LINK -->
+          <article class="project-item gs-hidden">
+            <div class="project-visual">
+              <img src="assets/projects/agenda-link.svg" alt="Agenda Link">
+            </div>
+            <div class="project-details">
+              <span class="project-category">Transacional / Booking</span>
+              <h3 class="project-title">Agenda Link</h3>
+              <p class="project-desc">Sistema de agendamento transacional com gestão rígida de concorrência. Restrições a nível de banco (PostgreSQL) para impedir race-conditions durante pagamentos.</p>
+              <div class="project-impact">99,8% agendamentos sem colisão</div>
+              <div class="project-tags">
+                <span class="project-tag">Next.js</span>
+                <span class="project-tag">PostgreSQL</span>
+                <span class="project-tag">Stripe API</span>
               </div>
-            </article>
+              <a href="projects/agenda-link.html" class="btn-text">Documentação técnica <span class="arrow">→</span></a>
+            </div>
+          </article>
 
-            <!-- TALOS ENGINE -->
-            <article class="project-card reveal">
-              <div class="project-card-inner">
-                <div class="project-visual">
-                  <img src="assets/projects/talos-engine.svg" alt="Talos Middleware Engine">
-                </div>
-                <div class="project-body">
-                  <span class="project-kicker">Backend / API Gateway</span>
-                  <h3 class="project-title">Talos Middleware Engine</h3>
-                  <p class="project-desc">Motor backend assíncrono para processar webhooks de alto volume, mantendo o serviço estável mesmo com fluxos irregulares.</p>
-                  <div class="project-metric">120K webhooks/dia com &lt;0.3% erro</div>
-                  <div class="project-stack">
-                    <span class="tag">Node.js</span>
-                    <span class="tag">Express</span>
-                    <span class="tag">Message Queues</span>
-                  </div>
-                  <div class="project-footer">
-                    <a href="projects/bk-talos-engine.html" class="project-link">Documentação →</a>
-                  </div>
-                </div>
+          <!-- TALOS ENGINE -->
+          <article class="project-item gs-hidden">
+            <div class="project-visual">
+              <img src="assets/projects/talos-engine.svg" alt="Talos Middleware Engine">
+            </div>
+            <div class="project-details">
+              <span class="project-category">Backend / API Gateway</span>
+              <h3 class="project-title">Talos Middleware Engine</h3>
+              <p class="project-desc">Motor backend assíncrono para webhooks de alto volume com retry policies e exponential backoff sem degradar o servidor.</p>
+              <div class="project-impact">120K webhooks/dia com &lt;0.3% erro</div>
+              <div class="project-tags">
+                <span class="project-tag">Node.js</span>
+                <span class="project-tag">Express</span>
+                <span class="project-tag">Message Queues</span>
               </div>
-            </article>
+              <a href="projects/bk-talos-engine.html" class="btn-text">Documentação técnica <span class="arrow">→</span></a>
+            </div>
+          </article>
 
-            <!-- CÓRTEX GLOBAL -->
-            <article class="project-card reveal">
-              <div class="project-card-inner">
-                <div class="project-visual">
-                  <img src="assets/projects/cortex-global.svg" alt="Córtex Global">
-                </div>
-                <div class="project-body">
-                  <span class="project-kicker">HealthTech / QA</span>
-                  <h3 class="project-title">Córtex Global</h3>
-                  <p class="project-desc">Prova de conceito para triagem médica com foco em confiabilidade dos fluxos e validação automatizada de rotas críticas.</p>
-                  <div class="project-metric">100% cobertura em fluxos críticos</div>
-                  <div class="project-stack">
-                    <span class="tag">React</span>
-                    <span class="tag">Google AI</span>
-                    <span class="tag">Playwright E2E</span>
-                  </div>
-                  <div class="project-footer">
-                    <a href="projects/cortex-global.html" class="project-link">Documentação →</a>
-                  </div>
-                </div>
+          <!-- CÓRTEX GLOBAL -->
+          <article class="project-item gs-hidden">
+            <div class="project-visual">
+              <img src="assets/projects/cortex-global.svg" alt="Córtex Global">
+            </div>
+            <div class="project-details">
+              <span class="project-category">HealthTech / QA</span>
+              <h3 class="project-title">Córtex Global</h3>
+              <p class="project-desc">Prova de conceito para triagem médica. Foco em Quality Assurance com cobertura E2E usando Playwright para compliance em fluxos críticos.</p>
+              <div class="project-impact">100% cobertura em fluxos críticos</div>
+              <div class="project-tags">
+                <span class="project-tag">React</span>
+                <span class="project-tag">Google AI</span>
+                <span class="project-tag">Playwright E2E</span>
               </div>
-            </article>
+              <a href="projects/cortex-global.html" class="btn-text">Documentação técnica <span class="arrow">→</span></a>
+            </div>
+          </article>
 
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- SKILLS -->
-    <section id="tecnologia" class="section" style="background: var(--bg-secondary);">
+    <hr class="section-divider">
+
+    <!-- ═══════════ STACK ═══════════ -->
+    <section id="stack" class="section">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-label">Proficiência Técnica</span>
-          <h2 class="section-title">Stack moderno e corporativo.</h2>
-          <p class="section-desc">Tecnologias que uso no dia a dia para entregar software em produção.</p>
-        </div>
+        <p class="section-eyebrow gs-hidden">04 — Stack</p>
+        <h2 class="section-heading gs-hidden">Tecnologias que uso em produção.</h2>
 
-        <div class="skills-grid">
-          <div class="skill-category reveal">
-            <div class="skill-category-header">
-              <div class="skill-category-icon">▲</div>
-              <h3 class="skill-category-title">Frontend & Client</h3>
-            </div>
+        <div class="skills-table gs-hidden" style="margin-top: var(--space-2xl);">
+          <div class="skill-row">
+            <span class="skill-label">Frontend</span>
             <div class="skill-items">
-              <span class="skill-item">React Hooks <span class="skill-level expert">expert</span></span>
-              <span class="skill-item">TypeScript <span class="skill-level expert">expert</span></span>
-              <span class="skill-item">Tailwind CSS <span class="skill-level advanced">avançado</span></span>
-              <span class="skill-item">Design Systems <span class="skill-level advanced">avançado</span></span>
-              <span class="skill-item">PWA & Performance <span class="skill-level intermediate">interm.</span></span>
+              <span class="skill-chip">React</span>
+              <span class="skill-chip">Next.js</span>
+              <span class="skill-chip">TypeScript</span>
+              <span class="skill-chip">Tailwind CSS</span>
+              <span class="skill-chip">Zustand</span>
             </div>
           </div>
-
-          <div class="skill-category reveal">
-            <div class="skill-category-header">
-              <div class="skill-category-icon">⚙</div>
-              <h3 class="skill-category-title">Backend & API</h3>
-            </div>
+          <div class="skill-row">
+            <span class="skill-label">Backend</span>
             <div class="skill-items">
-              <span class="skill-item">Node.js <span class="skill-level expert">expert</span></span>
-              <span class="skill-item">REST/GraphQL <span class="skill-level advanced">avançado</span></span>
-              <span class="skill-item">Serverless <span class="skill-level advanced">avançado</span></span>
-              <span class="skill-item">Event-driven <span class="skill-level advanced">avançado</span></span>
+              <span class="skill-chip">Node.js</span>
+              <span class="skill-chip">Express</span>
+              <span class="skill-chip">REST / GraphQL</span>
+              <span class="skill-chip">Serverless</span>
+              <span class="skill-chip">Event-driven</span>
             </div>
           </div>
-
-          <div class="skill-category reveal">
-            <div class="skill-category-header">
-              <div class="skill-category-icon">▦</div>
-              <h3 class="skill-category-title">Database & Data</h3>
-            </div>
+          <div class="skill-row">
+            <span class="skill-label">Dados</span>
             <div class="skill-items">
-              <span class="skill-item">PostgreSQL <span class="skill-level expert">expert</span></span>
-              <span class="skill-item">Supabase <span class="skill-level advanced">avançado</span></span>
-              <span class="skill-item">Redis <span class="skill-level intermediate">interm.</span></span>
-              <span class="skill-item">Data Modeling <span class="skill-level expert">expert</span></span>
+              <span class="skill-chip">PostgreSQL</span>
+              <span class="skill-chip">Supabase</span>
+              <span class="skill-chip">Redis</span>
+              <span class="skill-chip">Data Modeling</span>
             </div>
           </div>
-
-          <div class="skill-category reveal">
-            <div class="skill-category-header">
-              <div class="skill-category-icon">◉</div>
-              <h3 class="skill-category-title">DevOps & QA</h3>
-            </div>
+          <div class="skill-row">
+            <span class="skill-label">DevOps & QA</span>
             <div class="skill-items">
-              <span class="skill-item">GitHub Actions <span class="skill-level advanced">avançado</span></span>
-              <span class="skill-item">Playwright E2E <span class="skill-level advanced">avançado</span></span>
-              <span class="skill-item">Observability <span class="skill-level intermediate">interm.</span></span>
-              <span class="skill-item">Docker <span class="skill-level advanced">avançado</span></span>
+              <span class="skill-chip">Docker</span>
+              <span class="skill-chip">GitHub Actions</span>
+              <span class="skill-chip">Playwright E2E</span>
+              <span class="skill-chip">Vercel</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTATO -->
-    <section id="contato" class="section contact-section">
+    <hr class="section-divider">
+
+    <!-- ═══════════ CONTATO ═══════════ -->
+    <section id="contato" class="section">
       <div class="container">
-        <div class="section-header reveal" style="text-align: center;">
-          <span class="section-label">Contato</span>
-          <h2 class="section-title">Disponível para novos desafios.</h2>
-          <p class="section-desc">
-            Procuro equipes maduras que valorizam código manutenível, testes automatizados e impacto direto nos resultados de negócio.
+        <div class="contact-block gs-hidden">
+          <p class="section-eyebrow">05 — Contato</p>
+          <h2 class="section-heading">Disponível para<br>novos desafios.</h2>
+          <p class="section-lead">
+            Procuro equipes maduras que valorizam código manutenível, testes automatizados e impacto nos resultados de negócio.
           </p>
-        </div>
 
-        <div class="contact-links reveal">
-          <a href="mailto:marcosgabriel20061216@gmail.com" class="contact-link email">
-            ✉ marcosgabriel20061216@gmail.com
-          </a>
-          <a href="https://www.linkedin.com/in/marcos-gabriel-rodrigues-ba%C3%ADa-0181022a5/" target="_blank" rel="noopener noreferrer" class="contact-link">
-            LinkedIn
-          </a>
-          <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer" class="contact-link">
-            GitHub
-          </a>
+          <div class="contact-links">
+            <a href="mailto:marcosgabriel20061216@gmail.com" class="contact-link">
+              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+              E-mail
+            </a>
+            <a href="https://www.linkedin.com/in/marcos-gabriel-rodrigues-ba%C3%ADa-0181022a5/" target="_blank" rel="noopener noreferrer" class="contact-link">
+              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer" class="contact-link">
+              <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <div>
-          <span class="footer-logo">Marcos<span style="color: var(--accent);">.</span></span>
-          <span style="margin-left: var(--space-md);">Engenharia de Software © 2026</span>
-        </div>
+        <span style="font-family: var(--font-display); font-weight: 700; color: var(--text-heading);">marcos<em style="font-style: normal; color: var(--text-dim); font-weight: 500;">.dev</em></span>
         <div class="footer-links">
-          <a href="#hero">Início</a>
           <a href="#projetos">Projetos</a>
           <a href="#contato">Contato</a>
+          <a href="https://github.com/bk-marcosr" target="_blank">GitHub</a>
         </div>
       </div>
     </div>
   </footer>
+
+  <!-- LIBS: Lenis (Smooth Scroll) + GSAP (Animations) via CDN -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>
 
   <script src="js/animations.js"></script>
   <script src="js/core.js"></script>
