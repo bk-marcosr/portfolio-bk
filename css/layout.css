@@ -30,7 +30,7 @@
   padding: 6px 14px;
   background: var(--accent-soft);
   border-radius: 100px;
-  border: 1px solid rgba(99, 102, 241, 0.15);
+  border: 1px solid var(--accent-border);
 }
 
 .section-title {
