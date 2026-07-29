@@ -159,14 +159,14 @@
 
 @media (min-width: 900px) {
   .about-layout {
-    grid-template-columns: 320px 1fr;
+    grid-template-columns: 400px 1fr;
     gap: var(--space-3xl);
   }
 }
 
 .about-photo {
   width: 100%;
-  max-width: 320px;
+  max-width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: var(--radius-xl);
@@ -613,19 +613,33 @@
 
 
 /* ══════════════════════════════════════════
-   ABOUT — MINI CODE SNIPPET
+   HERO — TWO COLUMN & MINI CODE SNIPPET
    ══════════════════════════════════════════ */
 
-.about-code {
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .hero-layout {
+    grid-template-columns: 1fr 440px;
+    gap: var(--space-3xl);
+  }
+}
+
+.hero-code {
   background: #0D0D0D;
   border: 1px solid var(--border-dim);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  margin-top: var(--space-xl);
-  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-.about-code-bar {
+.hero-code-bar {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -633,34 +647,34 @@
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-.about-code-dot {
+.hero-code-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: #333;
 }
-.about-code-dot:nth-child(1) { background: #555; }
-.about-code-dot:nth-child(2) { background: #444; }
-.about-code-dot:nth-child(3) { background: #333; }
+.hero-code-dot:nth-child(1) { background: #555; }
+.hero-code-dot:nth-child(2) { background: #444; }
+.hero-code-dot:nth-child(3) { background: #333; }
 
-.about-code-filename {
+.hero-code-filename {
   margin-left: auto;
   font-family: var(--font-mono);
   font-size: 0.7rem;
   color: rgba(255,255,255,0.2);
 }
 
-.about-code-body {
-  padding: 16px 18px;
+.hero-code-body {
+  padding: 18px 20px;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   line-height: 1.8;
   color: #888;
 }
 
-.about-code-body .ck { color: #666; }
-.about-code-body .cv { color: #B0B0B0; }
-.about-code-body .cs { color: #707070; }
+.hero-code-body .ck { color: #666; }
+.hero-code-body .cv { color: #B0B0B0; }
+.hero-code-body .cs { color: #707070; }
 
 
 /* ══════════════════════════════════════════
