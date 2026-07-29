@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR" data-theme="dark" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estudo de Caso: Agenda Link | Marcos Gabriel</title>
-  <meta name="theme-color" content="#000000">
+  <title>AgendaLink — Estudo de Caso | Marcos Gabriel</title>
+  <meta name="description" content="Plataforma B2B2C de agendamento com Stripe Checkout, Edge Functions, RLS e gestão de conflitos em calendários dinâmicos.">
+  <meta name="theme-color" content="#050505">
 
+  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -16,101 +18,88 @@
 
   <script>
     (function() {
-      var theme = localStorage.getItem('theme');
-      if (!theme) {
-        theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-      }
-      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.classList.remove('no-js');
+      var t = localStorage.getItem('theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
-
-  <style>
-    .case-header { padding-top: 120px; padding-bottom: var(--space-xl); border-bottom: 1px solid var(--border-subtle); margin-bottom: var(--space-xl); }
-    .case-meta { display: flex; flex-wrap: wrap; gap: var(--space-lg); margin-bottom: var(--space-lg); font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-muted); }
-    .case-meta div { display: flex; flex-direction: column; gap: 4px; }
-    .case-meta strong { color: var(--text-primary); font-weight: 500; }
-    .content-block { margin-bottom: var(--space-xxl); max-width: 800px; }
-    .content-block h2 { font-size: 1.5rem; margin-bottom: var(--space-md); }
-    .content-block p { margin-bottom: var(--space-md); }
-    .content-block ul { list-style: disc; padding-left: var(--space-lg); margin-bottom: var(--space-md); color: var(--text-secondary); }
-    .content-block ul li { margin-bottom: var(--space-sm); }
-  </style>
 </head>
-<body>
 
-  <nav class="floating-nav" id="floatingNav">
+<body>
+  <nav class="nav" id="siteNav">
     <div class="nav-inner">
-      <a href="../index.html" class="nav-logo">Marcos<span>.</span></a>
+      <a href="../index.html" class="nav-wordmark">marcos<em>.dev</em></a>
       <div class="nav-links">
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema">
-          <span id="themeIcon">☀️</span>
+        <button class="theme-btn" id="themeToggle" type="button" aria-label="Alternar tema">
+          <span id="themeIcon">☀</span>
         </button>
       </div>
     </div>
   </nav>
 
   <main class="container">
-    <div class="case-header reveal">
-      <a href="../index.html" class="back-link">← Voltar para o portfólio</a>
-      <h1 class="section-title-lg">Agenda Link</h1>
-      <p class="section-intro mb-lg">Sistema de agendamento focado em autônomos, utilizando gerenciamento rígido de conflitos e integrações com gateways de pagamento.</p>
-      
+    <div class="case-header">
+      <a href="../index.html#projetos" class="case-back">← Voltar aos projetos</a>
+      <h1 class="case-title">AgendaLink</h1>
+      <p class="case-intro">Aplicação cirúrgica e moderna que cobre o ciclo completo do usuário, do cadastro ao pagamento. Algoritmos de fuso horário, gestão de conflitos e integração financeira real via Stripe.</p>
+
       <div class="case-meta">
-        <div><span>Papel</span><strong>Engenheiro Full Stack</strong></div>
-        <div><span>Ano</span><strong>2023</strong></div>
-        <div><span>Categoria</span><strong>SaaS / Transacional</strong></div>
-        <div><span>Status</span><strong>Em Produção</strong></div>
+        <div class="case-meta-item"><span>Papel</span><strong>Engenheiro Full Stack</strong></div>
+        <div class="case-meta-item"><span>Ano</span><strong>2024</strong></div>
+        <div class="case-meta-item"><span>Tipo</span><strong>B2B2C / Transacional</strong></div>
+        <div class="case-meta-item"><span>Status</span><strong>Em Produção</strong></div>
       </div>
     </div>
 
-    <div class="content-block reveal">
+    <div class="case-block">
       <h2>Contexto & Problema</h2>
-      <p>Profissionais autônomos gastam horas semanais organizando horários, lidando com no-shows e realizando cobranças manuais. Plataformas genéricas muitas vezes falham na flexibilidade de pagamentos locais ou carecem de regras de negócio personalizadas para o prestador de serviço brasileiro.</p>
+      <p>Profissionais autônomos gastam horas semanais organizando horários, lidando com no-shows e realizando cobranças manuais. Plataformas genéricas falham na flexibilidade de pagamentos locais ou carecem de regras de negócio personalizadas para o prestador de serviço brasileiro.</p>
     </div>
 
-    <div class="content-block reveal">
-      <h2>Objetivo</h2>
-      <p>Criar uma plataforma de reservas sem fricção (Booking System) onde o cliente final consegue ver disponibilidades reais, reservar o horário mediante pagamento (Stripe) e receber notificações automatizadas (WhatsApp/Email), liberando totalmente a agenda do profissional.</p>
-    </div>
-
-    <div class="content-block reveal">
-      <h2>Arquitetura & Tecnologias</h2>
+    <div class="case-block">
+      <h2>Arquitetura & Stack</h2>
       <ul>
-        <li><strong>Frontend:</strong> React (Vite), priorizando velocidade e componentes visuais de calendário de alta performance.</li>
-        <li><strong>Banco de Dados:</strong> PostgreSQL através do Supabase. A escolha do Postgres é vital pela transacionalidade ACID e constraints rigorosas (evitar double-booking).</li>
-        <li><strong>Serverless:</strong> Supabase Edge Functions invocadas durante o checkout para comunicar com a API da Stripe de maneira segura.</li>
+        <li><strong>Frontend:</strong> React 19, Vite, Tailwind v4. Componentes visuais de calendário de alta performance.</li>
+        <li><strong>Banco de Dados:</strong> PostgreSQL via Supabase. Transacionalidade ACID e constraints rigorosas para evitar double-booking.</li>
+        <li><strong>Pagamentos:</strong> Edge Functions Serverless acopladas a Webhooks do Stripe — pagamentos externos de maneira extremamente segura.</li>
+        <li><strong>Segurança:</strong> Row Level Security (RLS) diretamente no banco, eliminando vulnerabilidades na camada de aplicação.</li>
       </ul>
-    </div>
-
-    <div class="content-block reveal">
-      <h2>Decisões Técnicas & Desafios</h2>
-      <p>O maior risco arquitetural em um sistema de reservas é o fenômeno da Concorrência (race conditions). Se dois clientes tentarem reservar o mesmo horário simultaneamente, o sistema não pode permitir ambas as gravações. Implementei travas a nível de banco (Table Constraints no PostgreSQL) e validações no servidor antes de instanciar a Intent de Pagamento, garantindo integridade 100%.</p>
-    </div>
-
-    <div class="content-block reveal">
-      <h2>Galeria & Mockups</h2>
-      <div class="case-visual" style="margin-bottom: var(--space-md);">
-        <img src="../assets/projects/agenda-booking.svg" alt="Agenda Link booking UI placeholder" style="width:100%;height:auto;display:block;object-fit:cover;" />
+      <div class="case-stack-grid">
+        <span class="project-tag">React 19</span>
+        <span class="project-tag">Vite</span>
+        <span class="project-tag">Supabase</span>
+        <span class="project-tag">Tailwind v4</span>
+        <span class="project-tag">Stripe Checkout</span>
+        <span class="project-tag">Edge Functions</span>
+        <span class="project-tag">RLS</span>
       </div>
     </div>
 
-    <div class="content-block reveal">
-      <h2>Conclusão</h2>
-      <p>Agenda Link prova que SaaS focado no transacional não tolera estado global instável. O projeto consolida princípios sólidos de engenharia de software transacional misturado à comodidade visual das tecnologias modernas de frontend.</p>
-      <div class="hero-actions" style="margin-top: var(--space-lg);">
-        <a href="https://github.com/bk-marcosr" target="_blank" class="btn-ghost">Ver no GitHub</a>
-      </div>
+    <div class="case-block">
+      <h2>Decisões Técnicas</h2>
+      <p>O maior risco em um sistema de reservas é a concorrência (race conditions). Se dois clientes tentarem reservar o mesmo horário simultaneamente, o sistema não pode permitir ambas as gravações. Implementei travas a nível de banco (Table Constraints no PostgreSQL) e validações no servidor antes de instanciar a Intent de Pagamento, garantindo integridade 100%.</p>
+      <p>Os algoritmos de fuso horário garantem que profissionais em diferentes regiões visualizem e gerenciem seus horários corretamente, sem conflitos de timezone.</p>
     </div>
 
+    <div class="case-gallery">
+      <img src="../assets/projects/agenda-link.png" alt="AgendaLink — Interface de booking" loading="lazy">
+      <img src="../assets/projects/agenda-link-calendar.png" alt="AgendaLink — Calendário semanal" loading="lazy">
+    </div>
+
+    <div class="case-block">
+      <h2>Resultado</h2>
+      <p>Recrutadores adoram ver integrações com dinheiro real. O AgendaLink prova que SaaS focado no transacional não tolera estado global instável. O projeto consolida princípios de engenharia de software transacional com a comodidade visual das tecnologias modernas de frontend.</p>
+      <div style="margin-top: var(--space-xl);">
+        <a href="https://github.com/bk-marcosr" target="_blank" class="btn-outline">Ver no GitHub</a>
+      </div>
+    </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <div>
-          <span class="footer-logo">Marcos<span style="color: var(--accent);">.</span></span>
-          <span style="margin-left: var(--space-md);">Engenharia de Software © 2026</span>
-        </div>
+        <span style="font-family: var(--font-display); font-weight: 700; color: var(--text-heading);">marcos<em style="font-style: normal; color: var(--text-dim); font-weight: 500;">.dev</em></span>
         <div class="footer-links">
           <a href="../index.html">Início</a>
           <a href="../index.html#projetos">Projetos</a>
@@ -120,7 +109,6 @@
     </div>
   </footer>
 
-  <script src="../js/animations.js"></script>
   <script src="../js/core.js"></script>
 </body>
 </html>

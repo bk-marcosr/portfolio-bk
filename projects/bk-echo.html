@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR" data-theme="dark" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estudo de Caso: BK Echo | Marcos Gabriel</title>
-  <meta name="theme-color" content="#000000">
+  <title>BK Echo — Estudo de Caso | Marcos Gabriel</title>
+  <meta name="description" content="Geração e Scoring de Conteúdo com IA: transcrição, RAG, sistema de avaliação e roteamento híbrido Next.js.">
+  <meta name="theme-color" content="#050505">
 
+  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -16,101 +18,88 @@
 
   <script>
     (function() {
-      var theme = localStorage.getItem('theme');
-      if (!theme) {
-        theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-      }
-      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.classList.remove('no-js');
+      var t = localStorage.getItem('theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
-
-  <style>
-    .case-header { padding-top: 120px; padding-bottom: var(--space-xl); border-bottom: 1px solid var(--border-subtle); margin-bottom: var(--space-xl); }
-    .case-meta { display: flex; flex-wrap: wrap; gap: var(--space-lg); margin-bottom: var(--space-lg); font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-muted); }
-    .case-meta div { display: flex; flex-direction: column; gap: 4px; }
-    .case-meta strong { color: var(--text-primary); font-weight: 500; }
-    .content-block { margin-bottom: var(--space-xxl); max-width: 800px; }
-    .content-block h2 { font-size: 1.5rem; margin-bottom: var(--space-md); }
-    .content-block p { margin-bottom: var(--space-md); }
-    .content-block ul { list-style: disc; padding-left: var(--space-lg); margin-bottom: var(--space-md); color: var(--text-secondary); }
-    .content-block ul li { margin-bottom: var(--space-sm); }
-  </style>
 </head>
-<body>
 
-  <nav class="floating-nav" id="floatingNav">
+<body>
+  <nav class="nav" id="siteNav">
     <div class="nav-inner">
-      <a href="../index.html" class="nav-logo">Marcos<span>.</span></a>
+      <a href="../index.html" class="nav-wordmark">marcos<em>.dev</em></a>
       <div class="nav-links">
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema">
-          <span id="themeIcon">☀️</span>
+        <button class="theme-btn" id="themeToggle" type="button" aria-label="Alternar tema">
+          <span id="themeIcon">☀</span>
         </button>
       </div>
     </div>
   </nav>
 
   <main class="container">
-    <div class="case-header reveal">
-      <a href="../index.html" class="back-link">← Voltar para o portfólio</a>
-      <h1 class="section-title-lg">BK Echo</h1>
-      <p class="section-intro mb-lg">Aplicação focada em processamento de arquivos de áudio via inteligência artificial e devoluções contextuais precisas.</p>
-      
+    <div class="case-header">
+      <a href="../index.html#projetos" class="case-back">← Voltar aos projetos</a>
+      <h1 class="case-title">BK Echo</h1>
+      <p class="case-intro">Ecossistema rigoroso de transcrição, recuperação e geração (RAG) com sistema de avaliação (Scoring) de conteúdo. Fluência arquitetural no ecossistema Next.js levada ao extremo.</p>
+
       <div class="case-meta">
-        <div><span>Papel</span><strong>Desenvolvedor Full Stack</strong></div>
-        <div><span>Ano</span><strong>2024</strong></div>
-        <div><span>Categoria</span><strong>IA Generativa / Mídia</strong></div>
-        <div><span>Status</span><strong>Estudo de Arquitetura</strong></div>
+        <div class="case-meta-item"><span>Papel</span><strong>Engenheiro Full Stack</strong></div>
+        <div class="case-meta-item"><span>Ano</span><strong>2024</strong></div>
+        <div class="case-meta-item"><span>Tipo</span><strong>IA / RAG / Content Scoring</strong></div>
+        <div class="case-meta-item"><span>Status</span><strong>Estudo de Arquitetura</strong></div>
       </div>
     </div>
 
-    <div class="content-block reveal">
+    <div class="case-block">
       <h2>Contexto & Problema</h2>
-      <p>O processo manual de escutar longas gravações de áudio (reuniões, aulas, entrevistas) e convertê-las em documentos bem estruturados ou resumos pontuais toma horas de trabalho de um analista.</p>
+      <p>O processo manual de escutar longas gravações de áudio (reuniões, aulas, entrevistas) e convertê-las em documentos bem estruturados toma horas de trabalho de um analista. Ao invés de apenas "chamar uma API", o Echo constrói um ecossistema completo de transcrição, recuperação e geração.</p>
     </div>
 
-    <div class="content-block reveal">
-      <h2>Objetivo</h2>
-      <p>Prototipar e entregar uma aplicação (Next.js) que absorve mídias de áudio, processa a transcrição e consome a OpenAI para retornar artefatos prontos (Resumo Executivo, Ata de Reunião, Highlights) em segundos.</p>
-    </div>
-
-    <div class="content-block reveal">
-      <h2>Arquitetura & Tecnologias</h2>
+    <div class="case-block">
+      <h2>Arquitetura & Stack</h2>
       <ul>
-        <li><strong>Server Components (Next.js):</strong> Adoção do App Router para manipular a ponte de dados e o streamming de IA sem repassar tokens ou lógicas sensíveis ao navegador.</li>
+        <li><strong>Server Components (Next.js 14):</strong> App Router para manipular a ponte de dados e o streaming de IA sem repassar tokens ou lógicas sensíveis ao navegador.</li>
         <li><strong>OpenAI Whisper:</strong> Pipeline de transformação de voz para texto (Speech-to-Text).</li>
-        <li><strong>OpenAI GPT (Comandos Estruturados):</strong> Modelagem de *System Prompts* para forçar a API a devolver respostas em JSON validado, impedindo halucinações de formato.</li>
+        <li><strong>OpenAI GPT:</strong> System Prompts estruturados para forçar respostas em JSON validado, impedindo alucinações de formato.</li>
+        <li><strong>Scoring:</strong> Fluxo de aprovação com sistema de avaliação de conteúdo gerado, permitindo curadoria humana sobre outputs de IA.</li>
+        <li><strong>SSR + Middlewares:</strong> Roteamento híbrido do Next.js para abstrair lógicas pesadas da camada visual e proteger dados através de Sessões SSR.</li>
       </ul>
-    </div>
-
-    <div class="content-block reveal">
-      <h2>Decisões Técnicas & Desafios</h2>
-      <p>Lidar com arquivos em Next.js exige controle estrito do Edge/Node Runtime. O upload de áudios pode facilmente estourar os limites de payload da Vercel (4.5MB). Foi desenhada uma arquitetura via pre-signed URLs (upload direto para o Supabase Storage), onde o frontend avisa o backend do upload concluído, que então consome o bucket diretamente para rodar a inferência da OpenAI.</p>
-    </div>
-
-    <div class="content-block reveal">
-      <h2>Galeria & Mockups</h2>
-      <div class="case-visual" style="margin-bottom: var(--space-md);">
-        <img src="../assets/projects/echo-generator.svg" alt="Echo generator UI placeholder" style="width:100%;height:auto;display:block;object-fit:cover;" />
+      <div class="case-stack-grid">
+        <span class="project-tag">Next.js 14</span>
+        <span class="project-tag">React 18</span>
+        <span class="project-tag">Supabase SSR</span>
+        <span class="project-tag">OpenAI</span>
+        <span class="project-tag">Whisper</span>
+        <span class="project-tag">Middlewares</span>
       </div>
     </div>
 
-    <div class="content-block reveal">
-      <h2>Conclusão</h2>
-      <p>BK Echo provou que a inteligência artificial generativa, quando encapsulada em uma UI focada em engenharia e utilidade ao invés de "chatbots conversacionais", gera um salto absurdo em utilidade prática.</p>
-      <div class="hero-actions" style="margin-top: var(--space-lg);">
-        <a href="https://github.com/bk-marcosr" target="_blank" class="btn-ghost">Ver no GitHub</a>
-      </div>
+    <div class="case-block">
+      <h2>Decisões Técnicas</h2>
+      <p>Lidar com arquivos em Next.js exige controle estrito do Edge/Node Runtime. O upload de áudios pode estourar os limites de payload da Vercel (4.5MB). Foi desenhada uma arquitetura via pre-signed URLs (upload direto para Supabase Storage), onde o frontend avisa o backend do upload concluído, que então consome o bucket diretamente para rodar a inferência da OpenAI.</p>
+      <p>O sistema de Scoring permite que conteúdo gerado por IA seja avaliado em múltiplas dimensões (clareza, relevância, estrutura) antes de ser aprovado, criando um loop de feedback que refina a qualidade dos outputs.</p>
     </div>
 
+    <div class="case-gallery">
+      <img src="../assets/projects/bk-echo.png" alt="BK Echo — Interface principal" loading="lazy">
+      <img src="../assets/projects/bk-echo-workspace.png" alt="BK Echo — Workspace de conteúdo" loading="lazy">
+    </div>
+
+    <div class="case-block">
+      <h2>Resultado</h2>
+      <p>BK Echo provou que IA generativa, quando encapsulada em uma UI focada em engenharia e utilidade ao invés de "chatbots conversacionais", gera um salto absurdo em utilidade prática. Não é "chamar uma API": é RAG + Scoring + Aprovação + SSR.</p>
+      <div style="margin-top: var(--space-xl);">
+        <a href="https://github.com/bk-marcosr" target="_blank" class="btn-outline">Ver no GitHub</a>
+      </div>
+    </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <div>
-          <span class="footer-logo">Marcos<span style="color: var(--accent);">.</span></span>
-          <span style="margin-left: var(--space-md);">Engenharia de Software © 2026</span>
-        </div>
+        <span style="font-family: var(--font-display); font-weight: 700; color: var(--text-heading);">marcos<em style="font-style: normal; color: var(--text-dim); font-weight: 500;">.dev</em></span>
         <div class="footer-links">
           <a href="../index.html">Início</a>
           <a href="../index.html#projetos">Projetos</a>
@@ -120,7 +109,6 @@
     </div>
   </footer>
 
-  <script src="../js/animations.js"></script>
   <script src="../js/core.js"></script>
 </body>
 </html>

@@ -89,7 +89,23 @@
         <h2 class="section-heading gs-hidden">Engenharia orientada<br>a impacto de produto.</h2>
 
         <div class="about-layout">
-          <img src="perfil.png" alt="Marcos Gabriel" class="about-photo gs-hidden-left">
+          <div class="gs-hidden-left">
+            <img src="perfil.png" alt="Marcos Gabriel" class="about-photo">
+
+            <!-- Tech icons row -->
+            <div class="tech-icons">
+              <!-- React -->
+              <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="#61DAFB" stroke-width="1"><circle cx="12" cy="12" r="2.5"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg>
+              <!-- Node.js -->
+              <svg class="tech-icon" viewBox="0 0 24 24" fill="#539E43"><path d="M12 1.85l-9.5 5.5v11l9.5 5.5 9.5-5.5v-11L12 1.85zm0 2.31l7.19 4.16v8.32L12 20.8l-7.19-4.16V8.32L12 4.16z"/></svg>
+              <!-- TypeScript -->
+              <svg class="tech-icon" viewBox="0 0 24 24" fill="#3178C6"><path d="M1 1v22h22V1H1zm12.5 18.25v-2.5h-2.75v-9h-2.5v9H5.5v2.5h8zm4.75-5c0-1.1-.9-2-2-2h-2v-2.25h4v-2.5h-6.5v7.25h4.5v2.25h-4.5v2.5h4.5c1.1 0 2-.9 2-2v-3.25z"/></svg>
+              <!-- PostgreSQL -->
+              <svg class="tech-icon" viewBox="0 0 24 24" fill="#336791"><path d="M12 2C8.13 2 5 5.13 5 9v6c0 3.87 3.13 7 7 7s7-3.13 7-7V9c0-3.87-3.13-7-7-7zm0 2c2.76 0 5 2.24 5 5v6c0 2.76-2.24 5-5 5S7 17.76 7 15V9c0-2.76 2.24-5 5-5zm0 3a2 2 0 100 4 2 2 0 000-4z"/></svg>
+              <!-- Next.js -->
+              <svg class="tech-icon" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="12" r="11" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M9 8v8l7-8" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
 
           <div class="about-body gs-hidden">
             <p>
@@ -104,6 +120,24 @@
               <span class="about-tag">APIs Resilientes</span>
               <span class="about-tag">Arquitetura Multi-tenant</span>
               <span class="about-tag">Tech Lead</span>
+            </div>
+
+            <!-- Mini code snippet -->
+            <div class="about-code">
+              <div class="about-code-bar">
+                <span class="about-code-dot"></span>
+                <span class="about-code-dot"></span>
+                <span class="about-code-dot"></span>
+                <span class="about-code-filename">stack.config.ts</span>
+              </div>
+              <div class="about-code-body">
+                <span class="ck">export const</span> <span class="cv">stack</span> = {<br>
+                &nbsp;&nbsp;runtime: <span class="cs">"Node.js + Edge Functions"</span>,<br>
+                &nbsp;&nbsp;frontend: <span class="cs">"React · Next.js · Zustand"</span>,<br>
+                &nbsp;&nbsp;data: <span class="cs">"PostgreSQL · Supabase · Redis"</span>,<br>
+                &nbsp;&nbsp;ai: <span class="cs">"OpenAI · Gemini · RAG"</span>,<br>
+                } <span class="ck">as const</span>;
+              </div>
             </div>
           </div>
         </div>

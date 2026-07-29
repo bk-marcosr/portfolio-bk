@@ -170,12 +170,6 @@
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: var(--radius-xl);
-  filter: grayscale(100%);
-  transition: filter 0.6s ease;
-}
-
-.about-photo:hover {
-  filter: grayscale(0%);
 }
 
 .about-body p {
@@ -494,4 +488,202 @@
   height: 1px;
   background: var(--border-dim);
   margin: 0;
+}
+
+
+/* ══════════════════════════════════════════
+   CASE STUDY PAGES
+   ══════════════════════════════════════════ */
+
+.case-header {
+  padding-top: 120px;
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border-dim);
+  margin-bottom: var(--space-2xl);
+}
+
+.case-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dim);
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  transition: color 0.2s ease;
+  margin-bottom: var(--space-lg);
+}
+.case-back:hover { color: var(--text-heading); }
+
+.case-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: var(--space-md);
+}
+
+.case-intro {
+  font-size: 1.1rem;
+  color: var(--text-body);
+  line-height: 1.7;
+  max-width: 700px;
+  margin-bottom: var(--space-xl);
+}
+
+.case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xl);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.case-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.case-meta-item span {
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+}
+
+.case-meta-item strong {
+  color: var(--text-heading);
+  font-weight: 500;
+}
+
+.case-block {
+  margin-bottom: var(--space-3xl);
+  max-width: 800px;
+}
+
+.case-block h2 {
+  font-size: 1.4rem;
+  margin-bottom: var(--space-md);
+  color: var(--text-heading);
+}
+
+.case-block p {
+  margin-bottom: var(--space-md);
+  line-height: 1.7;
+}
+
+.case-block ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: var(--space-md);
+}
+
+.case-block ul li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: var(--space-sm);
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+.case-block ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-dim);
+}
+
+.case-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-3xl);
+}
+
+.case-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-dim);
+}
+
+.case-stack-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--space-md);
+}
+
+
+/* ══════════════════════════════════════════
+   ABOUT — MINI CODE SNIPPET
+   ══════════════════════════════════════════ */
+
+.about-code {
+  background: #0D0D0D;
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: var(--space-xl);
+  max-width: 480px;
+}
+
+.about-code-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.about-code-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #333;
+}
+.about-code-dot:nth-child(1) { background: #555; }
+.about-code-dot:nth-child(2) { background: #444; }
+.about-code-dot:nth-child(3) { background: #333; }
+
+.about-code-filename {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.2);
+}
+
+.about-code-body {
+  padding: 16px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: #888;
+}
+
+.about-code-body .ck { color: #666; }
+.about-code-body .cv { color: #B0B0B0; }
+.about-code-body .cs { color: #707070; }
+
+
+/* ══════════════════════════════════════════
+   TECH ICON ROW
+   ══════════════════════════════════════════ */
+
+.tech-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  align-items: center;
+  margin-top: var(--space-xl);
+}
+
+.tech-icon {
+  width: 28px;
+  height: 28px;
+  opacity: 0.35;
+  transition: opacity 0.3s ease;
+  filter: grayscale(100%) brightness(1.5);
+}
+
+.tech-icon:hover {
+  opacity: 0.8;
+  filter: grayscale(0%);
 }
