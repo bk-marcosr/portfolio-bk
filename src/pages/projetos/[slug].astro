@@ -1,0 +1,94 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { featuredProjects } from '../../data/projects';
+import type { FeaturedProject } from '../../data/types';
+import { url } from '../../lib/url';
+
+export const getStaticPaths = (() =>
+  featuredProjects.map((project, index) => ({
+    params: { slug: project.slug },
+    props: { project, next: featuredProjects[(index + 1) % featuredProjects.length] },
+  }))) satisfies GetStaticPaths;
+
+interface Props {
+  project: FeaturedProject;
+  next: FeaturedProject;
+}
+
+const { project, next } = Astro.props;
+---
+
+<Base title={`${project.name} — Marcos Gabriel`} description={project.line} type="article">
+  <article class="px-5 pb-24 pt-28 sm:px-10 sm:pt-36" style={`--c: ${project.color}`} data-cursor-color={project.color}>
+    <div class="mx-auto max-w-[1400px]">
+      <a href={url(`/#${project.slug}`)} class="tlink text-[15px] text-mute">← voltar</a>
+
+      <div class="mt-10 h-[6px] w-full bg-[var(--c)]"></div>
+      <h1 class="mt-8 font-display text-[clamp(3rem,11vw,10rem)] font-semibold leading-[0.88] tracking-[-0.045em]" data-split="chapter">
+        {project.name}
+      </h1>
+      <p class="mt-8 max-w-3xl font-display text-[clamp(1.3rem,2.4vw,2rem)] font-medium leading-[1.25] tracking-[-0.01em]">{project.line}</p>
+
+      <dl class="mt-12 grid gap-6 border-t border-line pt-6 sm:grid-cols-3">
+        <div><dt class="text-[14px] text-faint">Papel</dt><dd class="mt-1 text-[16px]">{project.role}</dd></div>
+        <div><dt class="text-[14px] text-faint">Período</dt><dd class="mt-1 text-[16px]">{project.period}</dd></div>
+        <div><dt class="text-[14px] text-faint">Stack</dt><dd class="mt-1 text-[16px]">{project.stack.join(', ')}</dd></div>
+      </dl>
+
+      {
+        project.screens && (
+          <div class="mt-16 overflow-hidden rounded-md" data-reveal="clip">
+            <Image
+              src={project.screens.items[0].src}
+              alt={project.screens.items[0].alt}
+              widths={[960, 1440, 1920]}
+              sizes="(min-width: 1400px) 1320px, 100vw"
+              format="webp"
+              quality={84}
+              class="block h-auto w-full"
+              loading="eager"
+            />
+          </div>
+        )
+      }
+
+      <div class="mt-20 grid gap-16 lg:grid-cols-12">
+        <div class="space-y-16 lg:col-span-8 lg:col-start-3">
+          {
+            project.sections.map((section) => (
+              <section data-reveal="up">
+                <h2 class="font-display text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-[-0.02em]">{section.title}</h2>
+                {section.body?.map((paragraph) => (
+                  <p class="mt-5 text-[18px] leading-[1.75] text-paper/85">{paragraph}</p>
+                ))}
+                {section.bullets && (
+                  <ul class="mt-6 space-y-4">
+                    {section.bullets.map((bullet) => (
+                      <li class="grid grid-cols-[1.25rem_1fr] text-[18px] leading-[1.7] text-paper/85">
+                        <span class="mt-[0.62em] block size-[7px] bg-[var(--c)]" aria-hidden="true" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            ))
+          }
+          <p class="text-[16px] leading-relaxed text-mute">
+            O código é privado. Mostro o repositório e as decisões numa conversa:{' '}
+            <a href={url('/#contato')} class="tlink text-paper">fala comigo</a>.
+          </p>
+        </div>
+      </div>
+
+      <a href={url(`/projetos/${next.slug}/`)} class="group mt-32 block" style={`--n: ${next.color}`}>
+        <span class="text-[15px] text-faint">Próximo</span>
+        <span class="mt-2 block font-display text-[clamp(2.6rem,8vw,7rem)] font-semibold leading-[0.9] tracking-[-0.04em] transition-colors duration-300 group-hover:text-[var(--n)]">
+          {next.name} →
+        </span>
+      </a>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import { experience, profile, stack } from '../data/profile';
+import portrait from '../assets/perfil.png';
+---
+
+<section id="trajetoria" class="px-5 py-24 sm:px-10 sm:py-36" aria-labelledby="trajetoria-title">
+  <div class="mx-auto grid max-w-[1400px] gap-16 lg:grid-cols-12 lg:gap-12">
+    <div class="lg:col-span-4">
+      <h2 id="trajetoria-title" class="font-display text-[clamp(2rem,4.5vw,3.6rem)] font-semibold tracking-[-0.03em]" data-split="lines">
+        Trajetória
+      </h2>
+      <div class="mt-10 max-w-[18rem] overflow-hidden rounded-md" data-reveal="clip">
+        <Image
+          src={portrait}
+          alt={`Foto de ${profile.name}`}
+          widths={[320, 480, 640]}
+          sizes="(min-width: 1024px) 288px, 70vw"
+          format="webp"
+          quality={84}
+          class="block h-auto w-full grayscale transition-[filter] duration-700 hover:grayscale-0"
+        />
+      </div>
+    </div>
+
+    <div class="lg:col-span-8">
+      <ol>
+        {
+          experience.map((item) => (
+            <li class="grid gap-3 border-t border-line py-8 md:grid-cols-[10rem_1fr] md:gap-10" data-reveal="up">
+              <p class="text-[15px] text-faint tabular-nums">{item.period}</p>
+              <div>
+                <h3 class="font-display text-[clamp(1.5rem,2.6vw,2.1rem)] font-semibold leading-tight tracking-[-0.02em]">
+                  <span style={item.color ? `text-decoration: underline; text-decoration-color: ${item.color}; text-decoration-thickness: 3px; text-underline-offset: 8px;` : undefined}>
+                    {item.org}
+                  </span>
+                </h3>
+                <p class="mt-2 text-[16px] text-mute">{item.role}</p>
+                <p class="mt-4 max-w-[40rem] text-[16px] leading-[1.7] text-paper/85">{item.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <dl class="mt-20 border-t border-line" data-reveal="up">
+        {
+          stack.map((group) => (
+            <div class="grid gap-1 border-b border-line py-4 md:grid-cols-[10rem_1fr] md:gap-10">
+              <dt class="text-[15px] text-faint">{group.label}</dt>
+              <dd class="text-[16px] text-paper/90">{group.items}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>

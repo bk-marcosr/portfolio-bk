@@ -1,0 +1,162 @@
+@import "tailwindcss";
+@import "@fontsource-variable/funnel-display";
+@import "@fontsource-variable/funnel-sans";
+@import "lenis/dist/lenis.css";
+
+/*
+ * Base preto, branco e cinza. Cada projeto tem a cor do próprio produto:
+ *   campanhas  #ef5f67  (vermelho do Rotor, "queda")
+ *   rotor      #7aa2f7  (azul de destaque do Rotor)
+ *   prazinho   #2fc68a  (verde do tema escuro original do Prazinho)
+ *   rigor      #e9a23b  (âmbar de alerta do Rotor/Rigor)
+ *   rr         #a683d8  (violeta dos gráficos do Prazinho)
+ * Cor nunca vira fundo de seção, gradiente ou brilho.
+ */
+@theme {
+  --font-display: "Funnel Display Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Funnel Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0b0b0b;
+  --color-ink-2: #141414;
+  --color-line: #232323;
+  --color-paper: #eeeeec;
+  --color-mute: #9a9a96;
+  --color-faint: #5e5e5a;
+
+  --color-campanhas: #ef5f67;
+  --color-rotor: #7aa2f7;
+  --color-prazinho: #2fc68a;
+  --color-rigor: #e9a23b;
+  --color-rr: #a683d8;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-paper);
+    outline-offset: 4px;
+  }
+
+  [id] {
+    scroll-margin-top: 4.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Botão de ação das simulações: texto com sublinhado grosso na cor do projeto. */
+  .sim-action {
+    position: relative;
+    padding: 0.35rem 0;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--color-paper);
+    background: none;
+    border: 0;
+    cursor: pointer;
+    text-decoration-line: underline;
+    text-decoration-color: var(--c, var(--color-paper));
+    text-decoration-thickness: 3px;
+    text-underline-offset: 7px;
+    transition: color 160ms ease, text-underline-offset 160ms ease;
+  }
+
+  .sim-action:hover {
+    color: var(--c, var(--color-paper));
+    text-underline-offset: 9px;
+  }
+
+  .sim-action[aria-pressed="true"] {
+    color: var(--c);
+  }
+
+  /* Link de texto */
+  .tlink {
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+    text-decoration-color: var(--c, var(--color-faint));
+    transition: text-decoration-color 160ms ease, color 160ms ease;
+  }
+
+  .tlink:hover {
+    text-decoration-color: var(--c, var(--color-paper));
+  }
+
+  /* Cursor customizado (só em mouse) */
+  .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 60;
+    width: 12px;
+    height: 12px;
+    margin: -6px 0 0 -6px;
+    border-radius: 999px;
+    background: var(--cursor-c, var(--color-paper));
+    pointer-events: none;
+    transition: width 220ms cubic-bezier(0.2, 0.8, 0.2, 1), height 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      margin 220ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 180ms ease, opacity 200ms ease;
+    opacity: 0;
+  }
+
+  .cursor[data-state="active"] {
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    html.has-cursor,
+    html.has-cursor a,
+    html.has-cursor button,
+    html.has-cursor canvas {
+      cursor: none;
+    }
+  }
+}
+
+@layer components {
+  /* Máscaras de linha do SplitText: espaço para descendentes (g, p, ç) não serem cortados. */
+  [data-split] > * {
+    padding-bottom: 0.14em;
+    margin-bottom: -0.14em;
+  }
+
+  [data-header][data-scrolled] {
+    background-color: rgb(11 11 11 / 0.86);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  [data-header][data-hidden] {
+    transform: translateY(-100%);
+  }
+}

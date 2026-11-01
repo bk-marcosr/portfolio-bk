@@ -1,0 +1,33 @@
+---
+import { profile } from '../data/profile';
+---
+
+<section class="relative flex min-h-[100svh] flex-col px-5 pb-8 pt-24 sm:px-10 sm:pt-28" aria-labelledby="hero-title">
+  <div class="mx-auto flex w-full max-w-[1400px] flex-1 flex-col">
+    <div class="flex items-baseline justify-between gap-6 font-display text-[15px] text-mute sm:text-base" data-reveal="fade">
+      <p>{profile.role.toLowerCase()} · {profile.location}</p>
+      <p class="hidden sm:block">aberto a oportunidades</p>
+    </div>
+
+    <h1
+      id="hero-title"
+      class="mt-4 font-display text-[clamp(3.6rem,19vw,12.5rem)] font-semibold leading-[0.86] tracking-[-0.045em]"
+      data-split="hero"
+    >
+      Marcos<br />Gabriel
+    </h1>
+
+    <div class="mt-auto pt-12">
+      <canvas
+        class="block h-[300px] w-full touch-manipulation sm:h-[340px]"
+        data-sim="hero"
+        role="img"
+        aria-label="Simulação dos sistemas: campanhas entregando mensagens, Rotor executando ordens, Prazinho recebendo parcelas, Rigor calculando indicadores e a automação da RR Chevrolet conciliando leads. Toque numa linha para disparar eventos."
+      ></canvas>
+      <p class="mt-5 max-w-xl text-[14px] leading-relaxed text-faint" data-reveal="fade">
+        Isto é uma simulação dos sistemas que eu construí, rodando agora no teu navegador.{' '}
+        <span class="text-mute">Toca numa linha pra disparar eventos.</span>
+      </p>
+    </div>
+  </div>
+</section>

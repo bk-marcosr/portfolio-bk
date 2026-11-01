@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Statement from '../components/Statement.astro';
+import Chapter from '../components/Chapter.astro';
+import OtherProjects from '../components/OtherProjects.astro';
+import Trajectory from '../components/Trajectory.astro';
+import Contact from '../components/Contact.astro';
+import { featuredProjects } from '../data/projects';
+---
+
+<Base>
+  <Hero />
+  <Statement />
+  <div id="projetos">
+    {featuredProjects.map((project) => <Chapter project={project} />)}
+  </div>
+  <OtherProjects />
+  <Trajectory />
+  <Contact />
+</Base>

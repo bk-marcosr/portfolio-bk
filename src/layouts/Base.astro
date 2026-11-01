@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+import { profile } from '../data/profile';
+import { url } from '../lib/url';
+import Header from '../components/Header.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  type?: 'website' | 'article';
+}
+
+const {
+  title = `${profile.name} — ${profile.role}`,
+  description = profile.description,
+  type = 'website',
+} = Astro.props;
+
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const ogImage = Astro.site ? new URL(url('/og.png'), Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b0b0b" />
+    <meta name="color-scheme" content="dark" />
+    {canonical && <link rel="canonical" href={canonical} />}
+
+    <meta property="og:type" content={type} />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <link rel="sitemap" href={url('/sitemap-index.xml')} />
+
+    <script is:inline>
+      // Esconde o título do hero só enquanto a animação de entrada não começa.
+      // Se o JS falhar, o fallback de 2,5 s garante que o texto apareça.
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var root = document.documentElement;
+        root.classList.add('motion');
+        setTimeout(function () { root.classList.add('motion-ready'); }, 2500);
+      }
+    </script>
+    <style is:global>
+      html.motion:not(.motion-ready) [data-split='hero'] { opacity: 0; }
+    </style>
+  </head>
+  <body class="min-h-dvh">
+    <a
+      href="#conteudo"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-paper focus:px-3 focus:py-2 focus:text-sm focus:text-ink"
+    >
+      Pular para o conteúdo
+    </a>
+    <Header />
+    <main id="conteudo">
+      <slot />
+    </main>
+    <script>
+      import '../scripts/main.ts';
+    </script>
+  </body>
+</html>

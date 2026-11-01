@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/url';
+---
+
+<Base title="Página não encontrada — Marcos Gabriel">
+  <section class="flex min-h-[80dvh] flex-col justify-center px-5 sm:px-10">
+    <div class="mx-auto w-full max-w-[1400px]">
+      <h1 class="font-display text-[clamp(3rem,11vw,10rem)] font-semibold leading-[0.88] tracking-[-0.045em]">Essa rota<br />não existe.</h1>
+      <a href={url('/')} class="tlink mt-10 inline-block font-display text-[18px] font-medium">Voltar pro início</a>
+    </div>
+  </section>
+</Base>
