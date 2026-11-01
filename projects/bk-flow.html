@@ -6,10 +6,23 @@
   <title>BK Flow — Estudo de Caso | Marcos Gabriel</title>
   <meta name="description" content="SaaS B2B para agências de marketing: gestão de métricas, orquestração de publicações e autopublicação no Instagram.">
   <meta name="theme-color" content="#050505">
+  <link rel="canonical" href="https://bk-marcosr.github.io/portfolio-bk/projects/bk-flow.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="marcos.dev">
+  <meta property="og:title" content="BK Flow — Estudo de Caso | Marcos Gabriel">
+  <meta property="og:description" content="SaaS B2B para agências de marketing: gestão de métricas, orquestração de publicações e autopublicação no Instagram.">
+  <meta property="og:url" content="https://bk-marcosr.github.io/portfolio-bk/projects/bk-flow.html">
+  <meta property="og:image" content="https://bk-marcosr.github.io/portfolio-bk/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 
   <link rel="stylesheet" href="../css/tokens.css">
   <link rel="stylesheet" href="../css/base.css">
@@ -17,11 +30,15 @@
   <link rel="stylesheet" href="../css/components.css">
 
   <script>
-    (function() {
-      document.documentElement.classList.remove('no-js');
-      var t = localStorage.getItem('theme');
-      if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', t);
+    (function () {
+      var root = document.documentElement;
+      root.classList.remove('no-js');
+      var theme = null;
+      try { theme = localStorage.getItem('theme'); } catch (err) { theme = null; }
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      root.setAttribute('data-theme', theme);
     })();
   </script>
 </head>
@@ -42,7 +59,7 @@
     <div class="case-header">
       <a href="../index.html#projetos" class="case-back">← Voltar aos projetos</a>
       <h1 class="case-title">BK Flow</h1>
-      <p class="case-intro">SaaS B2B colossal focado em agências de marketing. Gestão de métricas, orquestração de publicações e calendário editorial com autopublicação no Instagram via Meta Graph API.</p>
+      <p class="case-intro">SaaS B2B para agências de marketing: métricas, fluxo de aprovação e calendário editorial com autopublicação no Instagram via Meta Graph API.</p>
 
       <div class="case-meta">
         <div class="case-meta-item"><span>Papel</span><strong>Engenheiro Full Stack</strong></div>
@@ -84,23 +101,21 @@
     </div>
 
     <div class="case-gallery">
-      <img src="../assets/projects/bk-flow.png" alt="BK Flow — Dashboard principal" loading="lazy">
-      <img src="../assets/projects/bk-flow-calendar.png" alt="BK Flow — Calendário editorial" loading="lazy">
+      <img src="../assets/projects/bk-flow.webp" alt="BK Flow — Dashboard principal" width="1024" height="1024" loading="lazy" decoding="async">
+      <img src="../assets/projects/bk-flow-calendar.webp" alt="BK Flow — Calendário editorial" width="1024" height="1024" loading="lazy" decoding="async">
     </div>
 
     <div class="case-block">
       <h2>Resultado</h2>
-      <p>O BK Flow se consolidou como uma infraestrutura robusta, demonstrando como a união de modelagem relacional sólida com as práticas mais modernas do ecossistema React (React Query + Zustand + Shadcn — a "Santíssima Trindade" do Frontend) pode gerar uma experiência de classe mundial para o usuário final.</p>
-      <div style="margin-top: var(--space-xl);">
-        <a href="https://github.com/bk-marcosr" target="_blank" class="btn-outline">Ver no GitHub</a>
-      </div>
+      <p>Criação, aprovação e agendamento passaram a viver em um só lugar. O isolamento por agência ficou no banco (RLS), não espalhado em checagens da aplicação, e o calendário responde na hora graças às mutações otimistas.</p>
+      <p class="case-note">Código-fonte privado. Faço um walkthrough técnico do projeto em call — <a href="../index.html#contato">fale comigo</a>.</p>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <span style="font-family: var(--font-display); font-weight: 700; color: var(--text-heading);">marcos<em style="font-style: normal; color: var(--text-dim); font-weight: 500;">.dev</em></span>
+        <span class="footer-wordmark">marcos<em>.dev</em></span>
         <div class="footer-links">
           <a href="../index.html">Início</a>
           <a href="../index.html#projetos">Projetos</a>

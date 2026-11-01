@@ -6,10 +6,23 @@
   <title>AgendaLink — Estudo de Caso | Marcos Gabriel</title>
   <meta name="description" content="Plataforma B2B2C de agendamento com Stripe Checkout, Edge Functions, RLS e gestão de conflitos em calendários dinâmicos.">
   <meta name="theme-color" content="#050505">
+  <link rel="canonical" href="https://bk-marcosr.github.io/portfolio-bk/projects/agenda-link.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="marcos.dev">
+  <meta property="og:title" content="AgendaLink — Estudo de Caso | Marcos Gabriel">
+  <meta property="og:description" content="Plataforma B2B2C de agendamento com Stripe Checkout, Edge Functions, RLS e gestão de conflitos em calendários dinâmicos.">
+  <meta property="og:url" content="https://bk-marcosr.github.io/portfolio-bk/projects/agenda-link.html">
+  <meta property="og:image" content="https://bk-marcosr.github.io/portfolio-bk/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 
   <link rel="stylesheet" href="../css/tokens.css">
   <link rel="stylesheet" href="../css/base.css">
@@ -17,11 +30,15 @@
   <link rel="stylesheet" href="../css/components.css">
 
   <script>
-    (function() {
-      document.documentElement.classList.remove('no-js');
-      var t = localStorage.getItem('theme');
-      if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', t);
+    (function () {
+      var root = document.documentElement;
+      root.classList.remove('no-js');
+      var theme = null;
+      try { theme = localStorage.getItem('theme'); } catch (err) { theme = null; }
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      root.setAttribute('data-theme', theme);
     })();
   </script>
 </head>
@@ -42,7 +59,7 @@
     <div class="case-header">
       <a href="../index.html#projetos" class="case-back">← Voltar aos projetos</a>
       <h1 class="case-title">AgendaLink</h1>
-      <p class="case-intro">Aplicação cirúrgica e moderna que cobre o ciclo completo do usuário, do cadastro ao pagamento. Algoritmos de fuso horário, gestão de conflitos e integração financeira real via Stripe.</p>
+      <p class="case-intro">Plataforma de agendamento que cobre o ciclo completo, do cadastro ao pagamento: fuso horário, conflitos de agenda e cobrança via Stripe.</p>
 
       <div class="case-meta">
         <div class="case-meta-item"><span>Papel</span><strong>Engenheiro Full Stack</strong></div>
@@ -62,7 +79,7 @@
       <ul>
         <li><strong>Frontend:</strong> React 19, Vite, Tailwind v4. Componentes visuais de calendário de alta performance.</li>
         <li><strong>Banco de Dados:</strong> PostgreSQL via Supabase. Transacionalidade ACID e constraints rigorosas para evitar double-booking.</li>
-        <li><strong>Pagamentos:</strong> Edge Functions Serverless acopladas a Webhooks do Stripe — pagamentos externos de maneira extremamente segura.</li>
+        <li><strong>Pagamentos:</strong> Edge Functions criam a sessão de Stripe Checkout e processam os webhooks — nenhuma chave secreta passa pelo navegador.</li>
         <li><strong>Segurança:</strong> Row Level Security (RLS) diretamente no banco, eliminando vulnerabilidades na camada de aplicação.</li>
       </ul>
       <div class="case-stack-grid">
@@ -78,28 +95,26 @@
 
     <div class="case-block">
       <h2>Decisões Técnicas</h2>
-      <p>O maior risco em um sistema de reservas é a concorrência (race conditions). Se dois clientes tentarem reservar o mesmo horário simultaneamente, o sistema não pode permitir ambas as gravações. Implementei travas a nível de banco (Table Constraints no PostgreSQL) e validações no servidor antes de instanciar a Intent de Pagamento, garantindo integridade 100%.</p>
+      <p>O maior risco em um sistema de reservas é a concorrência (race conditions). Se dois clientes tentarem reservar o mesmo horário simultaneamente, o sistema não pode permitir ambas as gravações. Implementei travas no próprio banco (constraints no PostgreSQL) e validação no servidor antes de criar a cobrança, então o mesmo horário não pode ser vendido duas vezes.</p>
       <p>Os algoritmos de fuso horário garantem que profissionais em diferentes regiões visualizem e gerenciem seus horários corretamente, sem conflitos de timezone.</p>
     </div>
 
     <div class="case-gallery">
-      <img src="../assets/projects/agenda-link.png" alt="AgendaLink — Interface de booking" loading="lazy">
-      <img src="../assets/projects/agenda-link-calendar.png" alt="AgendaLink — Calendário semanal" loading="lazy">
+      <img src="../assets/projects/agenda-link.webp" alt="AgendaLink — Interface de booking" width="1024" height="1024" loading="lazy" decoding="async">
+      <img src="../assets/projects/agenda-link-calendar.webp" alt="AgendaLink — Calendário semanal" width="1024" height="1024" loading="lazy" decoding="async">
     </div>
 
     <div class="case-block">
       <h2>Resultado</h2>
-      <p>Recrutadores adoram ver integrações com dinheiro real. O AgendaLink prova que SaaS focado no transacional não tolera estado global instável. O projeto consolida princípios de engenharia de software transacional com a comodidade visual das tecnologias modernas de frontend.</p>
-      <div style="margin-top: var(--space-xl);">
-        <a href="https://github.com/bk-marcosr" target="_blank" class="btn-outline">Ver no GitHub</a>
-      </div>
+      <p>Um fluxo completo envolvendo dinheiro real: reserva, cobrança e confirmação. A integridade fica no banco (constraints + RLS) e os segredos de pagamento ficam no servidor (Edge Functions), deixando o front livre para focar em experiência.</p>
+      <p class="case-note">Código-fonte privado. Faço um walkthrough técnico do projeto em call — <a href="../index.html#contato">fale comigo</a>.</p>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <span style="font-family: var(--font-display); font-weight: 700; color: var(--text-heading);">marcos<em style="font-style: normal; color: var(--text-dim); font-weight: 500;">.dev</em></span>
+        <span class="footer-wordmark">marcos<em>.dev</em></span>
         <div class="footer-links">
           <a href="../index.html">Início</a>
           <a href="../index.html#projetos">Projetos</a>

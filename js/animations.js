@@ -6,28 +6,68 @@
 (function () {
   'use strict';
 
-  // ——— LENIS SMOOTH SCROLL ———
-  var lenis = new Lenis({
-    duration: 1.4,
-    easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-    orientation: 'vertical',
-    gestureOrientation: 'vertical',
-    smoothWheel: true,
-    smoothTouch: false,
-    touchMultiplier: 2,
-  });
+  var HIDDEN_SELECTOR = '[class*="gs-hidden"]';
 
-  // Expose globally so core.js can access it
+  function revealAll() {
+    var hidden = document.querySelectorAll(HIDDEN_SELECTOR);
+    hidden.forEach(function (el) {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  }
+
+  // Safety net registered FIRST: if anything below throws, content still appears.
+  setTimeout(revealAll, 5000);
+
+  var prefersReducedMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // CDN blocked (adblock, corporate proxy, offline) or reduced motion → static page.
+  if (prefersReducedMotion || typeof window.gsap === 'undefined' || typeof window.ScrollTrigger === 'undefined') {
+    revealAll();
+    return;
+  }
+
+  // ——— LENIS SMOOTH SCROLL (optional enhancement) ———
+  var lenis = null;
+
+  if (typeof window.Lenis !== 'undefined') {
+    try {
+      lenis = new Lenis({
+        duration: 1.4,
+        easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        smoothTouch: false,
+        touchMultiplier: 2,
+      });
+
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(function (time) {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+    } catch (err) {
+      lenis = null;
+      console.warn('[animations] Lenis init failed, using native scroll.', err);
+    }
+  }
+
   window.__lenis = lenis;
 
-  // Sync Lenis RAF with GSAP ticker
-  lenis.on('scroll', ScrollTrigger.update);
-
-  gsap.ticker.add(function (time) {
-    lenis.raf(time * 1000);
-  });
-
-  gsap.ticker.lagSmoothing(0);
+  function scrollToTarget(target) {
+    if (lenis) {
+      lenis.scrollTo(target, { offset: target === 0 ? 0 : -80, duration: 1.8 });
+      return;
+    }
+    if (target === 0) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    var top = target.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
 
   // ——— SMOOTH ANCHOR NAVIGATION via Lenis ———
   // All links with [data-scroll-to] will use Lenis scrollTo instead of native jump
@@ -49,14 +89,12 @@
       }
 
       if (href === '#') {
-        // Scroll to top
-        lenis.scrollTo(0, { duration: 1.8 });
-      } else {
-        var target = document.querySelector(href);
-        if (target) {
-          lenis.scrollTo(target, { offset: -80, duration: 1.8 });
-        }
+        scrollToTarget(0);
+        return;
       }
+
+      var target = document.querySelector(href);
+      if (target) scrollToTarget(target);
     });
   });
 
@@ -76,6 +114,21 @@
       stagger: 0.18,
       ease: 'expo.out',
       delay: 0.3,
+    });
+  }
+
+  // ——— SCALE reveals (hero code card) ———
+  var scaleEls = document.querySelectorAll('.gs-hidden-scale');
+  if (scaleEls.length) {
+    gsap.fromTo(scaleEls, {
+      opacity: 0,
+      scale: 0.92,
+    }, {
+      opacity: 1,
+      scale: 1,
+      duration: 1.2,
+      ease: 'expo.out',
+      delay: 0.6,
     });
   }
 
@@ -207,14 +260,5 @@
       }
     },
   });
-
-  // ——— FALLBACK: reveal anything still hidden after 5s ———
-  setTimeout(function () {
-    var still = document.querySelectorAll('[class*="gs-hidden"]');
-    still.forEach(function (el) {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-    });
-  }, 5000);
 
 })();

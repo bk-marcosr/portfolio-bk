@@ -6,10 +6,23 @@
   <title>Ecossistema Talos — Estudo de Caso | Marcos Gabriel</title>
   <meta name="description" content="Motor de IA + Dashboard Visual: sockets persistentes do WhatsApp, Gemini AI, grafos interativos e web scraping.">
   <meta name="theme-color" content="#050505">
+  <link rel="canonical" href="https://bk-marcosr.github.io/portfolio-bk/projects/bk-talos-dashboard.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="marcos.dev">
+  <meta property="og:title" content="Ecossistema Talos — Estudo de Caso | Marcos Gabriel">
+  <meta property="og:description" content="Motor de IA + Dashboard Visual: sockets persistentes do WhatsApp, Gemini AI, grafos interativos e web scraping.">
+  <meta property="og:url" content="https://bk-marcosr.github.io/portfolio-bk/projects/bk-talos-dashboard.html">
+  <meta property="og:image" content="https://bk-marcosr.github.io/portfolio-bk/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 
   <link rel="stylesheet" href="../css/tokens.css">
   <link rel="stylesheet" href="../css/base.css">
@@ -17,11 +30,15 @@
   <link rel="stylesheet" href="../css/components.css">
 
   <script>
-    (function() {
-      document.documentElement.classList.remove('no-js');
-      var t = localStorage.getItem('theme');
-      if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', t);
+    (function () {
+      var root = document.documentElement;
+      root.classList.remove('no-js');
+      var theme = null;
+      try { theme = localStorage.getItem('theme'); } catch (err) { theme = null; }
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      root.setAttribute('data-theme', theme);
     })();
   </script>
 </head>
@@ -42,7 +59,7 @@
     <div class="case-header">
       <a href="../index.html#projetos" class="case-back">← Voltar aos projetos</a>
       <h1 class="case-title">Ecossistema Talos</h1>
-      <p class="case-intro">Projeto de maior impacto técnico. Motor pesado orquestrando sockets persistentes do WhatsApp e IA, aliado a um painel complexo que processa PDFs, faz web scraping e desenha fluxos interativos através de nós.</p>
+      <p class="case-intro">Atendimento no WhatsApp com IA, em dois sistemas: um motor em Node.js que mantém as sessões e processa mensagens com Gemini, e um painel em Next.js onde os fluxos são montados visualmente em nós — com leitura de PDF e web scraping como etapas.</p>
 
       <div class="case-meta">
         <div class="case-meta-item"><span>Papel</span><strong>Engenheiro Full Stack</strong></div>
@@ -59,7 +76,7 @@
 
     <div class="case-block">
       <h2>Arquitetura & Stack</h2>
-      <p>Separação majestosa de responsabilidades em dois sistemas independentes:</p>
+      <p>Responsabilidades separadas em dois sistemas independentes:</p>
       <ul>
         <li><strong>bk-talos-engine (Motor):</strong> Express/Node.js gerenciando sockets persistentes do WhatsApp (Baileys), processamento de IA com Google Generative AI (Gemini), webhooks e filas de processamento.</li>
         <li><strong>bk-talos-dashboard (Painel):</strong> Next.js 16 (App Router) com editor visual de fluxos usando xyflow/react (React Flow), processamento de PDFs, web scraping e métricas de uso de IA.</li>
@@ -82,23 +99,21 @@
     </div>
 
     <div class="case-gallery">
-      <img src="../assets/projects/talos-ecosystem.png" alt="Ecossistema Talos — Dashboard principal" loading="lazy">
-      <img src="../assets/projects/talos-flow-editor.png" alt="Ecossistema Talos — Editor de fluxos" loading="lazy">
+      <img src="../assets/projects/talos-ecosystem.webp" alt="Ecossistema Talos — Dashboard principal" width="1024" height="1024" loading="lazy" decoding="async">
+      <img src="../assets/projects/talos-flow-editor.webp" alt="Ecossistema Talos — Editor de fluxos" width="1024" height="1024" loading="lazy" decoding="async">
     </div>
 
     <div class="case-block">
       <h2>Resultado</h2>
-      <p>A separação estrita entre o Dashboard (camada visual client-heavy) e o Engine (camada servidor) permitiu escalar as interfaces gráficas sem degradar a performance das filas de processamento. O Ecossistema Talos é o ápice da engenharia Full Stack.</p>
-      <div style="margin-top: var(--space-xl);">
-        <a href="https://github.com/bk-marcosr" target="_blank" class="btn-outline">Ver no GitHub</a>
-      </div>
+      <p>A separação estrita entre o Dashboard (camada visual client-heavy) e o Engine (camada servidor) permitiu evoluir a interface sem degradar a performance das filas de processamento — e reiniciar ou atualizar um lado sem derrubar o outro.</p>
+      <p class="case-note">Código-fonte privado. Faço um walkthrough técnico do projeto em call — <a href="../index.html#contato">fale comigo</a>.</p>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <span style="font-family: var(--font-display); font-weight: 700; color: var(--text-heading);">marcos<em style="font-style: normal; color: var(--text-dim); font-weight: 500;">.dev</em></span>
+        <span class="footer-wordmark">marcos<em>.dev</em></span>
         <div class="footer-links">
           <a href="../index.html">Início</a>
           <a href="../index.html#projetos">Projetos</a>

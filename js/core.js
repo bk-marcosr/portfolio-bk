@@ -60,7 +60,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function applyTheme(theme) {
     html.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (err) {
+      // Storage blocked (private mode / sandboxed frame): theme still applies for this visit.
+    }
     if (icon) icon.textContent = theme === 'dark' ? '☀' : '☽';
   }
 

@@ -3,13 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marcos Gabriel — Software Engineer</title>
-  <meta name="description" content="Engenheiro de Software. Aplicações escaláveis, APIs resilientes e interfaces focadas em produto.">
+  <title>Marcos Gabriel — Desenvolvedor Full Stack</title>
+  <meta name="description" content="Desenvolvedor Full Stack em Belém (PA). Automação e dados na RR Chevrolet; produtos SaaS com IA, pagamentos e arquitetura multi-tenant.">
   <meta name="theme-color" content="#050505">
+  <link rel="canonical" href="https://bk-marcosr.github.io/portfolio-bk/">
 
-  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+  <!-- Open Graph / link previews (LinkedIn, WhatsApp, X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="marcos.dev">
+  <meta property="og:title" content="Marcos Gabriel — Desenvolvedor Full Stack">
+  <meta property="og:description" content="Automação e dados na RR Chevrolet. Produtos SaaS com IA, pagamentos e multi-tenant.">
+  <meta property="og:url" content="https://bk-marcosr.github.io/portfolio-bk/">
+  <meta property="og:image" content="https://bk-marcosr.github.io/portfolio-bk/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
@@ -17,11 +33,15 @@
   <link rel="stylesheet" href="css/components.css">
 
   <script>
-    (function() {
-      document.documentElement.classList.remove('no-js');
-      var t = localStorage.getItem('theme');
-      if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', t);
+    (function () {
+      var root = document.documentElement;
+      root.classList.remove('no-js');
+      var theme = null;
+      try { theme = localStorage.getItem('theme'); } catch (err) { theme = null; }
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      root.setAttribute('data-theme', theme);
     })();
   </script>
 </head>
@@ -34,7 +54,7 @@
 
       <div class="nav-links">
         <a href="#sobre" class="nav-link" data-scroll-to>Sobre</a>
-        <a href="#carreira" class="nav-link" data-scroll-to>Carreira</a>
+        <a href="#carreira" class="nav-link" data-scroll-to>Experiência</a>
         <a href="#projetos" class="nav-link" data-scroll-to>Projetos</a>
         <a href="#stack" class="nav-link" data-scroll-to>Stack</a>
         <a href="#contato" class="nav-link" data-scroll-to>Contato</a>
@@ -53,7 +73,7 @@
   <div class="mobile-overlay" id="mobileOverlay">
     <a href="#" class="mobile-link" data-scroll-to>Início</a>
     <a href="#sobre" class="mobile-link" data-scroll-to>Sobre</a>
-    <a href="#carreira" class="mobile-link" data-scroll-to>Carreira</a>
+    <a href="#carreira" class="mobile-link" data-scroll-to>Experiência</a>
     <a href="#projetos" class="mobile-link" data-scroll-to>Projetos</a>
     <a href="#stack" class="mobile-link" data-scroll-to>Stack</a>
     <a href="#contato" class="mobile-link" data-scroll-to>Contato</a>
@@ -73,7 +93,7 @@
             <hr class="hero-rule gs-hidden">
 
             <p class="hero-body gs-hidden">
-              Engenheiro Full Stack focado em aplicações SaaS, APIs resilientes e integrações de IA. Trabalho com produto e engenharia para transformar necessidades complexas em sistemas que escalam.
+              Desenvolvedor Full Stack em Belém (PA). Hoje automatizo processos e dados na RR Chevrolet. Fora dela, construo produtos SaaS com IA, pagamentos e arquitetura multi-tenant.
             </p>
 
             <div class="hero-ctas gs-hidden">
@@ -81,10 +101,9 @@
               <a href="#contato" class="btn-outline" data-scroll-to>Fale comigo</a>
             </div>
           </div>
-          
+
           <div class="hero-visual gs-hidden-scale">
-            <!-- Mini code snippet -->
-            <div class="hero-code">
+            <div class="hero-code" aria-hidden="true">
               <div class="hero-code-bar">
                 <span class="hero-code-dot"></span>
                 <span class="hero-code-dot"></span>
@@ -93,10 +112,11 @@
               </div>
               <div class="hero-code-body">
                 <span class="ck">export const</span> <span class="cv">stack</span> = {<br>
-                &nbsp;&nbsp;runtime: <span class="cs">"Node.js + Edge Functions"</span>,<br>
-                &nbsp;&nbsp;frontend: <span class="cs">"React · Next.js · Zustand"</span>,<br>
-                &nbsp;&nbsp;data: <span class="cs">"PostgreSQL · Supabase · Redis"</span>,<br>
-                &nbsp;&nbsp;ai: <span class="cs">"OpenAI · Gemini · RAG"</span>,<br>
+                &nbsp;&nbsp;frontend: <span class="cs">"React · Next.js · TypeScript"</span>,<br>
+                &nbsp;&nbsp;backend: <span class="cs">"Node.js · Edge Functions"</span>,<br>
+                &nbsp;&nbsp;data: <span class="cs">"PostgreSQL · Supabase · RLS"</span>,<br>
+                &nbsp;&nbsp;ai: <span class="cs">"Gemini · OpenAI"</span>,<br>
+                &nbsp;&nbsp;automation: <span class="cs">"Python · RPA"</span>,<br>
                 } <span class="ck">as const</span>;
               </div>
             </div>
@@ -108,14 +128,13 @@
     <!-- ═══════════ SOBRE ═══════════ -->
     <section id="sobre" class="section">
       <div class="container">
-        <h2 class="section-heading gs-hidden">Engenharia orientada<br>a impacto de produto.</h2>
+        <h2 class="section-heading gs-hidden">Do protótipo<br>ao sistema que roda todo dia.</h2>
 
         <div class="about-layout">
           <div class="gs-hidden-left">
-            <img src="perfil.png" alt="Marcos Gabriel" class="about-photo">
+            <img src="perfil.webp" alt="Marcos Gabriel" class="about-photo" width="408" height="612">
 
-            <!-- Tech icons row -->
-            <div class="tech-icons">
+            <div class="tech-icons" aria-hidden="true">
               <!-- React -->
               <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="#61DAFB" stroke-width="1"><circle cx="12" cy="12" r="2.5"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg>
               <!-- Node.js -->
@@ -131,17 +150,17 @@
 
           <div class="about-body gs-hidden">
             <p>
-              Já liderei a reconstrução de um fluxo de checkout que travava em picos e, com mudanças no backend e no controle de concorrência, reduzi os incidentes em produção e evitamos horas de retrabalho manual.
+              Estudo Sistemas de Informação na <strong>UFRA</strong> e trabalho com automação e dados na <strong>RR Chevrolet</strong>, onde construí robôs que extraem eventos do CRM, conciliam com a base de leads de campanhas e entregam dashboard e relatório de KPI prontos para a gestão.
             </p>
             <p>
-              Hoje, foco em <strong>Node.js / TypeScript</strong>, APIs resilientes e automações que deixam a entrega mais previsível e o produto mais seguro — mesmo quando o uso cresce rápido.
+              Em paralelo, desenvolvo produtos próprios: atendimento automatizado com IA no WhatsApp, agendamento com pagamento via Stripe e SaaS multi-tenant com <strong>Supabase + RLS</strong>. Meu foco é sair do protótipo e chegar no sistema que funciona todo dia.
             </p>
 
             <div class="about-tags">
               <span class="about-tag">Full Stack</span>
-              <span class="about-tag">APIs Resilientes</span>
-              <span class="about-tag">Arquitetura Multi-tenant</span>
-              <span class="about-tag">Tech Lead</span>
+              <span class="about-tag">Automação &amp; RPA</span>
+              <span class="about-tag">IA Aplicada</span>
+              <span class="about-tag">Multi-tenant (RLS)</span>
             </div>
           </div>
         </div>
@@ -150,33 +169,41 @@
 
     <hr class="section-divider">
 
-    <!-- ═══════════ CARREIRA ═══════════ -->
+    <!-- ═══════════ EXPERIÊNCIA ═══════════ -->
     <section id="carreira" class="section">
       <div class="container">
-        <h2 class="section-heading gs-hidden">Histórico técnico.</h2>
+        <h2 class="section-heading gs-hidden">Experiência.</h2>
 
         <div class="timeline-grid">
           <div class="timeline-row gs-hidden">
+            <span class="timeline-year">2026 — Atual</span>
+            <div class="timeline-info">
+              <h3>RR Chevrolet · Automação &amp; Dados</h3>
+              <p>Robôs RPA (Rocketbot + Python) que extraem eventos do CRM, conciliam com a base de leads de Meta Ads e geram dashboard e relatório de KPI em Excel. Reestruturei a orquestração em robô pai + módulos isolados e corrigi a janela de conciliação, eliminando ~92% dos falsos positivos.</p>
+            </div>
+          </div>
+
+          <div class="timeline-row gs-hidden">
             <span class="timeline-year">2024 — Atual</span>
             <div class="timeline-info">
-              <h3>Engenharia de Plataforma & IA</h3>
-              <p>Middlewares assíncronos, integração de LLMs em workflows corporativos. Modelagem multi-tenant e orquestração em Edge Computing com foco em alta disponibilidade.</p>
+              <h3>BKode · Fundador &amp; Desenvolvedor</h3>
+              <p>Produtos próprios de ponta a ponta: modelagem de dados, backend, interface e deploy. AgendaLink, Ecossistema Talos, BK Flow e BK Echo saíram daqui.</p>
             </div>
           </div>
 
           <div class="timeline-row gs-hidden">
-            <span class="timeline-year">2023</span>
+            <span class="timeline-year">2026 — Atual</span>
             <div class="timeline-info">
-              <h3>Desenvolvimento SaaS & Transacional</h3>
-              <p>Pipelines críticos: gateways de pagamento recorrentes, RBAC granular e estado otimista para interfaces reativas B2B.</p>
+              <h3>UTIC · Diretor Administrativo-Financeiro</h3>
+              <p>Empresa Júnior de TI e Comunicação da UFRA. Responsável pela estrutura financeira e pela política interna de alocação de recursos.</p>
             </div>
           </div>
 
           <div class="timeline-row gs-hidden">
-            <span class="timeline-year">2021 — 2022</span>
+            <span class="timeline-year">Em curso</span>
             <div class="timeline-info">
-              <h3>Fundamentos: APIs & Client-Side</h3>
-              <p>Ecossistema Node/React. Modelagem intensiva de bancos relacionais e construção de APIs RESTful como base para sistemas de gestão internos.</p>
+              <h3>UFRA · Bacharelado em Sistemas de Informação</h3>
+              <p>Universidade Federal Rural da Amazônia, Belém (PA).</p>
             </div>
           </div>
         </div>
@@ -188,51 +215,28 @@
     <!-- ═══════════ PROJETOS ═══════════ -->
     <section id="projetos" class="section">
       <div class="container">
-        <h2 class="section-heading gs-hidden">Arquitetura em produção.</h2>
-        <p class="section-lead gs-hidden">Sistemas reais resolvendo problemas complexos de domínio.</p>
+        <h2 class="section-heading gs-hidden">Projetos em destaque.</h2>
+        <p class="section-lead gs-hidden">Os dois com mais peso técnico — cada um com estudo de caso completo.</p>
 
         <div class="project-feed" style="margin-top: var(--space-3xl);">
-
-          <!-- BK FLOW -->
-          <article class="project-item gs-hidden">
-            <div class="project-visual">
-              <img src="assets/projects/bk-flow.png" alt="BK Flow — SaaS de Gestão de Redes Sociais" loading="lazy">
-            </div>
-            <div class="project-details">
-              <span class="project-category">SaaS B2B / Automação</span>
-              <h3 class="project-title">BK Flow</h3>
-              <p class="project-desc">SaaS colossal focado em agências de marketing. Gestão de métricas, orquestração de publicações e calendário editorial com autopublicação no Instagram via Meta Graph API. Visão Multi-Tenant com níveis de permissão e controle de acesso.</p>
-              <div class="project-impact">A "Santíssima Trindade" do Frontend: React Query + Zustand + Shadcn</div>
-              <div class="project-tags">
-                <span class="project-tag">React 18</span>
-                <span class="project-tag">Vite</span>
-                <span class="project-tag">Supabase</span>
-                <span class="project-tag">Zustand</span>
-                <span class="project-tag">React Query</span>
-                <span class="project-tag">Edge Functions</span>
-                <span class="project-tag">Meta Graph API</span>
-              </div>
-              <a href="projects/bk-flow.html" class="btn-text">Ler estudo de caso <span class="arrow">→</span></a>
-            </div>
-          </article>
 
           <!-- ECOSSISTEMA TALOS -->
           <article class="project-item gs-hidden">
             <div class="project-visual">
-              <img src="assets/projects/talos-ecosystem.png" alt="Ecossistema Talos — Motor de IA + Dashboard Visual" loading="lazy">
+              <img src="assets/projects/talos-ecosystem.webp" alt="Ecossistema Talos — editor visual de fluxos de IA" width="1024" height="1024" loading="lazy" decoding="async">
             </div>
             <div class="project-details">
-              <span class="project-category">IA / Automação / Full Stack</span>
+              <span class="project-category">IA · Automação · Full Stack</span>
               <h3 class="project-title">Ecossistema Talos</h3>
-              <p class="project-desc">Projeto de maior impacto técnico. Motor pesado (bk-talos-engine) orquestrando sockets persistentes do WhatsApp e IA em Node.js, aliado a um painel complexo (bk-talos-dashboard) que processa PDFs, faz web scraping e desenha fluxos interativos através de nós.</p>
-              <div class="project-impact">O ápice da engenharia Full Stack: Motor backend + Grafos interativos + IA</div>
+              <p class="project-desc">Atendimento automatizado no WhatsApp com IA. Um motor em Node.js mantém as sessões (Baileys) e processa mensagens com Gemini; um painel em Next.js permite montar os fluxos visualmente em nós, com leitura de PDF e web scraping como etapas.</p>
+              <div class="project-impact">Motor e painel separados: o editor visual cresce sem travar a fila de mensagens.</div>
               <div class="project-tags">
-                <span class="project-tag">Next.js 16</span>
+                <span class="project-tag">Node.js</span>
                 <span class="project-tag">Express</span>
-                <span class="project-tag">Gemini AI</span>
-                <span class="project-tag">xyflow/react</span>
                 <span class="project-tag">Baileys</span>
-                <span class="project-tag">Webhooks</span>
+                <span class="project-tag">Gemini</span>
+                <span class="project-tag">Next.js</span>
+                <span class="project-tag">React Flow</span>
               </div>
               <a href="projects/bk-talos-dashboard.html" class="btn-text">Ler estudo de caso <span class="arrow">→</span></a>
             </div>
@@ -241,46 +245,48 @@
           <!-- AGENDA LINK -->
           <article class="project-item gs-hidden">
             <div class="project-visual">
-              <img src="assets/projects/agenda-link.png" alt="AgendaLink — Plataforma B2B2C com Pagamentos" loading="lazy">
+              <img src="assets/projects/agenda-link.webp" alt="AgendaLink — agendamento com pagamento" width="1024" height="1024" loading="lazy" decoding="async">
             </div>
             <div class="project-details">
-              <span class="project-category">B2B2C / Transacional</span>
+              <span class="project-category">B2B2C · Pagamentos</span>
               <h3 class="project-title">AgendaLink</h3>
-              <p class="project-desc">Aplicação cirúrgica que cobre o ciclo completo do usuário, do cadastro ao pagamento. Algoritmos de fuso horário, gestão de conflitos em calendários dinâmicos e pagamentos externos usando Edge Functions Serverless acopladas a Webhooks do Stripe com Row Level Security no banco.</p>
-              <div class="project-impact">Integrações com dinheiro real: Stripe Checkout + Edge Functions + RLS</div>
+              <p class="project-desc">Agendamento com pagamento do cadastro ao checkout. Conflitos de horário são barrados por constraint no PostgreSQL — não só na interface —, o pagamento passa por Stripe Checkout com Edge Functions e webhooks, e o RLS isola os dados de cada profissional.</p>
+              <div class="project-impact">Sem double-booking: a regra vive no banco, não no front.</div>
               <div class="project-tags">
                 <span class="project-tag">React 19</span>
-                <span class="project-tag">Vite</span>
                 <span class="project-tag">Supabase</span>
-                <span class="project-tag">Tailwind v4</span>
+                <span class="project-tag">PostgreSQL</span>
                 <span class="project-tag">Stripe</span>
+                <span class="project-tag">Edge Functions</span>
                 <span class="project-tag">RLS</span>
               </div>
               <a href="projects/agenda-link.html" class="btn-text">Ler estudo de caso <span class="arrow">→</span></a>
             </div>
           </article>
 
-          <!-- BK ECHO -->
-          <article class="project-item gs-hidden">
-            <div class="project-visual">
-              <img src="assets/projects/bk-echo.png" alt="BK Echo — Geração e Scoring de Conteúdo com IA" loading="lazy">
-            </div>
-            <div class="project-details">
-              <span class="project-category">IA / RAG / Content Scoring</span>
-              <h3 class="project-title">BK Echo</h3>
-              <p class="project-desc">Ecossistema rigoroso de transcrição, recuperação e geração (RAG) com sistema de avaliação (Scoring) de conteúdo. Utiliza roteamento híbrido do Next.js (Middlewares + Server Components) para abstrair lógicas pesadas e proteger dados através de Sessões SSR.</p>
-              <div class="project-impact">Não é "chamar uma API": é RAG + Scoring + Aprovação + SSR</div>
-              <div class="project-tags">
-                <span class="project-tag">Next.js 14</span>
-                <span class="project-tag">React 18</span>
-                <span class="project-tag">Supabase SSR</span>
-                <span class="project-tag">OpenAI</span>
-                <span class="project-tag">Middlewares</span>
-              </div>
-              <a href="projects/bk-echo.html" class="btn-text">Ler estudo de caso <span class="arrow">→</span></a>
-            </div>
-          </article>
+        </div>
 
+        <!-- OUTROS PROJETOS -->
+        <div class="project-list gs-hidden">
+          <h3 class="project-list-heading">Outros projetos</h3>
+
+          <a href="projects/bk-flow.html" class="project-row">
+            <div class="project-row-main">
+              <span class="project-row-title">BK Flow</span>
+              <span class="project-row-desc">SaaS para agências: calendário editorial, aprovação e autopublicação no Instagram via Meta Graph API.</span>
+            </div>
+            <span class="project-row-meta">React · Supabase · RLS</span>
+            <span class="project-row-arrow" aria-hidden="true">→</span>
+          </a>
+
+          <a href="projects/bk-echo.html" class="project-row">
+            <div class="project-row-main">
+              <span class="project-row-title">BK Echo</span>
+              <span class="project-row-desc">Transcrição com Whisper e geração de documentos com IA, com scoring e aprovação humana antes de publicar.</span>
+            </div>
+            <span class="project-row-meta">Next.js · OpenAI · SSR</span>
+            <span class="project-row-arrow" aria-hidden="true">→</span>
+          </a>
         </div>
       </div>
     </section>
@@ -290,13 +296,13 @@
     <!-- ═══════════ STACK ═══════════ -->
     <section id="stack" class="section">
       <div class="container">
-        <h2 class="section-heading gs-hidden">Tecnologias que uso em produção.</h2>
+        <h2 class="section-heading gs-hidden">Stack que uso nos projetos acima.</h2>
 
         <div class="skills-table gs-hidden" style="margin-top: var(--space-2xl);">
           <div class="skill-row">
             <span class="skill-label">Frontend</span>
             <div class="skill-items">
-              <span class="skill-chip">React 18/19</span>
+              <span class="skill-chip">React</span>
               <span class="skill-chip">Next.js</span>
               <span class="skill-chip">TypeScript</span>
               <span class="skill-chip">Tailwind CSS</span>
@@ -310,10 +316,9 @@
             <div class="skill-items">
               <span class="skill-chip">Node.js</span>
               <span class="skill-chip">Express</span>
-              <span class="skill-chip">REST / GraphQL</span>
-              <span class="skill-chip">Edge Functions</span>
+              <span class="skill-chip">REST</span>
+              <span class="skill-chip">Edge Functions (Deno)</span>
               <span class="skill-chip">Webhooks</span>
-              <span class="skill-chip">Event-driven</span>
             </div>
           </div>
           <div class="skill-row">
@@ -321,26 +326,31 @@
             <div class="skill-items">
               <span class="skill-chip">PostgreSQL</span>
               <span class="skill-chip">Supabase</span>
-              <span class="skill-chip">Redis</span>
               <span class="skill-chip">RLS</span>
-              <span class="skill-chip">Data Modeling</span>
+              <span class="skill-chip">Modelagem relacional</span>
             </div>
           </div>
           <div class="skill-row">
             <span class="skill-label">IA</span>
             <div class="skill-items">
-              <span class="skill-chip">OpenAI</span>
               <span class="skill-chip">Gemini</span>
-              <span class="skill-chip">RAG Pipelines</span>
-              <span class="skill-chip">Prompt Engineering</span>
+              <span class="skill-chip">OpenAI GPT</span>
+              <span class="skill-chip">Whisper</span>
+              <span class="skill-chip">Saída estruturada (JSON)</span>
             </div>
           </div>
           <div class="skill-row">
-            <span class="skill-label">DevOps & QA</span>
+            <span class="skill-label">Automação</span>
             <div class="skill-items">
-              <span class="skill-chip">Docker</span>
-              <span class="skill-chip">GitHub Actions</span>
-              <span class="skill-chip">Playwright E2E</span>
+              <span class="skill-chip">Python</span>
+              <span class="skill-chip">Rocketbot (RPA)</span>
+              <span class="skill-chip">Excel / planilhas</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">Entrega</span>
+            <div class="skill-items">
+              <span class="skill-chip">Git &amp; GitHub</span>
               <span class="skill-chip">Vercel</span>
             </div>
           </div>
@@ -356,23 +366,24 @@
         <div class="contact-block gs-hidden">
           <h2 class="section-heading">Disponível para<br>novos desafios.</h2>
           <p class="section-lead">
-            Procuro equipes maduras que valorizam código manutenível, testes automatizados e impacto nos resultados de negócio.
+            Busco um time de produto onde código revisado, testes e entrega contínua fazem parte da rotina.
           </p>
 
           <div class="contact-links">
             <a href="mailto:marcosgabriel20061216@gmail.com" class="contact-link">
-              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
               E-mail
             </a>
             <a href="https://www.linkedin.com/in/marcos-gabriel-rodrigues-ba%C3%ADa-0181022a5/" target="_blank" rel="noopener noreferrer" class="contact-link">
-              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
               LinkedIn
             </a>
             <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer" class="contact-link">
-              <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               GitHub
             </a>
           </div>
+          <p class="contact-email">marcosgabriel20061216@gmail.com</p>
         </div>
       </div>
     </section>
@@ -382,17 +393,17 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <span style="font-family: var(--font-display); font-weight: 700; color: var(--text-heading);">marcos<em style="font-style: normal; color: var(--text-dim); font-weight: 500;">.dev</em></span>
+        <span class="footer-wordmark">marcos<em>.dev</em></span>
         <div class="footer-links">
           <a href="#projetos" data-scroll-to>Projetos</a>
           <a href="#contato" data-scroll-to>Contato</a>
-          <a href="https://github.com/bk-marcosr" target="_blank">GitHub</a>
+          <a href="https://github.com/bk-marcosr" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- LIBS -->
+  <!-- LIBS (optional enhancement — page works without them) -->
   <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>
