@@ -1,53 +1,36 @@
-import type { FeaturedProject, MinorProject, ProjectStatus } from './types';
+import type { FeaturedProject, MinorProject } from './types';
+import { COLORS } from '../scripts/sim/lanes';
 import prazinhoDashboard from '../assets/projects/prazinho-dashboard.webp';
 import prazinhoVendas from '../assets/projects/prazinho-vendas.webp';
 import prazinhoFechamento from '../assets/projects/prazinho-fechamento.webp';
 
-export const STATUS_TONE: Record<ProjectStatus, 'live' | 'signal' | 'neutral'> = {
-  producao: 'live',
-  ativo: 'signal',
-  academico: 'neutral',
-  encerrado: 'neutral',
-};
-
 export const featuredProjects: FeaturedProject[] = [
   {
     slug: 'campanhas-platform',
+    lane: 'campanhas',
+    color: COLORS.campanhas,
     name: 'Campanhas Platform',
-    tagline: 'Plataforma de campanhas e vouchers para uma rede de barbearias.',
-    summary:
-      'Campanhas digitais e físicas por filial, landing pages, voucher único por lead e entrega pelo WhatsApp com fila durável. Back-end, front-end, testes e operação.',
-    status: 'producao',
-    statusLabel: 'Em produção desde jul/2026',
-    period: '2026',
-    role: 'Full stack — do banco à operação',
-    highlights: [
-      'Monólito modular em três processos: SPA, API Express e um worker dedicado. Só o worker roda filas (BullMQ) e jobs.',
-      'Contrato HTTP gerado: 147 operações do back-end e 101 chamadas do front conferidas contra OpenAPI 3.1 no CI.',
-      'Segurança por padrão: cookie HttpOnly, CSRF, RBAC com escopo por filial e minimização de dados pessoais.',
+    line: 'Campanhas e vouchers para uma rede de barbearias. Em produção desde julho de 2026.',
+    lead: 'O lead entra pela landing page, recebe um voucher único e a mensagem sai pelo WhatsApp. Se o provedor cair, nada se perde: a fila segura e o worker retoma de onde parou.',
+    facts: [
+      '147 operações HTTP com contrato OpenAPI gerado e conferido no CI.',
+      'API e worker em processos separados — só o worker mexe na fila.',
+      '10 fluxos de ponta a ponta no Playwright, inclusive consentimento de privacidade.',
     ],
-    facts: ['147 operações HTTP', '10 fluxos E2E', 'Release com security gate'],
-    stack: ['React 19', 'Vite', 'TanStack Query', 'Express', 'Zod', 'Prisma', 'PostgreSQL 16', 'Redis 7', 'BullMQ', 'Docker Compose', 'Traefik', 'Vitest', 'Playwright', 'GitHub Actions'],
-    visual: {
-      kind: 'flow',
-      flow: {
-        title: 'campanhas-platform · topologia de produção',
-        caption: 'A API não roda migrations nem jobs. O worker é o único processo com filas habilitadas.',
-        layers: [
-          [{ label: 'Internet' }],
-          [{ label: 'Traefik', meta: 'TLS e roteamento' }],
-          [
-            { label: 'SPA React', meta: 'Nginx não-root' },
-            { label: 'API Express', meta: '147 operações', live: true },
-          ],
-          [
-            { label: 'PostgreSQL 16', meta: 'fonte da verdade', live: true },
-            { label: 'Redis 7', meta: 'filas BullMQ' },
-          ],
-          [{ label: 'Worker', meta: 'jobs · WhatsApp · Meta · SMTP' }],
-        ],
-      },
+    stack: ['React 19', 'Express', 'Prisma', 'PostgreSQL 16', 'Redis', 'BullMQ', 'Docker', 'Playwright'],
+    sim: {
+      actions: [
+        { kind: 'burst', label: 'Disparar campanha', amount: 24 },
+        { kind: 'toggle-down', label: 'Derrubar o provedor', labelActive: 'Religar o provedor' },
+      ],
+      counters: [
+        { field: 'done', label: 'entregues' },
+        { field: 'waiting', label: 'na fila' },
+      ],
+      caption: 'Derruba o provedor no meio de um disparo: a fila cresce, nada some, e tudo sai quando ele volta.',
     },
+    period: '2026',
+    role: 'Full stack, do banco à operação',
     sections: [
       {
         title: 'Contexto',
@@ -84,36 +67,32 @@ export const featuredProjects: FeaturedProject[] = [
   },
   {
     slug: 'rotor',
+    lane: 'rotor',
+    color: COLORS.rotor,
     name: 'Rotor',
     formerName: 'TradeMind',
-    tagline: 'Robô de trading spot com execução real na Binance, feito para nunca ordenar duas vezes.',
-    summary:
-      'Painel pessoal que analisa o mercado, decide e executa ordens a cada minuto, com trava de execução, IDs idempotentes e reconciliação de posição.',
-    status: 'producao',
-    statusLabel: 'Em operação desde set/2026',
-    period: '2025 — 2026',
-    role: 'Projeto pessoal — produto, back-end e interface',
-    highlights: [
-      'Cada ordem nasce como tentativa registrada, com identificador próprio, antes de chegar à exchange.',
-      'Se a resposta da Binance se perde, novas ordens ficam bloqueadas até a reconciliação provar o que aconteceu.',
-      'Chaves da exchange só no servidor (Vault). O acesso é conferido no back-end, não só na tela.',
+    line: 'Robô de trading com dinheiro real na Binance. Operando desde setembro de 2026.',
+    lead: 'Cada ordem passa por uma trava antes de sair. Se a resposta da Binance se perde, nenhuma ordem nova sai até a reconciliação provar o que aconteceu. Foi isso que segurou uma compra duplicada de BNB em setembro.',
+    facts: [
+      'Tentativa registrada com ID idempotente antes de a ordem sair.',
+      'Operação e posição gravadas na mesma transação.',
+      'Chaves só no servidor. 8 Edge Functions, ciclo a cada minuto.',
     ],
-    facts: ['8 Edge Functions', '22 migrations', 'Ciclo a cada 1 min'],
-    stack: ['React', 'TypeScript', 'Vite', 'TanStack Query', 'Supabase Auth', 'PostgreSQL', 'RLS', 'Vault', 'Cron', 'Edge Functions (Deno)', 'Binance Spot API'],
-    visual: {
-      kind: 'flow',
-      flow: {
-        title: 'rotor · caminho de uma ordem real',
-        caption: 'Resultado incerto bloqueia a próxima ordem até a reconciliação.',
-        layers: [
-          [{ label: 'Agendador', meta: 'a cada 1 minuto' }],
-          [{ label: 'Edge Function', meta: 'acesso, saldo e limites de risco' }],
-          [{ label: 'Tentativa registrada', meta: 'ID idempotente + trava', live: true }],
-          [{ label: 'Binance Spot API', meta: 'ordem a mercado' }],
-          [{ label: 'PostgreSQL', meta: 'operação e posição na mesma transação', live: true }],
-        ],
-      },
+    stack: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Vault', 'Edge Functions', 'Binance API'],
+    sim: {
+      actions: [
+        { kind: 'burst', label: 'Enviar ordem', amount: 1 },
+        { kind: 'lose-response', label: 'Perder a resposta da Binance' },
+      ],
+      counters: [
+        { field: 'done', label: 'executadas' },
+        { field: 'failed', label: 'reconciliadas' },
+        { field: 'waiting', label: 'esperando a trava' },
+      ],
+      caption: 'Perde a resposta de uma ordem e manda outras atrás: elas param na trava até a reconciliação liberar.',
     },
+    period: '2025 — 2026',
+    role: 'Projeto pessoal: produto, servidor e interface',
     sections: [
       {
         title: 'Contexto',
@@ -148,31 +127,28 @@ export const featuredProjects: FeaturedProject[] = [
   },
   {
     slug: 'prazinho',
+    lane: 'prazinho',
+    color: COLORS.prazinho,
     name: 'Prazinho',
     formerName: 'FinançaFácil',
-    tagline: 'Gestão financeira para pequenos negócios e revendedores.',
-    summary:
-      'Vendas à vista e a prazo, compras com fornecedores, estoque, fechamento mensal e finanças pessoais em um só lugar.',
-    status: 'ativo',
-    statusLabel: 'Em desenvolvimento ativo',
+    line: 'Venda a prazo, estoque e fechamento do mês para pequeno revendedor.',
+    lead: 'Feito para quem anota fiado no caderno. A chave que vai para o navegador é pública; quem decide o que cada usuário enxerga é o banco, com RLS em todas as tabelas.',
+    facts: [
+      '16 migrations versionadas.',
+      'Modo demonstração com back-end em memória: revisar design nunca toca dado real.',
+      'Relatório em PDF e backup exportável direto do app.',
+    ],
+    stack: ['React', 'TypeScript', 'Tailwind', 'shadcn/ui', 'Supabase', 'Vitest', 'Vercel'],
+    screens: {
+      items: [
+        { src: prazinhoDashboard, alt: 'Prazinho: visão geral com dinheiro em caixa, a receber e a pagar' },
+        { src: prazinhoVendas, alt: 'Prazinho: lista de vendas à vista e a prazo' },
+        { src: prazinhoFechamento, alt: 'Prazinho: fechamento do mês' },
+      ],
+      caption: 'Telas reais, no modo demonstração do próprio app (dados fictícios).',
+    },
     period: '2026',
     role: 'Produto, design e engenharia',
-    highlights: [
-      'Row Level Security em todas as tabelas: a chave do front é pública e o banco decide o que cada usuário vê.',
-      'Modo demonstração com back-end em memória para revisar o design com dados fictícios, sem tocar no banco real.',
-      'Relatórios em PDF e backup exportável direto do app.',
-    ],
-    facts: ['16 migrations', 'RLS em todas as tabelas', 'Testes com Vitest'],
-    stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'shadcn/ui', 'TanStack Query', 'Recharts', 'Supabase', 'Vitest', 'Vercel'],
-    visual: {
-      kind: 'screens',
-      caption: 'Telas reais do app em modo demonstração, com dados fictícios.',
-      screens: [
-        { src: prazinhoDashboard, alt: 'Prazinho — visão geral com dinheiro em caixa, valores a receber e a pagar' },
-        { src: prazinhoVendas, alt: 'Prazinho — lista de vendas à vista e a prazo' },
-        { src: prazinhoFechamento, alt: 'Prazinho — fechamento mensal' },
-      ],
-    },
     sections: [
       {
         title: 'Contexto',
@@ -206,40 +182,27 @@ export const featuredProjects: FeaturedProject[] = [
   },
   {
     slug: 'rigor',
+    lane: 'rigor',
+    color: COLORS.rigor,
     name: 'Rigor',
-    tagline: 'Análise fundamentalista das empresas da B3 com dados oficiais da CVM.',
-    summary:
-      'Pipeline em Python que coleta as demonstrações anuais de 2010 a 2025, calcula 12 indicadores e publica a base para um painel web.',
-    status: 'academico',
-    statusLabel: 'Projeto acadêmico',
-    period: '2026',
-    role: 'Pipeline de dados e interface web',
-    highlights: [
-      'Coleta, importação, cálculo, exportação e auditoria orquestrados por um único ponto de entrada, com modo offline.',
-      'Cada indicador guarda a fórmula e a operação com os nomes das contas, para conferência.',
-      'Valor ausente fica vazio. Não vira zero.',
+    line: 'Quinze anos de balanços da CVM viram doze indicadores por empresa da B3.',
+    lead: 'Pipeline em Python, um comando só, com modo offline. Quando falta dado na fonte, o indicador fica em branco. Não vira zero.',
+    facts: [
+      'De 2010 a 2025, todas as empresas listadas.',
+      'Cada indicador guarda a fórmula e as contas de origem.',
+      'Painel web lendo o Supabase só com chave de leitura.',
     ],
-    facts: ['2010 — 2025', '12 indicadores', 'SQLite · CSV · Supabase'],
-    stack: ['Python', 'SQLite', 'PostgreSQL (Supabase)', 'React', 'TypeScript', 'Vite'],
-    visual: {
-      kind: 'flow',
-      flow: {
-        title: 'rigor · pipeline de dados',
-        caption: 'Um comando reprocessa tudo; em modo offline, reaproveita os arquivos já baixados.',
-        layers: [
-          [
-            { label: 'CVM', meta: 'DFP: BPA, BPP e DRE' },
-            { label: 'B3', meta: 'cadastro e classificação' },
-          ],
-          [{ label: 'preparar_base.py', meta: 'coleta → cálculo → auditoria' }],
-          [
-            { label: 'SQLite + CSV', meta: 'base_empresas', live: true },
-            { label: 'Supabase', meta: 'leitura pública (anon)' },
-          ],
-          [{ label: 'Painel web', meta: 'React + TypeScript' }],
-        ],
-      },
+    stack: ['Python', 'SQLite', 'Supabase', 'React', 'TypeScript'],
+    sim: {
+      actions: [{ kind: 'burst', label: 'Processar uma empresa', amount: 12 }],
+      counters: [
+        { field: 'done', label: 'calculados' },
+        { field: 'hollow', label: 'em branco' },
+      ],
+      caption: 'Os quadrados vazados são indicadores sem dado na fonte: entram na conta como vazio, não como zero.',
     },
+    period: '2026',
+    role: 'Pipeline de dados e painel web',
     sections: [
       {
         title: 'Contexto',
@@ -274,49 +237,13 @@ export const featuredProjects: FeaturedProject[] = [
 ];
 
 export const otherProjects: MinorProject[] = [
-  {
-    name: 'Ecossistema Talos',
-    description: 'Atendimento no WhatsApp com IA: motor em Node.js com Baileys e Gemini, e painel em Next.js para montar fluxos em nós.',
-    stack: 'Node.js · Express · Next.js · React Flow',
-    year: '2026',
-  },
-  {
-    name: 'BK Flow',
-    description: 'SaaS para agências: calendário editorial, aprovação e publicação no Instagram pela Meta Graph API.',
-    stack: 'React · Supabase · Edge Functions',
-    year: '2026',
-  },
-  {
-    name: 'Pleno Movimento',
-    description: 'Gestão de studio de pilates: alunos, aulas, agenda, pagamentos e portal do aluno.',
-    stack: 'React · Supabase · RLS',
-    year: '2026',
-  },
-  {
-    name: 'AgendaLink',
-    description: 'Agendamento online para autônomos, com pagamento pelo Stripe Checkout.',
-    stack: 'React · Supabase · Stripe',
-    year: '2026',
-  },
-  {
-    name: 'OrçaPro',
-    description: 'Orçamentos em PDF para freelancers e MEIs.',
-    stack: 'React · Supabase · react-pdf',
-    year: '2026',
-  },
-  {
-    name: 'BK Echo',
-    description: 'Transcrição de áudio e geração de documentos com IA, com aprovação humana antes de publicar.',
-    stack: 'Next.js · OpenAI · Supabase',
-    year: '2026',
-  },
-  {
-    name: 'CVM Extract',
-    description: 'Extração de demonstrações financeiras da CVM em Python. Código aberto.',
-    stack: 'Python',
-    year: '2026',
-    url: 'https://github.com/bk-marcosr/CVM_extract',
-  },
+  { name: 'Ecossistema Talos', description: 'Atendimento no WhatsApp com IA: motor em Node.js com Baileys e Gemini, painel em Next.js para montar fluxos.', stack: 'Node.js, Next.js, React Flow', year: '2026' },
+  { name: 'BK Flow', description: 'Calendário editorial, aprovação e publicação no Instagram para agências.', stack: 'React, Supabase, Meta Graph', year: '2026' },
+  { name: 'Pleno Movimento', description: 'Gestão de studio de pilates: alunos, aulas, agenda, pagamentos e portal do aluno.', stack: 'React, Supabase', year: '2026' },
+  { name: 'AgendaLink', description: 'Agendamento para autônomos com pagamento pelo Stripe.', stack: 'React, Supabase, Stripe', year: '2026' },
+  { name: 'OrçaPro', description: 'Orçamento em PDF para freelancer e MEI.', stack: 'React, Supabase', year: '2026' },
+  { name: 'BK Echo', description: 'Transcrição de áudio e geração de documento com IA, com aprovação humana.', stack: 'Next.js, OpenAI', year: '2026' },
+  { name: 'CVM Extract', description: 'Extração de demonstrações financeiras da CVM. Código aberto.', stack: 'Python', year: '2026', url: 'https://github.com/bk-marcosr/CVM_extract' },
 ];
 
 export function getProject(slug: string): FeaturedProject | undefined {

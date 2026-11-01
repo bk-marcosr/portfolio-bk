@@ -1,0 +1,39 @@
+---
+import { otherProjects } from '../data/projects';
+---
+
+<section class="px-5 py-24 sm:px-10 sm:py-32" aria-labelledby="outros-title">
+  <div class="mx-auto max-w-[1400px]">
+    <h2 id="outros-title" class="font-display text-[clamp(2rem,4.5vw,3.6rem)] font-semibold tracking-[-0.03em]" data-split="lines">
+      Também construí
+    </h2>
+
+    <ul class="mt-12">
+      {
+        otherProjects.map((project) => {
+          const inner = (
+            <>
+              <span class="font-display text-[clamp(1.5rem,3vw,2.4rem)] font-medium leading-tight tracking-[-0.02em] transition-transform duration-300 group-hover:translate-x-2">
+                {project.name}
+                {project.url && <span class="ml-3 align-middle text-[0.55em] text-mute">código aberto ↗</span>}
+              </span>
+              <span class="text-[16px] leading-relaxed text-mute md:max-w-[34rem] md:text-right">{project.description}</span>
+            </>
+          );
+          return (
+            <li class="border-t border-line last:border-b" data-reveal="up">
+              {project.url ? (
+                <a href={project.url} target="_blank" rel="noopener noreferrer" class="group flex flex-col gap-2 py-6 md:flex-row md:items-baseline md:justify-between md:gap-10">
+                  {inner}
+                </a>
+              ) : (
+                <div class="group flex flex-col gap-2 py-6 md:flex-row md:items-baseline md:justify-between md:gap-10">{inner}</div>
+              )}
+            </li>
+          );
+        })
+      }
+    </ul>
+    <p class="mt-6 text-[14px] text-faint">A maioria dos repositórios é privada. Mostro o código numa conversa.</p>
+  </div>
+</section>

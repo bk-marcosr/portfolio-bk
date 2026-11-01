@@ -2,7 +2,9 @@
 
 Portfólio de Marcos Gabriel — desenvolvedor full stack.
 
-Site estático em **Astro + Tailwind CSS v4**, sem JavaScript no cliente. Fontes Geist servidas localmente, imagens otimizadas para WebP no build.
+O site mostra os sistemas funcionando: o topo é uma simulação em canvas das filas, travas e pipelines dos projetos, e cada projeto tem uma simulação própria para o visitante mexer (derrubar o provedor do Campanhas, perder a resposta da Binance no Rotor, processar uma empresa no Rigor).
+
+Astro + Tailwind CSS v4, GSAP (ScrollTrigger, SplitText) e Lenis. Fontes Funnel Display e Funnel Sans servidas localmente.
 
 ## Rodando
 
@@ -21,19 +23,24 @@ Todo o texto do site sai de `src/data/`:
 
 | Arquivo | O que tem |
 | --- | --- |
-| `src/data/profile.ts` | nome, contatos, resumo, experiência, princípios e stack |
-| `src/data/projects.ts` | projetos em destaque (estudos de caso, diagramas, prints) e lista de outros projetos |
+| `src/data/profile.ts` | nome, contatos, frase de abertura, trajetória e stack |
+| `src/data/projects.ts` | projetos em destaque (texto, simulação, prints, estudo de caso) e outros projetos |
 
 Cada projeto em destaque gera uma página em `/projetos/<slug>/`. Prints ficam em `src/assets/projects/` e são otimizados no build.
 
 ## Design
 
-Base preto, branco e cinza. Cor só como sinal:
+Base preto, branco e cinza. Cada projeto tem a cor do próprio produto, usada só como sinal (nunca fundo, gradiente ou brilho):
 
-- **verde `#2fc68a`** (do Prazinho, design dark original) — estado vivo: em produção, atual, resultado;
-- **azul `#7aa2f7`** (do Rotor) — estrutura e interação: linhas de diagrama, foco, hover.
+| Projeto | Cor | Origem |
+| --- | --- | --- |
+| Campanhas Platform | `#ef5f67` | vermelho de queda do Rotor |
+| Rotor | `#7aa2f7` | azul de destaque do Rotor |
+| Prazinho | `#2fc68a` | verde do tema escuro original do Prazinho |
+| Rigor | `#e9a23b` | âmbar de alerta do Rotor/Rigor |
+| RR Chevrolet | `#a683d8` | violeta dos gráficos do Prazinho |
 
-Linhas de 1px, sem glow, sem gradiente colorido. Tokens em `src/styles/global.css`.
+O motor das simulações fica em `src/scripts/sim/` (`engine.ts` simula estações, filas, trava e reconciliação; `lanes.ts` define cada sistema). Ele pausa fora da tela e respeita `prefers-reduced-motion`.
 
 ## Deploy
 

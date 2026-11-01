@@ -1,0 +1,23 @@
+---
+import { statement } from '../data/profile';
+import { COLORS } from '../scripts/sim/lanes';
+---
+
+<section class="px-5 py-28 sm:px-10 sm:py-40">
+  <p
+    class="mx-auto max-w-[1400px] font-display text-[clamp(1.9rem,4.6vw,4.4rem)] font-medium leading-[1.08] tracking-[-0.025em]"
+    data-split="words"
+  >
+    {
+      statement.map((part) =>
+        part.tone ? (
+          <span style={`color: ${COLORS[part.tone]}`} data-cursor-color={COLORS[part.tone]}>
+            {part.text}
+          </span>
+        ) : (
+          part.text
+        ),
+      )
+    }
+  </p>
+</section>

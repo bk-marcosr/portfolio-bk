@@ -1,0 +1,42 @@
+---
+import { profile } from '../data/profile';
+---
+
+<section id="contato" class="px-5 pb-16 pt-28 sm:px-10 sm:pt-40" aria-labelledby="contato-title">
+  <div class="mx-auto max-w-[1400px]">
+    <h2 id="contato-title" class="font-display text-[clamp(3rem,11vw,10rem)] font-semibold leading-[0.88] tracking-[-0.045em]" data-split="chapter">
+      Vamos<br />conversar?
+    </h2>
+
+    <div class="mt-14 flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+      <button
+        type="button"
+        class="group text-left"
+        data-copy={profile.email}
+        aria-label={`Copiar o e-mail ${profile.email}`}
+        data-magnetic
+      >
+        <span class="block break-words font-display text-[clamp(1.05rem,5vw,2.8rem)] font-medium tracking-[-0.02em] underline decoration-faint decoration-2 underline-offset-[10px] transition-colors group-hover:decoration-paper">
+          {profile.email}
+        </span>
+        <span class="mt-4 block text-[15px] text-mute" data-copy-status>Toca pra copiar</span>
+      </button>
+
+      <div class="flex gap-8 font-display text-[18px] font-medium">
+        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="tlink">LinkedIn ↗</a>
+        <a href={profile.github} target="_blank" rel="noopener noreferrer" class="tlink">GitHub ↗</a>
+        <a href={`mailto:${profile.email}`} class="tlink">E-mail ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="px-5 pb-10 pt-24 sm:px-10">
+  <div class="mx-auto flex max-w-[1400px] flex-col gap-3 text-[13px] text-faint sm:flex-row sm:justify-between">
+    <p>© {new Date().getFullYear()} {profile.name}, {profile.location}</p>
+    <p>
+      Cores tiradas dos próprios projetos.
+      <a href={profile.repo} target="_blank" rel="noopener noreferrer" class="tlink ml-2">Código do site ↗</a>
+    </p>
+  </div>
+</footer>
