@@ -1,0 +1,111 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+/*
+ * Design tokens
+ * ─────────────
+ * Base: preto, branco e cinza. Cor só como sinal, nunca como fundo de seção.
+ *   live   → verde do Prazinho (design dark original). Estado vivo: em produção, atual, resultado.
+ *   signal → azul do Rotor. Estrutura e interação: linhas de diagrama, foco, hover de link.
+ * Regras: linhas de 1px, sem sombra colorida, sem glow, sem gradiente de cor.
+ */
+@theme {
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --color-bg: #09090b;
+  --color-surface: #0e0e11;
+  --color-raised: #141418;
+  --color-line: #1d1d22;
+  --color-line-strong: #2c2c33;
+
+  --color-fg: #f4f4f5;
+  --color-muted: #a1a1aa;
+  --color-subtle: #71717a;
+  --color-faint: #4f4f57;
+
+  --color-live: #2fc68a;
+  --color-signal: #7aa2f7;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background-color: var(--color-bg);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-signal) 30%, transparent);
+    color: var(--color-fg);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-signal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Hairline de seção: 1px cinza com o começo em cor de sinal. */
+  .rule {
+    position: relative;
+    height: 1px;
+    background-color: var(--color-line);
+  }
+
+  .rule::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3rem;
+    background-color: var(--rule-color, var(--color-signal));
+  }
+
+  .rule[data-tone="live"] {
+    --rule-color: var(--color-live);
+  }
+
+  /* Link de texto: sublinhado azul aparece no hover/foco, sem mudar o layout. */
+  .link {
+    color: var(--color-fg);
+    text-decoration-line: underline;
+    text-decoration-color: var(--color-line-strong);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    transition: text-decoration-color 150ms ease, color 150ms ease;
+  }
+
+  .link:hover,
+  .link:focus-visible {
+    text-decoration-color: var(--color-signal);
+  }
+}

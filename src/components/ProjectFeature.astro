@@ -1,0 +1,64 @@
+---
+import type { FeaturedProject } from '../data/types';
+import { url } from '../lib/url';
+import ProjectVisual from './ProjectVisual.astro';
+import StatusBadge from './StatusBadge.astro';
+
+interface Props {
+  project: FeaturedProject;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+const number = String(index + 1).padStart(2, '0');
+const href = url(`/projetos/${project.slug}/`);
+---
+
+<article class="grid gap-10 border-t border-line py-14 first:border-t-0 first:pt-4 lg:grid-cols-12 lg:gap-12 lg:py-20">
+  <div class="lg:col-span-5">
+    <div class="flex flex-wrap items-center gap-3">
+      <span class="font-mono text-xs text-faint">{number}</span>
+      <StatusBadge status={project.status} label={project.statusLabel} />
+    </div>
+
+    <h3 class="mt-6 text-3xl font-semibold tracking-tight text-fg md:text-4xl">
+      <a href={href} class="transition-colors hover:text-signal">{project.name}</a>
+    </h3>
+    {project.formerName && <p class="mt-1 font-mono text-xs text-faint">antes {project.formerName}</p>}
+    <p class="mt-4 text-pretty text-lg leading-relaxed text-muted">{project.tagline}</p>
+
+    <ul class="mt-8 space-y-4">
+      {
+        project.highlights.map((item) => (
+          <li class="grid grid-cols-[1rem_1fr] gap-3 text-[15px] leading-relaxed text-muted">
+            <span class="font-mono text-signal" aria-hidden="true">–</span>
+            <span>{item}</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <dl class="mt-8 grid grid-cols-3 border-y border-line">
+      {
+        project.facts.map((fact, i) => (
+          <div class:list={['py-4 pr-3', i > 0 && 'border-l border-line pl-3']}>
+            <dt class="sr-only">Fato</dt>
+            <dd class="font-mono text-[11px] leading-snug text-fg/90">{fact}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <a href={href} class="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-fg">
+      <span class="link">Ler estudo de caso</span>
+      <span class="transition-transform group-hover:translate-x-0.5" aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  <div class="lg:col-span-7 lg:pt-10">
+    <ProjectVisual visual={project.visual} eager={index === 0} />
+    <p class="mt-4 font-mono text-[11px] leading-relaxed text-faint">
+      {project.stack.join(' · ')}
+    </p>
+  </div>
+</article>

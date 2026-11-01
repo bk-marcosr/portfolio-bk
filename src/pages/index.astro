@@ -1,0 +1,221 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import SystemsPanel from '../components/SystemsPanel.astro';
+import ProjectFeature from '../components/ProjectFeature.astro';
+import { about, experience, principles, profile, stack } from '../data/profile';
+import { featuredProjects, otherProjects } from '../data/projects';
+import portrait from '../assets/perfil.png';
+---
+
+<Base>
+  <!-- HERO -->
+  <section class="mx-auto max-w-6xl px-5 pb-20 pt-16 sm:px-8 md:pt-24 lg:pb-28">
+    <div class="grid gap-14 lg:grid-cols-12 lg:items-end lg:gap-12">
+      <div class="lg:col-span-7">
+        <p class="font-mono text-xs text-subtle">
+          {profile.name} — {profile.role.toLowerCase()} · {profile.location}
+        </p>
+        <h1 class="mt-6 text-balance text-[2.6rem] font-semibold leading-[1.04] tracking-[-0.035em] text-fg sm:text-6xl lg:text-[4.25rem]">
+          Construo sistemas que vão para produção.
+        </h1>
+        <p class="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted">
+          Plataformas com fila, pagamento e IA, e automações que tiram trabalho manual da operação. Do banco de dados à interface.
+        </p>
+
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a
+            href="#projetos"
+            class="inline-flex items-center gap-2 rounded-md bg-fg px-4 py-2.5 text-sm font-medium text-bg transition-opacity hover:opacity-90"
+          >
+            Ver projetos <span aria-hidden="true">↓</span>
+          </a>
+          <a
+            href="#contato"
+            class="inline-flex items-center gap-2 rounded-md border border-line-strong px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:border-subtle"
+          >
+            Falar comigo
+          </a>
+        </div>
+
+        <dl class="mt-12 divide-y divide-line border-y border-line">
+          {
+            profile.now.map((item) => (
+              <div class="grid grid-cols-[5.5rem_1fr] gap-4 py-3 text-sm">
+                <dt class="font-mono text-xs leading-5 text-subtle">{item.label}</dt>
+                <dd class="leading-5 text-fg/90">{item.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+
+      <div class="lg:col-span-5">
+        <SystemsPanel />
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 PROJETOS -->
+  <section id="projetos" class="mx-auto max-w-6xl px-5 pb-16 sm:px-8">
+    <SectionHeader index="01" label="Projetos selecionados" title="Quatro sistemas com regra de negócio de verdade." />
+    <div class="mt-8">
+      {featuredProjects.map((project, index) => <ProjectFeature project={project} index={index} />)}
+    </div>
+
+    <div class="mt-6">
+      <h3 class="font-mono text-xs uppercase tracking-[0.16em] text-subtle">Outros projetos</h3>
+      <ul class="mt-5 border-t border-line">
+        {
+          otherProjects.map((project) => {
+            const row = (
+              <>
+                <span class="text-[15px] font-medium text-fg">{project.name}</span>
+                <span class="text-sm leading-relaxed text-muted md:col-start-2">{project.description}</span>
+                <span class="hidden font-mono text-[11px] text-faint md:block">{project.stack}</span>
+                <span class="font-mono text-[11px] text-faint">
+                  {project.url ? <span class="text-signal">código ↗</span> : project.year}
+                </span>
+              </>
+            );
+            return (
+              <li class="border-b border-line">
+                {project.url ? (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="grid grid-cols-[1fr_auto] gap-x-6 gap-y-1 py-4 transition-colors hover:bg-surface md:grid-cols-[11rem_1fr_15rem_4rem] md:items-baseline md:px-2"
+                  >
+                    {row}
+                  </a>
+                ) : (
+                  <div class="grid grid-cols-[1fr_auto] gap-x-6 gap-y-1 py-4 md:grid-cols-[11rem_1fr_15rem_4rem] md:items-baseline md:px-2">
+                    {row}
+                  </div>
+                )}
+              </li>
+            );
+          })
+        }
+      </ul>
+      <p class="mt-4 font-mono text-[11px] text-faint">
+        A maioria dos repositórios é privada. Faço walkthrough do código em call.
+      </p>
+    </div>
+  </section>
+
+  <!-- 02 PRINCÍPIOS -->
+  <section class="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:py-24">
+    <SectionHeader index="02" label="Como eu trabalho" title="Princípios que aparecem no código, não só no discurso." />
+    <div class="mt-12 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2">
+      {
+        principles.map((principle, i) => (
+          <div class="flex flex-col bg-bg p-6 md:p-8">
+            <span class="font-mono text-[11px] text-faint">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="mt-4 text-lg font-semibold tracking-tight text-fg">{principle.title}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">{principle.body}</p>
+            <p class="mt-6 flex gap-2 border-t border-line pt-4 font-mono text-[11px] leading-relaxed text-subtle">
+              <span class="text-signal" aria-hidden="true">↳</span>
+              <span>{principle.evidence}</span>
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 03 EXPERIÊNCIA -->
+  <section id="experiencia" class="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:py-24">
+    <SectionHeader index="03" label="Experiência" title="Onde estou agora." tone="live" />
+    <div class="mt-12 grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <div class="flex items-center gap-4 lg:block">
+          <Image
+            src={portrait}
+            alt={`Foto de ${profile.name}`}
+            widths={[160, 320, 480]}
+            sizes="(min-width: 1024px) 240px, 96px"
+            format="webp"
+            quality={82}
+            class="size-24 shrink-0 rounded-xl border border-line object-cover object-top lg:size-auto lg:aspect-[4/5] lg:w-60"
+          />
+          <p class="font-mono text-xs leading-relaxed text-subtle lg:mt-4">
+            {profile.name}<br />{profile.location}
+          </p>
+        </div>
+        <div class="mt-6 space-y-4 text-[15px] leading-relaxed text-muted">
+          {about.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </div>
+
+      <ol class="border-t border-line lg:col-span-8">
+        {
+          experience.map((item) => (
+            <li class="grid gap-2 border-b border-line py-7 md:grid-cols-[9rem_1fr] md:gap-8">
+              <p class="flex items-center gap-2 font-mono text-xs text-subtle md:items-start md:pt-1">
+                {item.current && <span class="size-1.5 shrink-0 rounded-full bg-live md:mt-[0.3rem]" aria-label="atual" />}
+                {item.period}
+              </p>
+              <div>
+                <h3 class="text-lg font-semibold tracking-tight text-fg">
+                  {item.org} <span class="font-normal text-subtle">· {item.role}</span>
+                </h3>
+                <p class="mt-2 text-[15px] leading-relaxed text-muted">{item.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- 04 STACK -->
+  <section id="stack" class="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:py-24">
+    <SectionHeader index="04" label="Stack" title="Ferramentas que usei nos projetos acima." />
+    <dl class="mt-12 border-t border-line">
+      {
+        stack.map((group) => (
+          <div class="grid gap-2 border-b border-line py-5 md:grid-cols-[13rem_1fr] md:gap-8">
+            <dt class="font-mono text-xs text-subtle md:pt-0.5">{group.label}</dt>
+            <dd class="flex flex-wrap gap-x-2 gap-y-1.5 text-[15px] text-fg/90">
+              {group.items.map((item, i) => (
+                <span>
+                  {item}
+                  {i < group.items.length - 1 && <span class="ml-2 text-faint" aria-hidden="true">/</span>}
+                </span>
+              ))}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <!-- 05 CONTATO -->
+  <section id="contato" class="mx-auto max-w-6xl px-5 pb-24 pt-16 sm:px-8 lg:pb-32 lg:pt-24">
+    <SectionHeader index="05" label="Contato" tone="live" />
+    <div class="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-7">
+        <h2 class="text-balance text-4xl font-semibold tracking-[-0.03em] text-fg md:text-6xl">Vamos conversar.</h2>
+        <p class="mt-5 max-w-lg text-lg leading-relaxed text-muted">
+          Aberto a oportunidades como desenvolvedor full stack. Respondo por e-mail ou LinkedIn.
+        </p>
+      </div>
+      <div class="lg:col-span-5">
+        <a
+          href={`mailto:${profile.email}`}
+          class="group flex items-center justify-between gap-4 border-y border-line py-5 transition-colors hover:border-line-strong"
+        >
+          <span class="min-w-0 truncate font-mono text-sm text-fg sm:text-base">{profile.email}</span>
+          <span class="text-subtle transition-colors group-hover:text-signal" aria-hidden="true">→</span>
+        </a>
+        <div class="flex gap-6 pt-5 text-sm">
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="link">LinkedIn ↗</a>
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" class="link">GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

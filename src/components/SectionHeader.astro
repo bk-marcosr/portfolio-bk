@@ -1,0 +1,19 @@
+---
+interface Props {
+  index: string;
+  label: string;
+  title?: string;
+  tone?: 'signal' | 'live';
+  id?: string;
+}
+
+const { index, label, title, tone = 'signal', id } = Astro.props;
+---
+
+<header id={id}>
+  <div class="rule" data-tone={tone}></div>
+  <p class="pt-5 font-mono text-xs uppercase tracking-[0.16em] text-subtle">
+    <span class="text-faint">{index} /</span> {label}
+  </p>
+  {title && <h2 class="mt-5 max-w-3xl text-balance text-3xl font-semibold tracking-tight text-fg md:text-4xl">{title}</h2>}
+</header>
