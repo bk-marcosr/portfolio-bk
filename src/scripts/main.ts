@@ -131,7 +131,7 @@ function initHeroSim(): void {
 }
 
 const ANNOUNCE: Record<string, (counts: LaneCounts) => string | null> = {
-  campanhas: (c) => (c.down ? `Provedor fora do ar. ${c.waiting} mensagens seguras na fila.` : null),
+  talos: (c) => (c.down ? `Gemini fora do ar. ${c.diverted} mensagens já foram para um humano.` : null),
   rotor: (c) => (c.locked && c.waiting > 0 ? `Trava fechada. ${c.waiting} ordens esperando a reconciliação.` : null),
 };
 
@@ -186,6 +186,39 @@ function initDetailSims(): void {
       });
     });
   });
+}
+
+/* ───────────────────────── vídeos da interface real ───────────────────────── */
+
+function initVideos(): void {
+  const videos = document.querySelectorAll<HTMLVideoElement>('video[data-autoplay]');
+  if (videos.length === 0) return;
+
+  // Quem prefere menos movimento recebe controles e decide quando tocar.
+  if (reducedMotion) {
+    videos.forEach((video) => {
+      video.controls = true;
+      video.preload = 'metadata';
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) {
+          video.play().catch(() => {
+            video.controls = true;
+          });
+          return;
+        }
+        video.pause();
+      });
+    },
+    { threshold: 0.35 },
+  );
+  videos.forEach((video) => observer.observe(video));
 }
 
 /* ───────────────────────── cursor e detalhes ───────────────────────── */
@@ -297,6 +330,7 @@ function boot(): void {
   initSmoothScroll();
   initHeroSim();
   initDetailSims();
+  initVideos();
   initCopy();
   initHeader();
   initCursor();

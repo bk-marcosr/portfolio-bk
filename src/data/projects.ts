@@ -3,68 +3,10 @@ import { COLORS } from '../scripts/sim/lanes';
 import prazinhoDashboard from '../assets/projects/prazinho-dashboard.webp';
 import prazinhoVendas from '../assets/projects/prazinho-vendas.webp';
 import prazinhoFechamento from '../assets/projects/prazinho-fechamento.webp';
+import rotorMobile from '../assets/projects/rotor-mobile.webp';
+import talosAgentes from '../assets/projects/talos-agentes.webp';
 
 export const featuredProjects: FeaturedProject[] = [
-  {
-    slug: 'campanhas-platform',
-    lane: 'campanhas',
-    color: COLORS.campanhas,
-    name: 'Campanhas Platform',
-    line: 'Campanhas e vouchers para uma rede de barbearias. Em produção desde julho de 2026.',
-    lead: 'O lead entra pela landing page, recebe um voucher único e a mensagem sai pelo WhatsApp. Se o provedor cair, nada se perde: a fila segura e o worker retoma de onde parou.',
-    facts: [
-      '147 operações HTTP com contrato OpenAPI gerado e conferido no CI.',
-      'API e worker em processos separados — só o worker mexe na fila.',
-      '10 fluxos de ponta a ponta no Playwright, inclusive consentimento de privacidade.',
-    ],
-    stack: ['React 19', 'Express', 'Prisma', 'PostgreSQL 16', 'Redis', 'BullMQ', 'Docker', 'Playwright'],
-    sim: {
-      actions: [
-        { kind: 'burst', label: 'Disparar campanha', amount: 24 },
-        { kind: 'toggle-down', label: 'Derrubar o provedor', labelActive: 'Religar o provedor' },
-      ],
-      counters: [
-        { field: 'done', label: 'entregues' },
-        { field: 'waiting', label: 'na fila' },
-      ],
-      caption: 'Derruba o provedor no meio de um disparo: a fila cresce, nada some, e tudo sai quando ele volta.',
-    },
-    period: '2026',
-    role: 'Full stack, do banco à operação',
-    sections: [
-      {
-        title: 'Contexto',
-        body: [
-          'A rede precisava transformar campanhas — online e na loja — em clientes rastreáveis: captar o lead, validar a elegibilidade, emitir um voucher único e entregá-lo pelo WhatsApp. Sem perder mensagem quando um provedor cai e sem misturar dados entre filiais.',
-        ],
-      },
-      {
-        title: 'O que eu construí',
-        bullets: [
-          'Campanhas digitais e físicas com governança por filial.',
-          'Landing pages públicas com preview administrativo, templates e arquivos persistentes.',
-          'Claim de lead, elegibilidade, voucher único e histórico de entrega.',
-          'Mensageria durável com worker, Redis e provedores de WhatsApp: limites, cooldown, opt-out e saúde de sessões.',
-          'Dashboards com indicadores do Meta, funil, custos operacionais e exportações autorizadas.',
-        ],
-      },
-      {
-        title: 'Decisões técnicas',
-        bullets: [
-          'API e worker separados. Um pico de envios não disputa recurso com as rotas públicas, e só um processo mexe em fila.',
-          'Contrato como fonte da verdade. O inventário de rotas gera OpenAPI 3.1, tipos do front e validadores; o CI falha se houver divergência.',
-          'Fronteiras de módulo verificadas por máquina, não por convenção.',
-          'Testes por camada: unidade para regra pura, integração com PostgreSQL e Redis isolados para rotas, RBAC e filas, e Playwright para fluxos de navegador — inclusive consentimento de privacidade.',
-        ],
-      },
-      {
-        title: 'Resultado',
-        body: [
-          'V1 validada e implantada em 27/07/2026, com tag de release apontando para o código efetivamente em produção. A V1 está em manutenção corretiva e a V2 avança com migrations aditivas, preservando os fluxos que já rodam.',
-        ],
-      },
-    ],
-  },
   {
     slug: 'rotor',
     lane: 'rotor',
@@ -79,6 +21,15 @@ export const featuredProjects: FeaturedProject[] = [
       'Chaves só no servidor. 8 Edge Functions, ciclo a cada minuto.',
     ],
     stack: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Vault', 'Edge Functions', 'Binance API'],
+    media: {
+      kind: 'video',
+      src: '/media/rotor.mp4',
+      poster: '/media/rotor-poster.webp',
+      width: 1280,
+      height: 800,
+      label: 'Terminal do Rotor trocando de par. Interface real, dados de demonstração.',
+      phone: { src: rotorMobile, alt: 'Rotor no celular: preço, leitura do robô e gráfico de 15 minutos' },
+    },
     sim: {
       actions: [
         { kind: 'burst', label: 'Enviar ordem', amount: 1 },
@@ -139,6 +90,14 @@ export const featuredProjects: FeaturedProject[] = [
       'Relatório em PDF e backup exportável direto do app.',
     ],
     stack: ['React', 'TypeScript', 'Tailwind', 'shadcn/ui', 'Supabase', 'Vitest', 'Vercel'],
+    media: {
+      kind: 'video',
+      src: '/media/prazinho.mp4',
+      poster: '/media/prazinho-poster.webp',
+      width: 1280,
+      height: 766,
+      label: 'Navegando pelo Prazinho no modo demonstração do próprio app.',
+    },
     screens: {
       items: [
         { src: prazinhoDashboard, alt: 'Prazinho: visão geral com dinheiro em caixa, a receber e a pagar' },
@@ -177,6 +136,68 @@ export const featuredProjects: FeaturedProject[] = [
       {
         title: 'Resultado',
         body: ['Rebrand e novo design entregues em out/2026. O produto segue em evolução contínua.'],
+      },
+    ],
+  },
+  {
+    slug: 'talos',
+    lane: 'talos',
+    color: COLORS.talos,
+    name: 'Talos',
+    line: 'Atendimento no WhatsApp com IA, para pequenas empresas.',
+    lead: 'Cada mensagem passa pelo Maestro, que usa o Gemini para decidir se é venda, suporte ou caso para humano. Se a IA falhar ou estourar a cota, o Maestro não trava: manda o cliente para um humano. Ninguém fica sem resposta.',
+    facts: [
+      'Classificação com saída em JSON forçada, sem texto solto para interpretar.',
+      'Base de conhecimento alimentada por PDF e por páginas da web.',
+      'Motor em Node.js separado do painel: sessões do WhatsApp não caem quando o painel muda.',
+    ],
+    stack: ['Node.js', 'Express', 'Baileys', 'Gemini', 'Next.js', 'React Flow', 'Supabase', 'Stripe'],
+    media: {
+      kind: 'image',
+      image: { src: talosAgentes, alt: 'Talos: mapa de agentes com cliente WhatsApp, Maestro roteador, agente de vendas, de suporte e transferência humana' },
+      label: 'Mapa de agentes do painel. Interface real, conta de demonstração.',
+    },
+    sim: {
+      actions: [
+        { kind: 'burst', label: 'Chegam 10 mensagens', amount: 10 },
+        { kind: 'toggle-down', label: 'Derrubar o Gemini', labelActive: 'Religar o Gemini' },
+      ],
+      counters: [
+        { field: 'done', label: 'respondidas pela IA' },
+        { field: 'diverted', label: 'foram para um humano' },
+      ],
+      caption: 'Derruba o Gemini: o Maestro não segura ninguém. Cada mensagem vira um quadrado branco e vai para um humano até a IA voltar.',
+    },
+    period: '2026',
+    role: 'Motor, painel e integrações',
+    sections: [
+      {
+        title: 'Contexto',
+        body: [
+          'Pequena empresa que vende pelo WhatsApp perde cliente por demora. Bot de menu engessado irrita; IA solta inventa preço. O Talos precisava responder rápido, seguir o manual da empresa e saber a hora de chamar uma pessoa.',
+        ],
+      },
+      {
+        title: 'O que eu construí',
+        bullets: [
+          'Motor em Node.js que mantém as sessões do WhatsApp (Baileys) e recebe texto e mídia.',
+          'Maestro: classifica cada mensagem em venda, suporte ou transferência humana usando o Gemini.',
+          'Agentes de vendas e de suporte que respondem a partir da base de conhecimento da empresa.',
+          'Painel em Next.js com mapa de agentes, conversas, base de conhecimento (upload de PDF e leitura de páginas) e planos com Stripe.',
+        ],
+      },
+      {
+        title: 'Decisões técnicas',
+        bullets: [
+          'Falha da IA vira transferência humana. Erro de cota ou de modelo não deixa o cliente esperando.',
+          'O modelo responde em JSON obrigatório, então a classificação é validada antes de virar ação.',
+          'O manual de vendas define limites: nunca fechar preço no chat, nunca inventar serviço, levar para uma reunião.',
+          'Motor e painel em processos separados, cada um com seu deploy.',
+        ],
+      },
+      {
+        title: 'Resultado',
+        body: ['Um atendimento que responde sozinho o que sabe e passa adiante o que não sabe, com o mapa dos agentes visível para o dono do negócio.'],
       },
     ],
   },
@@ -237,7 +258,6 @@ export const featuredProjects: FeaturedProject[] = [
 ];
 
 export const otherProjects: MinorProject[] = [
-  { name: 'Ecossistema Talos', description: 'Atendimento no WhatsApp com IA: motor em Node.js com Baileys e Gemini, painel em Next.js para montar fluxos.', stack: 'Node.js, Next.js, React Flow', year: '2026' },
   { name: 'BK Flow', description: 'Calendário editorial, aprovação e publicação no Instagram para agências.', stack: 'React, Supabase, Meta Graph', year: '2026' },
   { name: 'Pleno Movimento', description: 'Gestão de studio de pilates: alunos, aulas, agenda, pagamentos e portal do aluno.', stack: 'React, Supabase', year: '2026' },
   { name: 'AgendaLink', description: 'Agendamento para autônomos com pagamento pelo Stripe.', stack: 'React, Supabase, Stripe', year: '2026' },

@@ -10,7 +10,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/marcos-gabriel-rodrigues-ba%C3%ADa-0181022a5/',
   repo: 'https://github.com/bk-marcosr/portfolio-bk',
   description:
-    'Desenvolvedor full stack em Belém (PA). Sistemas com fila, pagamento e dados — e automação na RR Chevrolet.',
+    'Desenvolvedor full stack em Belém (PA). Trading com dinheiro real, gestão financeira, atendimento com IA e automação de dados.',
 } as const;
 
 /**
@@ -19,11 +19,11 @@ export const profile = {
  */
 export const statement: { text: string; tone?: keyof typeof COLORS }[] = [
   { text: 'Hoje automatizo dados na RR Chevrolet. Fora dela, construo sistemas que não podem ' },
-  { text: 'perder mensagem', tone: 'campanhas' },
-  { text: ', ' },
   { text: 'duplicar ordem', tone: 'rotor' },
   { text: ', ' },
   { text: 'esquecer parcela', tone: 'prazinho' },
+  { text: ', ' },
+  { text: 'deixar cliente sem resposta', tone: 'talos' },
   { text: ' nem ' },
   { text: 'inventar número', tone: 'rigor' },
   { text: '.' },
@@ -35,7 +35,7 @@ export const experience: Experience[] = [
     org: 'RR Chevrolet',
     role: 'Automação & Dados',
     description:
-      'Robôs em Rocketbot e Python que exportam eventos do CRM, cruzam com a planilha de leads das campanhas e entregam dashboard e relatório de KPI. Reorganizei os robôs em orquestrador e módulos isolados e corrigi a janela de conciliação, cortando cerca de 92% dos falsos positivos.',
+      'Robôs em Rocketbot e Python que exportam eventos do CRM, cruzam com a planilha de leads dos anúncios e entregam dashboard e relatório de KPI. Reorganizei os robôs em orquestrador e módulos isolados e corrigi a janela de conciliação, cortando cerca de 92% dos falsos positivos.',
     color: COLORS.rr,
   },
   {
@@ -43,7 +43,7 @@ export const experience: Experience[] = [
     org: 'BKode',
     role: 'Fundador, desenvolvedor',
     description:
-      'Produtos próprios e sistemas para clientes: a plataforma de campanhas de uma rede de barbearias, a gestão de um studio de pilates, agendamento com pagamento e os SaaS financeiros.',
+      'Produtos próprios e sistemas para clientes: atendimento com IA no WhatsApp, a gestão de um studio de pilates, agendamento com pagamento e os SaaS financeiros.',
   },
   {
     period: '2026 — hoje',

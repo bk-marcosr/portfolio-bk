@@ -5,7 +5,7 @@
 
 /*
  * Base preto, branco e cinza. Cada projeto tem a cor do próprio produto:
- *   campanhas  #ef5f67  (vermelho do Rotor, "queda")
+ *   talos      #ef5f67  (vermelho do Rotor, "queda")
  *   rotor      #7aa2f7  (azul de destaque do Rotor)
  *   prazinho   #2fc68a  (verde do tema escuro original do Prazinho)
  *   rigor      #e9a23b  (âmbar de alerta do Rotor/Rigor)
@@ -23,7 +23,7 @@
   --color-mute: #9a9a96;
   --color-faint: #5e5e5a;
 
-  --color-campanhas: #ef5f67;
+  --color-talos: #ef5f67;
   --color-rotor: #7aa2f7;
   --color-prazinho: #2fc68a;
   --color-rigor: #e9a23b;

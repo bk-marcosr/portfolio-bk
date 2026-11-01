@@ -1,6 +1,6 @@
 import type { ImageMetadata } from 'astro';
 
-export type LaneId = 'campanhas' | 'rotor' | 'prazinho' | 'rigor' | 'rr';
+export type LaneId = 'rotor' | 'prazinho' | 'talos' | 'rigor' | 'rr';
 
 export type SimAction =
   | { kind: 'burst'; label: string; amount?: number }
@@ -9,7 +9,7 @@ export type SimAction =
 
 export interface SimCounter {
   /** Campo de LaneCounts exibido. */
-  field: 'done' | 'hollow' | 'failed' | 'waiting';
+  field: 'done' | 'hollow' | 'failed' | 'diverted' | 'waiting';
   label: string;
 }
 
@@ -17,6 +17,11 @@ export interface Screenshot {
   src: ImageMetadata;
   alt: string;
 }
+
+/** Mídia principal do capítulo: vídeo da interface real ou imagem grande. */
+export type ChapterMedia =
+  | { kind: 'video'; src: string; poster: string; width: number; height: number; label: string; phone?: Screenshot }
+  | { kind: 'image'; image: Screenshot; label: string; phone?: Screenshot };
 
 export interface CaseSection {
   title: string;
@@ -36,6 +41,7 @@ export interface FeaturedProject {
   lead: string;
   facts: string[];
   stack: string[];
+  media?: ChapterMedia;
   sim?: {
     actions: SimAction[];
     counters: SimCounter[];

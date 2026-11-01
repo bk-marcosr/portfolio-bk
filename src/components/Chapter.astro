@@ -9,6 +9,8 @@ interface Props {
 
 const { project } = Astro.props;
 const caseUrl = url(`/projetos/${project.slug}/`);
+const media = project.media;
+const sideScreens = project.screens ? (media ? project.screens.items.slice(1) : project.screens.items) : [];
 ---
 
 <section id={project.slug} class="px-5 py-24 sm:px-10 sm:py-36" style={`--c: ${project.color}`} data-chapter data-cursor-color={project.color}>
@@ -16,16 +18,55 @@ const caseUrl = url(`/projetos/${project.slug}/`);
     <div class="h-[6px] w-full origin-left bg-[var(--c)]" data-bar></div>
 
     <div class="mt-8 flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
-      <h2
-        class="font-display text-[clamp(3rem,11vw,10rem)] font-semibold leading-[0.88] tracking-[-0.045em]"
-        data-split="chapter"
-      >
+      <h2 class="font-display text-[clamp(3rem,11vw,10rem)] font-semibold leading-[0.88] tracking-[-0.045em]" data-split="chapter">
         {project.name}
       </h2>
       {project.formerName && <p class="pb-2 text-[15px] text-faint">antes {project.formerName}</p>}
     </div>
 
-    <div class="mt-12 grid gap-14 lg:mt-16 lg:grid-cols-12 lg:gap-12">
+    {
+      media && (
+        <figure class="mt-12 lg:mt-16">
+          <div class:list={['grid items-end gap-4', media.phone && 'lg:grid-cols-[1fr_auto]']}>
+            <div class="overflow-hidden rounded-md bg-ink-2" data-reveal="clip">
+              {media.kind === 'video' ? (
+                <video
+                  class="block h-auto w-full"
+                  src={url(media.src)}
+                  poster={url(media.poster)}
+                  width={media.width}
+                  height={media.height}
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  data-autoplay
+                  aria-label={media.label}
+                />
+              ) : (
+                <Image
+                  src={media.image.src}
+                  alt={media.image.alt}
+                  widths={[640, 960, 1280, 1920]}
+                  sizes="(min-width: 1400px) 1320px, 100vw"
+                  format="webp"
+                  quality={86}
+                  class="block h-auto w-full"
+                />
+              )}
+            </div>
+            {media.phone && (
+              <div class="hidden w-[15.5rem] overflow-hidden rounded-[1.4rem] border-[6px] border-ink-2 lg:block" data-reveal="clip">
+                <Image src={media.phone.src} alt={media.phone.alt} widths={[260, 520]} sizes="248px" format="webp" quality={86} class="block h-auto w-full" />
+              </div>
+            )}
+          </div>
+          <figcaption class="mt-4 text-[14px] text-faint">{media.label}</figcaption>
+        </figure>
+      )
+    }
+
+    <div class="mt-14 grid gap-14 lg:mt-20 lg:grid-cols-12 lg:gap-12">
       <div class="lg:col-span-5" data-reveal="up">
         <p class="font-display text-[clamp(1.3rem,2.1vw,1.7rem)] font-medium leading-[1.25] tracking-[-0.01em]">{project.line}</p>
         <p class="mt-6 max-w-[34rem] text-[17px] leading-[1.7] text-mute">{project.lead}</p>
@@ -42,7 +83,6 @@ const caseUrl = url(`/projetos/${project.slug}/`);
         </ul>
 
         <p class="mt-10 text-[14px] leading-relaxed text-faint">{project.stack.join(', ')}</p>
-
         <a href={caseUrl} class="tlink mt-8 inline-block font-display text-[17px] font-medium">Ler o caso completo</a>
       </div>
 
@@ -94,28 +134,15 @@ const caseUrl = url(`/projetos/${project.slug}/`);
         }
 
         {
-          project.screens && (
-            <figure>
-              <div class="overflow-hidden rounded-md" data-reveal="clip">
-                <Image
-                  src={project.screens.items[0].src}
-                  alt={project.screens.items[0].alt}
-                  widths={[640, 960, 1280, 1920]}
-                  sizes="(min-width: 1024px) 760px, 100vw"
-                  format="webp"
-                  quality={84}
-                  class="block h-auto w-full"
-                />
-              </div>
-              <div class="mt-3 grid grid-cols-2 gap-3">
-                {project.screens.items.slice(1).map((screen) => (
-                  <div class="overflow-hidden rounded-md" data-reveal="clip">
-                    <Image src={screen.src} alt={screen.alt} widths={[480, 960]} sizes="(min-width: 1024px) 375px, 50vw" format="webp" quality={80} class="block h-auto w-full" />
-                  </div>
-                ))}
-              </div>
-              <figcaption class="mt-4 text-[14px] text-faint">{project.screens.caption}</figcaption>
-            </figure>
+          !project.sim && sideScreens.length > 0 && (
+            <div class="grid gap-4">
+              {sideScreens.map((screen) => (
+                <div class="overflow-hidden rounded-md" data-reveal="clip">
+                  <Image src={screen.src} alt={screen.alt} widths={[640, 960, 1280]} sizes="(min-width: 1024px) 760px, 100vw" format="webp" quality={84} class="block h-auto w-full" />
+                </div>
+              ))}
+              {project.screens && <p class="text-[14px] text-faint">{project.screens.caption}</p>}
+            </div>
           )
         }
       </div>

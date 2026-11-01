@@ -1,7 +1,7 @@
 import type { LaneConfig } from './types';
 
 export const COLORS = {
-  campanhas: '#ef5f67',
+  talos: '#ef5f67',
   rotor: '#7aa2f7',
   prazinho: '#2fc68a',
   rigor: '#e9a23b',
@@ -9,19 +9,19 @@ export const COLORS = {
 } as const;
 
 export const LANES: Record<keyof typeof COLORS, LaneConfig> = {
-  campanhas: {
-    id: 'campanhas',
-    label: 'campanhas',
-    color: COLORS.campanhas,
+  talos: {
+    id: 'talos',
+    label: 'talos',
+    color: COLORS.talos,
     stations: [
-      { label: 'lead', kind: 'source', at: 0 },
-      { label: 'fila', kind: 'queue', at: 0.34, serviceMs: 40 },
-      { label: 'worker', kind: 'worker', at: 0.64, serviceMs: 380 },
-      { label: 'whatsapp', kind: 'sink', at: 1 },
+      { label: 'mensagem', kind: 'source', at: 0 },
+      { label: 'maestro', kind: 'worker', at: 0.36, serviceMs: 260, fallback: 'humano' },
+      { label: 'agente', kind: 'worker', at: 0.68, serviceMs: 420 },
+      { label: 'resposta', kind: 'sink', at: 1 },
     ],
-    spawnEveryMs: [520, 1150],
-    counter: 'mensagens entregues',
-    burst: 16,
+    spawnEveryMs: [800, 1600],
+    counter: 'respostas',
+    burst: 10,
   },
   rotor: {
     id: 'rotor',
@@ -82,4 +82,4 @@ export const LANES: Record<keyof typeof COLORS, LaneConfig> = {
   },
 };
 
-export const HERO_LANES: LaneConfig[] = [LANES.campanhas, LANES.rotor, LANES.prazinho, LANES.rigor, LANES.rr];
+export const HERO_LANES: LaneConfig[] = [LANES.rotor, LANES.prazinho, LANES.talos, LANES.rigor, LANES.rr];

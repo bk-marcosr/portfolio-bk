@@ -7,6 +7,11 @@ export interface StationConfig {
   at: number;
   /** Tempo de processamento de um item na estação, em ms. */
   serviceMs?: number;
+  /**
+   * Se o worker cair, em vez de segurar os itens ele os desvia para este destino
+   * (ex.: "humano"). Sem fallback, worker fora do ar segura a fila.
+   */
+  fallback?: string;
 }
 
 export interface LaneConfig {
@@ -32,6 +37,7 @@ export interface LaneCounts {
   done: number;
   hollow: number;
   failed: number;
+  diverted: number;
   waiting: number;
   down: boolean;
   locked: boolean;

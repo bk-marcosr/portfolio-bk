@@ -2,7 +2,7 @@
 
 Portfólio de Marcos Gabriel — desenvolvedor full stack.
 
-O site mostra os sistemas funcionando: o topo é uma simulação em canvas das filas, travas e pipelines dos projetos, e cada projeto tem uma simulação própria para o visitante mexer (derrubar o provedor do Campanhas, perder a resposta da Binance no Rotor, processar uma empresa no Rigor).
+O site mostra os sistemas funcionando: o topo é uma simulação em canvas dos projetos, cada projeto abre com vídeo ou print da interface real, e tem uma simulação própria para o visitante mexer (perder a resposta da Binance no Rotor, derrubar o Gemini no Talos, processar uma empresa no Rigor).
 
 Astro + Tailwind CSS v4, GSAP (ScrollTrigger, SplitText) e Lenis. Fontes Funnel Display e Funnel Sans servidas localmente.
 
@@ -26,7 +26,7 @@ Todo o texto do site sai de `src/data/`:
 | `src/data/profile.ts` | nome, contatos, frase de abertura, trajetória e stack |
 | `src/data/projects.ts` | projetos em destaque (texto, simulação, prints, estudo de caso) e outros projetos |
 
-Cada projeto em destaque gera uma página em `/projetos/<slug>/`. Prints ficam em `src/assets/projects/` e são otimizados no build.
+Cada projeto em destaque gera uma página em `/projetos/<slug>/`. Prints ficam em `src/assets/projects/` (otimizados no build); vídeos e pôsteres em `public/media/`. As telas são das interfaces reais; onde o app depende de banco, com dados de demonstração.
 
 ## Design
 
@@ -34,7 +34,7 @@ Base preto, branco e cinza. Cada projeto tem a cor do próprio produto, usada s�
 
 | Projeto | Cor | Origem |
 | --- | --- | --- |
-| Campanhas Platform | `#ef5f67` | vermelho de queda do Rotor |
+| Talos | `#ef5f67` | vermelho de queda do Rotor |
 | Rotor | `#7aa2f7` | azul de destaque do Rotor |
 | Prazinho | `#2fc68a` | verde do tema escuro original do Prazinho |
 | Rigor | `#e9a23b` | âmbar de alerta do Rotor/Rigor |

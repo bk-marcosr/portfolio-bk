@@ -12,6 +12,8 @@ interface Packet {
   hollow: boolean;
   uncertain: boolean;
   failed: boolean;
+  /** Desviado pelo fallback (ex.: atendimento humano). */
+  diverted: boolean;
   /** Tempo de serviço decorrido na estação atual (ms). */
   t: number;
   /** Fade de saída, de 1 a 0. */
@@ -37,6 +39,7 @@ interface Lane {
   done: number;
   hollow: number;
   failed: number;
+  diverted: number;
   hover: boolean;
   lastSignature: string;
 }
@@ -116,6 +119,7 @@ export class SystemSim {
       done: 0,
       hollow: 0,
       failed: 0,
+      diverted: 0,
       hover: false,
       lastSignature: '',
     }));
@@ -285,6 +289,7 @@ export class SystemSim {
       hollow: Math.random() < (lane.cfg.hollowRatio ?? 0),
       uncertain: false,
       failed: false,
+      diverted: false,
       t: 0,
       fade: 1,
     };
@@ -292,14 +297,35 @@ export class SystemSim {
     lane.transit.push(packet);
   }
 
+  /**
+   * Qual estação "cai" quando a linha está fora do ar: a que tem fallback, se existir;
+   * senão, os workers (que então seguram a fila).
+   */
+  private isDown(lane: Lane, station: Station): boolean {
+    if (!lane.down || station.cfg.kind !== 'worker') return false;
+    const hasFallback = lane.stations.some((candidate) => candidate.cfg.fallback);
+    return hasFallback ? Boolean(station.cfg.fallback) : true;
+  }
+
   private isBlocked(lane: Lane, station: Station): boolean {
-    if (station.cfg.kind === 'worker' && lane.down) return true;
+    if (this.isDown(lane, station) && !station.cfg.fallback) return true;
     if (station.cfg.kind === 'gate' && lane.locked) return true;
     return false;
   }
 
   private serve(lane: Lane, station: Station, index: number, dt: number): void {
     const { kind } = station.cfg;
+
+    // Worker com fallback fora do ar: nada trava, cada item é desviado na hora.
+    if (station.cfg.fallback && this.isDown(lane, station)) {
+      const pending = station.slot ?? station.buffer.shift();
+      station.slot = null;
+      if (!pending) return;
+      pending.diverted = true;
+      lane.diverted += 1;
+      this.release(lane, pending, index);
+      return;
+    }
 
     if (!station.slot && station.buffer.length > 0 && !this.isBlocked(lane, station)) {
       const packet = station.buffer.shift();
@@ -317,11 +343,14 @@ export class SystemSim {
 
     const packet = station.slot;
     if (!packet) return;
-    if (kind === 'worker' && lane.down) return;
+    if (this.isDown(lane, station)) return;
 
     packet.t += dt;
-    const duration =
-      kind === 'remote' && packet.uncertain ? lane.cfg.reconcileMs ?? 2400 : station.cfg.serviceMs ?? 0;
+    const duration = packet.diverted
+      ? 0
+      : kind === 'remote' && packet.uncertain
+        ? lane.cfg.reconcileMs ?? 2400
+        : station.cfg.serviceMs ?? 0;
     if (packet.t < duration) return;
 
     if (kind === 'queue') {
@@ -346,15 +375,22 @@ export class SystemSim {
 
     if (kind === 'sink') {
       packet.state = 'exiting';
-      if (packet.hollow) lane.hollow += 1;
+      if (packet.diverted) {
+        // já contado no momento do desvio
+      } else if (packet.hollow) lane.hollow += 1;
       else lane.done += 1;
       lane.exiting.push(packet);
       station.slot = null;
       return;
     }
 
-    const next = lane.stations[index + 1];
     station.slot = null;
+    this.release(lane, packet, index);
+  }
+
+  /** Manda o item da estação `index` para a próxima. */
+  private release(lane: Lane, packet: Packet, index: number): void {
+    const next = lane.stations[index + 1];
     if (!next) return;
     packet.state = 'moving';
     packet.target = index + 1;
@@ -365,13 +401,14 @@ export class SystemSim {
   private emit(lane: Lane, force: boolean): void {
     if (!this.onChange) return;
     const waiting = lane.stations.reduce((sum, station) => sum + station.buffer.length, 0);
-    const signature = `${lane.done}|${lane.hollow}|${lane.failed}|${waiting}|${lane.down}|${lane.locked}`;
+    const signature = `${lane.done}|${lane.hollow}|${lane.failed}|${lane.diverted}|${waiting}|${lane.down}|${lane.locked}`;
     if (!force && signature === lane.lastSignature) return;
     lane.lastSignature = signature;
     this.onChange(lane.cfg.id, {
       done: lane.done,
       hollow: lane.hollow,
       failed: lane.failed,
+      diverted: lane.diverted,
       waiting,
       down: lane.down,
       locked: lane.locked,
@@ -459,8 +496,10 @@ export class SystemSim {
       if (!showStationLabels) return;
       let label = station.cfg.label;
       let labelColor = PALETTE.label;
-      if (station.cfg.kind === 'worker' && lane.down) {
-        label = `${label} · fora do ar`;
+      if (this.isDown(lane, station)) {
+        const narrow = this.width < 560;
+        if (station.cfg.fallback) label = narrow ? `→ ${station.cfg.fallback}` : `${label} · fora → ${station.cfg.fallback}`;
+        else label = narrow ? 'fora do ar' : `${label} · fora do ar`;
         labelColor = color;
       }
       if (station.cfg.kind === 'gate' && lane.locked) {
@@ -522,9 +561,9 @@ export class SystemSim {
       ctx.fillRect(x - barWidth / 2, lineY + (isHero ? 5 : 8), barWidth * progress, 2);
     });
 
-    // Itens em trânsito
+    // Itens em trânsito (desviados para humano aparecem em branco)
     for (const packet of lane.transit) {
-      this.drawSquare(xAt(packet.x), lineY, size, color, packet.hollow, 1);
+      this.drawSquare(xAt(packet.x), lineY, size, packet.diverted ? PALETTE.text : color, packet.hollow, 1);
     }
 
     // Saindo (entregues somem; falhas viram um X)
@@ -544,7 +583,7 @@ export class SystemSim {
         continue;
       }
       const drift = (1 - packet.fade) * size * 2;
-      this.drawSquare(x + drift, lineY, size, color, packet.hollow, packet.fade);
+      this.drawSquare(x + drift, lineY, size, packet.diverted ? PALETTE.text : color, packet.hollow, packet.fade);
     }
   }
 
