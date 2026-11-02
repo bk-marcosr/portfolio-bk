@@ -3,7 +3,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import Lenis from 'lenis';
 import { SystemSim } from './sim/engine';
-import { COLORS, HERO_LANES, LANES } from './sim/lanes';
+import { LANES } from './sim/lanes';
 import type { LaneCounts } from './sim/types';
 
 type LaneId = keyof typeof LANES;
@@ -27,22 +27,8 @@ function initSmoothScroll(): void {
 /* ───────────────────────── tipografia em movimento ───────────────────────── */
 
 function initTextMotion(): void {
+  document.documentElement.classList.add('motion-ready');
   if (reducedMotion) return;
-
-  const hero = document.querySelector<HTMLElement>('[data-split="hero"]');
-  if (hero) {
-    SplitText.create(hero, {
-      type: 'lines,chars',
-      mask: 'lines',
-      autoSplit: true,
-      onSplit: (self) => {
-        document.documentElement.classList.add('motion-ready');
-        return gsap.from(self.chars, { yPercent: 110, duration: 1.1, ease: 'expo.out', stagger: 0.035, delay: 0.1 });
-      },
-    });
-  } else {
-    document.documentElement.classList.add('motion-ready');
-  }
 
   document.querySelectorAll<HTMLElement>('[data-split="chapter"], [data-split="lines"]').forEach((element) => {
     const chars = element.dataset.split === 'chapter';
@@ -60,25 +46,6 @@ function initTextMotion(): void {
         }),
     });
   });
-
-  const statement = document.querySelector<HTMLElement>('[data-split="words"]');
-  if (statement) {
-    SplitText.create(statement, {
-      type: 'words',
-      autoSplit: true,
-      onSplit: (self) =>
-        gsap.fromTo(
-          self.words,
-          { opacity: 0.14 },
-          {
-            opacity: 1,
-            ease: 'none',
-            stagger: 0.12,
-            scrollTrigger: { trigger: statement, start: 'top 80%', end: 'bottom 50%', scrub: 0.6 },
-          },
-        ),
-    });
-  }
 }
 
 function initReveals(): void {
@@ -124,10 +91,189 @@ function initReveals(): void {
 
 /* ───────────────────────── simulações ───────────────────────── */
 
-function initHeroSim(): void {
-  const canvas = document.querySelector<HTMLCanvasElement>('canvas[data-sim="hero"]');
-  if (!canvas) return;
-  new SystemSim({ canvas, lanes: HERO_LANES, variant: 'hero' });
+function initHeroIntro(): void {
+  if (reducedMotion) return;
+  const portrait = document.querySelector<HTMLElement>('[data-hero-portrait]');
+  const marquee = document.querySelector<HTMLElement>('[data-hero-name]');
+  // Entrada nos filhos; o parallax de rolagem fica nos contêineres para as animações não brigarem.
+  const timeline = gsap.timeline({ defaults: { ease: 'expo.out' } });
+  const photo = portrait?.firstElementChild;
+  const name = marquee?.firstElementChild;
+  if (photo) timeline.from(photo, { yPercent: 14, opacity: 0, duration: 1.6 }, 0.1);
+  if (name) timeline.from(name, { yPercent: 60, opacity: 0, duration: 1.4 }, 0.35);
+
+  // Ao rolar, a foto desce mais devagar que a página e o nome sobe.
+  const hero = portrait?.closest('section');
+  if (!hero) return;
+  const scroll = { trigger: hero, start: 'top top', end: 'bottom top', scrub: true };
+  if (portrait) gsap.to(portrait, { yPercent: 18, ease: 'none', scrollTrigger: scroll });
+  if (marquee) gsap.to(marquee, { yPercent: -60, ease: 'none', scrollTrigger: { ...scroll } });
+}
+
+/* ───────────────────────── faixas que correm ───────────────────────── */
+
+function initMarquees(): void {
+  const tracks = [...document.querySelectorAll<HTMLElement>('[data-marquee]')];
+  if (tracks.length === 0 || reducedMotion) return;
+
+  // Rolar para baixo empurra as faixas no sentido delas; rolar para cima inverte.
+  let scrollDirection = 1;
+  let boost = 0;
+  let lastY = window.scrollY;
+  window.addEventListener(
+    'scroll',
+    () => {
+      const delta = window.scrollY - lastY;
+      lastY = window.scrollY;
+      if (delta === 0) return;
+      scrollDirection = delta > 0 ? 1 : -1;
+      boost = Math.min(Math.abs(delta) * 9, 900);
+    },
+    { passive: true },
+  );
+
+  tracks.forEach((track) => {
+    const copy = track.querySelector<HTMLElement>('[data-marquee-copy]');
+    if (!copy) return;
+    const ownDirection = Number(track.dataset.marqueeDirection) || -1;
+    const speed = Number(track.dataset.marqueeSpeed) || 70;
+    const setX = gsap.quickSetter(track, 'x', 'px') as (value: number) => void;
+    let width = copy.offsetWidth;
+    let x = ownDirection > 0 ? -width : 0;
+    let visible = true;
+
+    new ResizeObserver(() => (width = copy.offsetWidth)).observe(copy);
+    new IntersectionObserver(([entry]) => (visible = entry.isIntersecting)).observe(track);
+
+    gsap.ticker.add((_, deltaMs) => {
+      if (!visible || width === 0) return;
+      x += ownDirection * scrollDirection * (speed + boost) * (deltaMs / 1000);
+      if (x <= -width) x += width;
+      else if (x > 0) x -= width;
+      setX(x);
+    });
+  });
+
+  gsap.ticker.add(() => {
+    boost *= 0.94;
+  });
+}
+
+/* ───────────────────────── lista de trabalhos ───────────────────────── */
+
+function initWorkIndex(): void {
+  const list = document.querySelector<HTMLElement>('[data-work]');
+  const preview = document.querySelector<HTMLElement>('[data-work-preview]');
+  const track = preview?.querySelector<HTMLElement>('[data-work-track]');
+  if (!list || !preview || !track || !finePointer || reducedMotion) return;
+
+  const rows = [...list.querySelectorAll<HTMLElement>('[data-work-row]')];
+  const videos = [...preview.querySelectorAll<HTMLVideoElement>('video')];
+  gsap.set(preview, { xPercent: -50, yPercent: -50, scale: 0.6, autoAlpha: 0 });
+  const toX = gsap.quickTo(preview, 'x', { duration: 0.65, ease: 'power3.out' });
+  const toY = gsap.quickTo(preview, 'y', { duration: 0.65, ease: 'power3.out' });
+  let active = -1;
+  let open = false;
+
+  const select = (index: number): void => {
+    if (index === active) return;
+    active = index;
+    gsap.to(track, { yPercent: -100 * index, duration: 0.7, ease: 'expo.out' });
+    videos.forEach((video) => {
+      if (Number(video.dataset.index) === index) video.play().catch(() => undefined);
+      else video.pause();
+    });
+  };
+
+  const hide = (): void => {
+    if (!open) return;
+    open = false;
+    active = -1;
+    gsap.to(preview, { scale: 0.6, autoAlpha: 0, duration: 0.35, ease: 'power3.in', overwrite: 'auto' });
+    videos.forEach((video) => video.pause());
+  };
+
+  // A prévia fica ao lado do cursor (não em cima do nome) e troca de lado perto da borda.
+  const targetX = (clientX: number): number => {
+    const half = preview.offsetWidth / 2;
+    const gap = 56;
+    return clientX + gap + half * 2 < window.innerWidth - 16 ? clientX + gap + half : clientX - gap - half;
+  };
+
+  list.addEventListener('pointerenter', (event) => {
+    open = true;
+    gsap.set(preview, { x: targetX(event.clientX), y: event.clientY });
+    gsap.to(preview, { scale: 1, autoAlpha: 1, duration: 0.5, ease: 'power3.out', overwrite: 'auto' });
+  });
+  list.addEventListener('pointermove', (event) => {
+    toX(targetX(event.clientX));
+    toY(event.clientY);
+  });
+  list.addEventListener('pointerleave', hide);
+  rows.forEach((row, index) => row.addEventListener('pointerenter', () => select(index)));
+
+  // Rolar com o mouse parado tira a lista de baixo do cursor sem disparar pointerleave.
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!open) return;
+      const rect = list.getBoundingClientRect();
+      const y = Number(gsap.getProperty(preview, 'y'));
+      if (y < rect.top || y > rect.bottom) hide();
+    },
+    { passive: true },
+  );
+}
+
+/* ───────────────────────── trajetória ───────────────────────── */
+
+function initLedger(): void {
+  document.querySelectorAll<HTMLElement>('[data-ledger-row]').forEach((row) => {
+    const button = row.querySelector<HTMLButtonElement>('[data-ledger-toggle]');
+    const panel = row.querySelector<HTMLElement>('[data-ledger-panel]');
+    if (!button || !panel) return;
+
+    const setOpen = (open: boolean): void => {
+      row.toggleAttribute('data-open', open);
+      button.setAttribute('aria-expanded', String(open));
+      panel.style.gridTemplateRows = open ? '1fr' : '0fr';
+      panel.inert = !open;
+    };
+
+    // Sem JS tudo fica aberto; com JS a lista começa fechada.
+    setOpen(false);
+    button.addEventListener('click', () => {
+      setOpen(button.getAttribute('aria-expanded') !== 'true');
+      window.setTimeout(() => ScrollTrigger.refresh(), 520);
+    });
+  });
+
+  if (reducedMotion) return;
+  const pills = document.querySelectorAll<HTMLElement>('[data-pill]');
+  if (pills.length === 0) return;
+  gsap.from(pills, {
+    width: 0,
+    duration: 1.1,
+    ease: 'expo.out',
+    stagger: 0.12,
+    scrollTrigger: { trigger: pills[0], start: 'top 85%', once: true },
+  });
+}
+
+/* ───────────────────────── relógio de Belém ───────────────────────── */
+
+function initClock(): void {
+  const nodes = document.querySelectorAll<HTMLElement>('[data-clock]');
+  if (nodes.length === 0) return;
+  const format = new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Belem', hour: '2-digit', minute: '2-digit' });
+  const tick = (): void => {
+    const time = format.format(new Date());
+    nodes.forEach((node) => {
+      node.textContent = node.dataset.clockFormat === 'long' ? `Belém, PA · ${time}` : `${time} · UTC−3`;
+    });
+  };
+  tick();
+  window.setInterval(tick, 15_000);
 }
 
 const ANNOUNCE: Record<string, (counts: LaneCounts) => string | null> = {
@@ -238,14 +384,12 @@ function initCursor(): void {
   let pointerY = -100;
 
   const describe = (target: Element | null): void => {
+    const label = target?.closest<HTMLElement>('[data-cursor-label]')?.dataset.cursorLabel ?? '';
     const interactive = target?.closest('a, button, canvas, [data-magnetic]');
-    cursor.dataset.state = interactive ? 'active' : '';
+    cursor.dataset.state = label ? 'label' : interactive ? 'active' : '';
+    if (cursor.textContent !== label) cursor.textContent = label;
 
-    let color: string | undefined;
-    if (target instanceof HTMLCanvasElement && target.dataset.sim === 'hero') {
-      color = COLORS[target.dataset.lane as LaneId];
-    }
-    color ??= target?.closest<HTMLElement>('[data-cursor-color]')?.dataset.cursorColor;
+    const color = target?.closest<HTMLElement>('[data-cursor-color]')?.dataset.cursorColor;
     cursor.style.setProperty('--cursor-c', color ?? '#eeeeec');
   };
 
@@ -328,7 +472,11 @@ function initCopy(): void {
 
 function boot(): void {
   initSmoothScroll();
-  initHeroSim();
+  initClock();
+  initHeroIntro();
+  initMarquees();
+  initWorkIndex();
+  initLedger();
   initDetailSims();
   initVideos();
   initCopy();

@@ -133,6 +133,35 @@
     margin: -22px 0 0 -22px;
   }
 
+  /* Rótulo dentro do cursor ("Ver") sobre a lista de trabalhos. */
+  .cursor {
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    font-family: var(--font-display);
+    font-size: 0;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .cursor[data-state="label"] {
+    width: 84px;
+    height: 84px;
+    margin: -42px 0 0 -42px;
+    font-size: 15px;
+  }
+
+  /* Na lista de trabalhos, o projeto sob o mouse fica em destaque e os outros recuam. */
+  @media (hover: hover) and (pointer: fine) {
+    [data-work-row] {
+      transition: opacity 400ms ease;
+    }
+
+    [data-work]:hover [data-work-row]:not(:hover) {
+      opacity: 0.32;
+    }
+  }
+
   @media (hover: hover) and (pointer: fine) {
     html.has-cursor,
     html.has-cursor a,

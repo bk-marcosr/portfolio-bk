@@ -13,22 +13,6 @@ export const profile = {
     'Desenvolvedor full stack em Belém (PA). Trading com dinheiro real, gestão financeira, atendimento com IA e automação de dados.',
 } as const;
 
-/**
- * Frase de abertura. Cada trecho colorido aponta para o projeto que prova aquilo.
- * `tone` usa a cor do projeto; texto sem tone fica neutro.
- */
-export const statement: { text: string; tone?: keyof typeof COLORS }[] = [
-  { text: 'Hoje automatizo dados na RR Chevrolet. Fora dela, construo sistemas que não podem ' },
-  { text: 'duplicar ordem', tone: 'rotor' },
-  { text: ', ' },
-  { text: 'esquecer parcela', tone: 'prazinho' },
-  { text: ', ' },
-  { text: 'deixar cliente sem resposta', tone: 'talos' },
-  { text: ' nem ' },
-  { text: 'inventar número', tone: 'rigor' },
-  { text: '.' },
-];
-
 export const experience: Experience[] = [
   {
     period: '2026 — hoje',
@@ -44,18 +28,21 @@ export const experience: Experience[] = [
     role: 'Fundador, desenvolvedor',
     description:
       'Produtos próprios e sistemas para clientes: atendimento com IA no WhatsApp, a gestão de um studio de pilates, agendamento com pagamento e os SaaS financeiros.',
+    color: '#eeeeec',
   },
   {
     period: '2026 — hoje',
     org: 'UTIC',
     role: 'Diretor Administrativo-Financeiro',
     description: 'Empresa júnior de TI da UFRA. Cuido da estrutura financeira e da política de alocação de recursos.',
+    color: COLORS.rotor,
   },
   {
     period: 'em curso',
     org: 'UFRA',
     role: 'Sistemas de Informação',
     description: 'Universidade Federal Rural da Amazônia, Belém.',
+    color: COLORS.prazinho,
   },
 ];
 

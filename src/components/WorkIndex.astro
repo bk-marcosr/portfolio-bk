@@ -1,0 +1,101 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { featuredProjects } from '../data/projects';
+import { url } from '../lib/url';
+
+type Preview =
+  | { kind: 'video'; src: string; poster: string; alt: string }
+  | { kind: 'image'; image: ImageMetadata; alt: string };
+
+// Cada projeto mostra a própria interface: vídeo quando existe, senão a imagem do capítulo ou a prévia dedicada.
+const items = featuredProjects.flatMap((project) => {
+  const media = project.media;
+  let preview: Preview | undefined;
+  if (media?.kind === 'video') preview = { kind: 'video', src: url(media.src), poster: url(media.poster), alt: media.label };
+  else if (media?.kind === 'image') preview = { kind: 'image', image: media.image.src, alt: media.image.alt };
+  else if (project.indexImage) preview = { kind: 'image', image: project.indexImage.src, alt: project.indexImage.alt };
+  return preview ? [{ project, preview }] : [];
+});
+---
+
+<section id="trabalhos" class="px-5 pt-20 pb-8 sm:px-10 sm:pt-32" aria-labelledby="trabalhos-title">
+  <div class="mx-auto max-w-[1400px]">
+    <div class="flex items-end justify-between gap-6 pb-8 sm:pb-12">
+      <h2 id="trabalhos-title" class="font-display text-[clamp(1.4rem,2.6vw,2.1rem)] font-medium tracking-[-0.02em]">
+        Trabalhos selecionados
+      </h2>
+      <p class="hidden text-[15px] text-mute sm:block">Projetos no ar, interface real</p>
+    </div>
+
+    <ul data-work>
+      {
+        items.map(({ project, preview }) => (
+          <li class="border-t border-line last:border-b" data-work-row style={`--c: ${project.color}`}>
+            <a
+              href={`#${project.slug}`}
+              class="group grid grid-cols-[1fr_auto] items-center gap-5 py-5 sm:py-7 lg:grid-cols-[1fr_auto_6rem] lg:gap-10 lg:py-10"
+              data-cursor-label="Ver"
+              data-cursor-color={project.color}
+            >
+              <span class="min-w-0">
+                <span class="block font-display text-[clamp(2.4rem,8.4vw,7.6rem)] font-semibold leading-[0.9] tracking-[-0.045em] transition-[color,translate] duration-500 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:translate-x-5 group-hover:text-[var(--c)] group-focus-visible:text-[var(--c)]">
+                  {project.name}
+                </span>
+                <span class="mt-2 flex items-center gap-2 text-[14px] text-mute lg:hidden">
+                  <span class="size-[7px] shrink-0 bg-[var(--c)]" aria-hidden="true" />
+                  {project.category} · {project.year}
+                </span>
+              </span>
+
+              <span class="hidden items-center gap-3 text-[16px] text-mute lg:flex">
+                <span class="size-[8px] bg-[var(--c)]" aria-hidden="true" />
+                {project.category}
+              </span>
+              <span class="hidden text-right text-[16px] text-mute tabular-nums lg:block">{project.year}</span>
+
+              {/* Miniatura no lugar da prévia flutuante (telas de toque e estreitas) */}
+              <span class="block w-[34vw] max-w-[11rem] overflow-hidden rounded-[4px] bg-ink-2 lg:hidden" aria-hidden="true">
+                {preview.kind === 'video' ? (
+                  <img src={preview.poster} alt="" width="352" height="220" loading="lazy" decoding="async" class="block aspect-[16/10] w-full object-cover object-left-top" />
+                ) : (
+                  <Image src={preview.image} alt="" widths={[220, 352]} sizes="34vw" format="webp" quality={80} class="block aspect-[16/10] w-full object-cover object-left-top" />
+                )}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <!-- Prévia que acompanha o mouse; cada projeto ocupa uma "janela" da faixa -->
+  <div
+    class="pointer-events-none fixed left-0 top-0 z-30 hidden aspect-[16/10] w-[clamp(20rem,30vw,28rem)] overflow-hidden rounded-md bg-ink-2 opacity-0 lg:block"
+    aria-hidden="true"
+    data-work-preview
+  >
+    <div class="flex h-full flex-col" data-work-track>
+      {
+        items.map(({ preview }, index) => (
+          <div class="h-full w-full shrink-0">
+            {preview.kind === 'video' ? (
+              <video
+                class="block h-full w-full object-cover object-left-top"
+                src={preview.src}
+                poster={preview.poster}
+                muted
+                loop
+                playsinline
+                preload="none"
+                data-index={index}
+              />
+            ) : (
+              <Image src={preview.image} alt="" widths={[480, 900]} sizes="28rem" format="webp" quality={82} class="block h-full w-full object-cover object-left-top" />
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

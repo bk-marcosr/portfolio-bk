@@ -82,4 +82,3 @@ export const LANES: Record<keyof typeof COLORS, LaneConfig> = {
   },
 };
 
-export const HERO_LANES: LaneConfig[] = [LANES.rotor, LANES.prazinho, LANES.talos, LANES.rigor, LANES.rr];

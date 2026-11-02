@@ -2,7 +2,7 @@
 
 Portfólio de Marcos Gabriel — desenvolvedor full stack.
 
-O site mostra os sistemas funcionando: o topo é uma simulação em canvas dos projetos, cada projeto abre com vídeo ou print da interface real, e tem uma simulação própria para o visitante mexer (perder a resposta da Binance no Rotor, derrubar o Gemini no Talos, processar uma empresa no Rigor).
+O site abre com foto e o nome correndo (o sentido acompanha a rolagem), passa por uma lista de trabalhos com prévia da interface real seguindo o mouse e entra nos projetos: cada um com vídeo ou print da interface e uma simulação para o visitante mexer (perder a resposta da Binance no Rotor, derrubar o Gemini no Talos, processar uma empresa no Rigor). No fim, um "Sobre" com recortes dos produtos no meio do texto e a trajetória em linhas que se pintam e abrem.
 
 Astro + Tailwind CSS v4, GSAP (ScrollTrigger, SplitText) e Lenis. Fontes Funnel Display e Funnel Sans servidas localmente.
 
@@ -23,14 +23,14 @@ Todo o texto do site sai de `src/data/`:
 
 | Arquivo | O que tem |
 | --- | --- |
-| `src/data/profile.ts` | nome, contatos, frase de abertura, trajetória e stack |
+| `src/data/profile.ts` | nome, contatos, trajetória (com a cor de cada linha) e stack |
 | `src/data/projects.ts` | projetos em destaque (texto, simulação, prints, estudo de caso) e outros projetos |
 
-Cada projeto em destaque gera uma página em `/projetos/<slug>/`. Prints ficam em `src/assets/projects/` (otimizados no build); vídeos e pôsteres em `public/media/`. As telas são das interfaces reais; onde o app depende de banco, com dados de demonstração.
+Cada projeto em destaque gera uma página em `/projetos/<slug>/`. Prints ficam em `src/assets/projects/` (otimizados no build), os recortes do "Sobre" em `src/assets/pills/`; vídeos e pôsteres em `public/media/`. As telas são das interfaces reais; onde o app depende de banco, com dados de demonstração.
 
 ## Design
 
-Base preto, branco e cinza. Cada projeto tem a cor do próprio produto, usada só como sinal (nunca fundo, gradiente ou brilho):
+Base preto, branco e cinza. Cada projeto tem a cor do próprio produto, usada como sinal e no hover das linhas (nunca fundo de seção, gradiente ou brilho):
 
 | Projeto | Cor | Origem |
 | --- | --- | --- |

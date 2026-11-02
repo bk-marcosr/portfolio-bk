@@ -5,6 +5,7 @@ import prazinhoVendas from '../assets/projects/prazinho-vendas.webp';
 import prazinhoFechamento from '../assets/projects/prazinho-fechamento.webp';
 import rotorMobile from '../assets/projects/rotor-mobile.webp';
 import talosAgentes from '../assets/projects/talos-agentes.webp';
+import rigorSim from '../assets/projects/rigor-sim.webp';
 
 export const featuredProjects: FeaturedProject[] = [
   {
@@ -13,6 +14,8 @@ export const featuredProjects: FeaturedProject[] = [
     color: COLORS.rotor,
     name: 'Rotor',
     formerName: 'TradeMind',
+    category: 'Trading com dinheiro real',
+    year: '2025—26',
     line: 'Robô de trading com dinheiro real na Binance. Operando desde setembro de 2026.',
     lead: 'Cada ordem passa por uma trava antes de sair. Se a resposta da Binance se perde, nenhuma ordem nova sai até a reconciliação provar o que aconteceu. Foi isso que segurou uma compra duplicada de BNB em setembro.',
     facts: [
@@ -82,6 +85,8 @@ export const featuredProjects: FeaturedProject[] = [
     color: COLORS.prazinho,
     name: 'Prazinho',
     formerName: 'FinançaFácil',
+    category: 'Gestão financeira',
+    year: '2026',
     line: 'Venda a prazo, estoque e fechamento do mês para pequeno revendedor.',
     lead: 'Feito para quem anota fiado no caderno. A chave que vai para o navegador é pública; quem decide o que cada usuário enxerga é o banco, com RLS em todas as tabelas.',
     facts: [
@@ -144,6 +149,8 @@ export const featuredProjects: FeaturedProject[] = [
     lane: 'talos',
     color: COLORS.talos,
     name: 'Talos',
+    category: 'Atendimento com IA',
+    year: '2026',
     line: 'Atendimento no WhatsApp com IA, para pequenas empresas.',
     lead: 'Cada mensagem passa pelo Maestro, que usa o Gemini para decidir se é venda, suporte ou caso para humano. Se a IA falhar ou estourar a cota, o Maestro não trava: manda o cliente para um humano. Ninguém fica sem resposta.',
     facts: [
@@ -206,6 +213,9 @@ export const featuredProjects: FeaturedProject[] = [
     lane: 'rigor',
     color: COLORS.rigor,
     name: 'Rigor',
+    category: 'Dados da B3 e CVM',
+    year: '2026',
+    indexImage: { src: rigorSim, alt: 'Rigor: indicadores calculados e em branco passando pelo pipeline' },
     line: 'Quinze anos de balanços da CVM viram doze indicadores por empresa da B3.',
     lead: 'Pipeline em Python, um comando só, com modo offline. Quando falta dado na fonte, o indicador fica em branco. Não vira zero.',
     facts: [

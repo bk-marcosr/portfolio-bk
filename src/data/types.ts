@@ -35,6 +35,11 @@ export interface FeaturedProject {
   color: string;
   name: string;
   formerName?: string;
+  /** Categoria curta para a lista de trabalhos (ex.: "Trading · pessoal"). */
+  category: string;
+  year: string;
+  /** Prévia da lista de trabalhos quando o projeto não tem mídia própria. */
+  indexImage?: Screenshot;
   /** Uma linha: o que é e o estado atual. */
   line: string;
   /** Parágrafo curto que explica o ponto do projeto. */
@@ -66,5 +71,6 @@ export interface Experience {
   org: string;
   role: string;
   description: string;
-  color?: string;
+  /** Cor que pinta a linha da trajetória no hover e quando aberta. */
+  color: string;
 }

@@ -1,0 +1,131 @@
+---
+import { Image } from 'astro:assets';
+import { experience, stack } from '../data/profile';
+import { COLORS } from '../scripts/sim/lanes';
+import portrait from '../assets/perfil.png';
+import rotorPill from '../assets/pills/rotor.webp';
+import prazinhoPill from '../assets/pills/prazinho.webp';
+import talosPill from '../assets/pills/talos.webp';
+
+// Recortes ampliados da interface real, para ficarem legíveis do tamanho de uma palavra.
+const pills = [
+  { href: '#rotor', image: rotorPill, color: COLORS.rotor, label: 'Ver o Rotor' },
+  { href: '#prazinho', image: prazinhoPill, color: COLORS.prazinho, label: 'Ver o Prazinho' },
+  { href: '#talos', image: talosPill, color: COLORS.talos, label: 'Ver o Talos' },
+];
+
+const tools = stack.flatMap((group) => group.items.split(', '));
+const half = Math.ceil(tools.length / 2);
+const marqueeRows = [
+  { items: tools.slice(0, half), direction: -1, tone: 'text-paper' },
+  { items: tools.slice(half), direction: 1, tone: 'text-mute' },
+];
+const squareColors = [COLORS.rotor, COLORS.prazinho, COLORS.talos, COLORS.rigor, COLORS.rr];
+
+const pill = 'inline-block h-[0.74em] translate-y-[0.08em] overflow-hidden rounded-full bg-ink-2 align-baseline';
+---
+
+<section id="sobre" class="overflow-x-clip px-5 pt-28 pb-24 sm:px-10 sm:pt-40 sm:pb-36" aria-labelledby="sobre-title">
+  <div class="mx-auto max-w-[1400px]">
+    <h2 id="sobre-title" class="mb-8 text-[15px] text-mute sm:mb-12">Sobre</h2>
+
+    <p class="max-w-[23ch] font-display text-[clamp(2rem,5.6vw,5rem)] font-medium leading-[1.08] tracking-[-0.035em]" data-reveal="up">
+      Sou o Marcos{' '}
+      <span class:list={[pill, 'w-[1.5em] bg-mute']} data-pill>
+        <Image src={portrait} alt="" widths={[160, 320]} sizes="8rem" format="webp" quality={82} class="h-full w-full object-cover object-[50%_15%]" />
+      </span>, dev full stack em Belém. Automatizo dados na{' '}
+      <span class="underline decoration-rr decoration-[0.08em] underline-offset-[0.14em]">RR&nbsp;Chevrolet</span>{' '}
+      e coloco no ar produto que mexe com dinheiro{' '}
+      {
+        pills.slice(0, 2).map((item) => (
+          <>
+            <a href={item.href} class:list={[pill, 'w-[1.75em]']} data-pill data-cursor-color={item.color} aria-label={item.label}>
+              <Image src={item.image} alt="" widths={[200, 400]} sizes="9rem" format="webp" quality={82} class="h-full w-full object-cover" />
+            </a>{' '}
+          </>
+        ))
+      }
+      e com cliente{' '}
+      <a href={pills[2].href} class:list={[pill, 'w-[1.75em]']} data-pill data-cursor-color={pills[2].color} aria-label={pills[2].label}>
+        <Image src={pills[2].image} alt="" widths={[200, 400]} sizes="9rem" format="webp" quality={82} class="h-full w-full object-cover" />
+      </a>{' '}
+      de verdade.
+    </p>
+
+    <!-- Trajetória: cada lugar é uma linha que se pinta com a própria cor e abre no clique -->
+    <h3 class="mt-24 mb-6 text-[15px] text-mute sm:mt-36 sm:mb-8">Onde estou</h3>
+    <ul data-ledger>
+      {
+        experience.map((item, index) => {
+          const panelId = `ledger-${index}`;
+          return (
+            <li class="group/row relative isolate border-t border-line last:border-b" style={`--c: ${item.color}`} data-ledger-row data-open>
+              <span
+                class="absolute -inset-x-5 inset-y-0 -z-10 origin-bottom scale-y-0 bg-[var(--c)] transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)] group-hover/row:scale-y-100 group-data-open/row:scale-y-100 sm:-inset-x-10"
+                aria-hidden="true"
+              />
+              <button
+                type="button"
+                class="grid w-full grid-cols-[1fr_auto] items-center gap-6 py-5 text-left transition-colors duration-300 group-hover/row:text-ink group-data-open/row:text-ink sm:py-7 lg:grid-cols-[10rem_1fr_16rem_2rem] lg:gap-10"
+                aria-expanded="true"
+                aria-controls={panelId}
+                data-ledger-toggle
+                data-cursor-color={item.color}
+              >
+                <span class="hidden text-[15px] tabular-nums opacity-70 lg:block">{item.period}</span>
+                <span class="font-display text-[clamp(2.6rem,8vw,7rem)] font-semibold leading-[0.9] tracking-[-0.045em]">{item.org}</span>
+                <span class="hidden text-[16px] opacity-70 lg:block">{item.role}</span>
+                <span class="relative size-7 justify-self-end" aria-hidden="true">
+                  <span class="absolute inset-x-0 top-1/2 h-[2px] -translate-y-1/2 bg-current" />
+                  <span class="absolute inset-y-0 left-1/2 w-[2px] -translate-x-1/2 bg-current transition-transform duration-300 group-data-open/row:rotate-90" />
+                </span>
+              </button>
+              <div
+                id={panelId}
+                class="grid grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(.2,.8,.2,1)] group-data-open/row:text-ink"
+                data-ledger-panel
+              >
+                <div class="overflow-hidden">
+                  <div class="grid gap-3 pb-8 lg:grid-cols-[10rem_1fr_16rem_2rem] lg:gap-10 lg:pb-10">
+                    <p class="text-[15px] opacity-75 lg:hidden">
+                      {item.role} · {item.period}
+                    </p>
+                    <p class="max-w-[38rem] text-[17px] leading-[1.65] lg:col-start-2">{item.description}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+
+  <!-- Ferramentas em duas faixas, em sentidos opostos -->
+  <div class="mt-24 sm:mt-36">
+    <h3 class="mx-auto mb-6 max-w-[1400px] text-[15px] text-mute sm:mb-8">No dia a dia</h3>
+    <ul class="sr-only">
+      {tools.map((tool) => <li>{tool}</li>)}
+    </ul>
+    <div class="-mx-5 flex flex-col gap-1 select-none sm:-mx-10" aria-hidden="true">
+      {
+        marqueeRows.map((row) => (
+          <div class="overflow-hidden">
+            <div class="flex w-max whitespace-nowrap will-change-transform" data-marquee data-marquee-direction={row.direction} data-marquee-speed="55">
+              {[0, 1].map((copy) => (
+                <div class:list={['flex shrink-0 items-center', row.tone]} data-marquee-copy={copy}>
+                  {row.items.map((tool, i) => (
+                    <span class="flex items-center font-display text-[clamp(2.2rem,6.4vw,5.6rem)] font-semibold leading-[1.05] tracking-[-0.035em]">
+                      <span class="px-[0.3em]">{tool}</span>
+                      <span class="inline-block size-[0.18em]" style={`background:${squareColors[i % squareColors.length]}`} />
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
