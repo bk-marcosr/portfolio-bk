@@ -414,11 +414,14 @@ function initCursor(): void {
 function initHeader(): void {
   const header = document.querySelector<HTMLElement>('[data-header]');
   if (!header) return;
+  const lightHero = document.querySelector('[data-hero-light]') !== null;
   let lastY = window.scrollY;
 
   const update = (): void => {
     const y = window.scrollY;
     header.toggleAttribute('data-scrolled', y > 24);
+    // No topo da home o header fica sobre o cinza da abertura: texto escuro.
+    header.toggleAttribute('data-on-light', lightHero && y <= 24);
     header.toggleAttribute('data-hidden', y > lastY && y > 160);
     lastY = y;
   };

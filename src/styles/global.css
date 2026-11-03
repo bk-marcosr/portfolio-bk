@@ -21,6 +21,8 @@
   --color-line: #232323;
   --color-paper: #eeeeec;
   --color-mute: #9a9a96;
+  /* Cinza da parede da foto: fundo da abertura, para a foto não ter emenda. */
+  --color-wall: #999999;
   --color-faint: #5e5e5a;
 
   --color-talos: #ef5f67;

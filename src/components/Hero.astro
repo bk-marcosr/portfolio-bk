@@ -8,35 +8,35 @@ import portrait from '../assets/perfil.png';
 const separators = [COLORS.rotor, COLORS.prazinho, COLORS.talos, COLORS.rigor, COLORS.rr];
 ---
 
-<section class="relative h-[100svh] min-h-[620px] overflow-hidden" aria-labelledby="hero-title">
+<section class="relative h-[100svh] min-h-[620px] overflow-hidden bg-wall text-ink" aria-labelledby="hero-title" data-hero-light data-cursor-color="#0b0b0b">
   <h1 id="hero-title" class="sr-only">{profile.name}, {profile.role.toLowerCase()} em {profile.location}</h1>
 
-  <!-- Retrato recortado, ancorado no rodapé -->
+  <!-- Retrato ancorado no rodapé; o fundo da seção é o mesmo cinza da parede da foto -->
   <div class="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center" data-hero-portrait>
     <Image
       src={portrait}
       alt={`Foto de ${profile.name}`}
-      widths={[408]}
-      sizes="(min-width: 1024px) 42vh, 70vw"
+      widths={[480, 720, 900]}
+      sizes="(min-width: 1024px) 50vh, 110vw"
       format="webp"
-      quality={90}
+      quality={88}
       loading="eager"
       fetchpriority="high"
-      class="h-[min(68svh,46rem)] w-auto max-w-none object-contain object-bottom [mask-image:linear-gradient(to_right,transparent,#000_18%,#000_82%,transparent),linear-gradient(to_top,transparent,#000_22%)] [mask-composite:intersect] [-webkit-mask-composite:source-in]"
+      class="h-[min(74svh,52rem)] w-auto max-w-none object-contain object-bottom [mask-image:linear-gradient(to_bottom,transparent,#000_6%)] md:[mask-image:linear-gradient(to_bottom,transparent,#000_6%),linear-gradient(to_right,transparent,#000_14%,#000_86%,transparent)] md:[mask-composite:intersect]"
     />
   </div>
 
   <!-- Topo: onde estou e o que faço -->
   <div class="relative mx-auto flex max-w-[1400px] items-start justify-between gap-6 px-5 pt-24 sm:px-10 sm:pt-28">
     <div class="flex items-center gap-3" data-reveal="fade">
-      <span class="relative grid size-11 place-items-center rounded-full bg-paper text-ink" aria-hidden="true">
+      <span class="relative grid size-11 place-items-center rounded-full bg-ink text-paper" aria-hidden="true">
         <svg viewBox="0 0 24 24" class="size-6 animate-[spin_12s_linear_infinite] motion-reduce:animate-none" fill="none" stroke="currentColor" stroke-width="1.4">
           <circle cx="12" cy="12" r="9" />
           <path d="M3 12h18M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9c-2.6-2.8-3.9-5.8-3.9-9s1.3-6.2 3.9-9z" />
         </svg>
       </span>
       <p class="font-display text-[15px] leading-tight">
-        Belém, Pará<br /><span class="text-mute tabular-nums" data-clock>Brasil · UTC−3</span>
+        Belém, Pará<br /><span class="text-ink/60 tabular-nums" data-clock>Brasil · UTC−3</span>
       </p>
     </div>
 
