@@ -3,7 +3,7 @@ import type { GetStaticPaths } from 'astro';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import { featuredProjects } from '../../data/projects';
-import type { FeaturedProject } from '../../data/types';
+import type { ChapterMedia, FeaturedProject } from '../../data/types';
 import { url } from '../../lib/url';
 
 export const getStaticPaths = (() =>
@@ -18,6 +18,11 @@ interface Props {
 }
 
 const { project, next } = Astro.props;
+
+// Capa do estudo de caso: o primeiro print, senão a mesma mídia do capítulo (vídeo ou imagem).
+const cover: ChapterMedia | undefined = project.screens
+  ? { kind: 'image', image: project.screens.items[0], label: project.screens.caption }
+  : project.media;
 ---
 
 <Base title={`${project.name} — Marcos Gabriel`} description={project.line} type="article">
@@ -38,18 +43,34 @@ const { project, next } = Astro.props;
       </dl>
 
       {
-        project.screens && (
-          <div class="mt-16 overflow-hidden rounded-md" data-reveal="clip">
-            <Image
-              src={project.screens.items[0].src}
-              alt={project.screens.items[0].alt}
-              widths={[960, 1440, 1920]}
-              sizes="(min-width: 1400px) 1320px, 100vw"
-              format="webp"
-              quality={84}
-              class="block h-auto w-full"
-              loading="eager"
-            />
+        cover && (
+          <div class="mt-16 overflow-hidden rounded-md bg-ink-2" data-reveal="clip">
+            {cover.kind === 'video' ? (
+              <video
+                class="block h-auto w-full"
+                src={url(cover.src)}
+                poster={url(cover.poster)}
+                width={cover.width}
+                height={cover.height}
+                muted
+                loop
+                playsinline
+                preload="none"
+                data-autoplay
+                aria-label={cover.label}
+              />
+            ) : (
+              <Image
+                src={cover.image.src}
+                alt={cover.image.alt}
+                widths={[960, 1440, 1920]}
+                sizes="(min-width: 1400px) 1320px, 100vw"
+                format="webp"
+                quality={84}
+                class="block h-auto w-full"
+                loading="eager"
+              />
+            )}
           </div>
         )
       }

@@ -5,7 +5,7 @@ import prazinhoVendas from '../assets/projects/prazinho-vendas.webp';
 import prazinhoFechamento from '../assets/projects/prazinho-fechamento.webp';
 import rotorMobile from '../assets/projects/rotor-mobile.webp';
 import talosAgentes from '../assets/projects/talos-agentes.webp';
-import rigorSim from '../assets/projects/rigor-sim.webp';
+import rigorVisao from '../assets/projects/rigor-visao.webp';
 
 export const featuredProjects: FeaturedProject[] = [
   {
@@ -215,7 +215,6 @@ export const featuredProjects: FeaturedProject[] = [
     name: 'Rigor',
     category: 'Dados da B3 e CVM',
     year: '2026',
-    indexImage: { src: rigorSim, alt: 'Rigor: indicadores calculados e em branco passando pelo pipeline' },
     line: 'Quinze anos de balanços da CVM viram doze indicadores por empresa da B3.',
     lead: 'Pipeline em Python, um comando só, com modo offline. Quando falta dado na fonte, o indicador fica em branco. Não vira zero.',
     facts: [
@@ -224,6 +223,14 @@ export const featuredProjects: FeaturedProject[] = [
       'Painel web lendo o Supabase só com chave de leitura.',
     ],
     stack: ['Python', 'SQLite', 'Supabase', 'React', 'TypeScript'],
+    media: {
+      kind: 'image',
+      image: {
+        src: rigorVisao,
+        alt: 'Rigor: visão geral com 567 empresas, 16 exercícios, 6.788 empresa-anos com DFP e a situação dos indicadores por ano',
+      },
+      label: 'Visão geral do painel. Dados reais da CVM e da B3, de 2010 a 2025.',
+    },
     sim: {
       actions: [{ kind: 'burst', label: 'Processar uma empresa', amount: 12 }],
       counters: [
